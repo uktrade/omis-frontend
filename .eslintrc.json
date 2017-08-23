@@ -1,0 +1,23 @@
+{
+	"extends": "eslint:recommended",
+
+	"env": {
+		"browser": false,
+		"node": true
+	},
+
+	"parserOptions": {
+		"ecmaVersion": 6
+	},
+
+	"rules": {
+			"brace-style": [ 2, "1tbs", { "allowSingleLine": true } ],
+			"no-undefined": 2,
+			"no-use-before-define": [ 2, { "functions": false, "classes": true } ],
+			"arrow-body-style": 2,
+			"arrow-parens": 2,
+			"strict": [ 2, "never" ],
+			"no-console": 2,
+			"semi": [ 2, "always" ]
+		}
+	}

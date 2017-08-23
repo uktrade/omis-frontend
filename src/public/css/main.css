@@ -1,0 +1,20 @@
+.skiplink{
+	position: absolute;
+	left: -9999em;
+}
+
+.error-heading {
+	border-left: 4px solid #B10E1E;
+	font-size: 1.188em;/*19px*/
+	padding-left: 0.526em;/*10px*/
+	margin-top: 1.579em;/*30px*/
+}
+
+.stack-trace {
+	font-size: 0.875em;/*14px*/
+	margin-bottom: 2.143em;/*30px*/
+	font-family: monospace;
+	overflow: auto;
+	word-wrap: normal;
+	white-space: pre;
+}

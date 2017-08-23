@@ -1,0 +1,38 @@
+{
+  "name": "omis-frontend",
+  "version": "1.0.0",
+  "description": "The public front end for OMIS",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run test:unit",
+    "test:unit": "NODE_ENV=development; LOG_LEVEL=error; JASMINE_CONFIG_PATH=src/test/app/jasmine.json jasmine",
+    "start": "NODE_ENV=production node --use-strict src/app/server.js",
+    "watch": "nodemon --use-strict src/app/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/uktrade/omis-frontend.git"
+  },
+  "author": "Graham Veal",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/uktrade/omis-frontend/issues"
+  },
+  "homepage": "https://github.com/uktrade/omis-frontend#readme",
+  "dependencies": {
+    "express": "4.15.4",
+    "morgan": "1.8.2",
+    "nunjucks": "3.0.1",
+    "raven": "2.1.2",
+    "request": "2.81.0",
+    "winston": "2.3.1"
+  },
+  "devDependencies": {
+    "compression": "1.7.0",
+    "eslint": "4.5.0",
+    "jasmine": "2.7.0",
+    "jasmine-core": "2.7.0",
+    "nodemon": "1.11.0",
+    "proxyquire": "1.8.0"
+  }
+}

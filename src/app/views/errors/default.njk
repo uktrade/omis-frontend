@@ -1,0 +1,27 @@
+{% extends 'layout.njk' %}
+
+{% set pageTitle='Error' %}
+
+{% block page_content %}
+
+	<h1 class="error-heading">
+		{{ error.code | default( 500 ) }}
+	</h1>
+
+	<p>
+		Sorry, something went wrong. Try <a href="/">visiting the homepage</a>.
+	</p>
+
+	<p>
+		This error has been reported to the team.
+	</p>
+
+	{%- if showErrors -%}
+
+	<p class="stack-trace">
+		{{ error.stack }}
+	</p>
+
+	{%- endif -%}
+
+{% endblock  %}
