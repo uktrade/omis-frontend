@@ -3,6 +3,8 @@ const nunjucks = require( 'nunjucks' );
 const path = require( 'path' );
 const morganLogger = require( 'morgan' );
 const compression = require( 'compression' );
+const session = require( 'express-session' );
+const MemoryStore = require( 'memorystore' )(session);
 
 const router = require( './router' );
 const config = require( './config' );
@@ -43,6 +45,13 @@ module.exports = function(){
 		app.use( compression() );
 		//staticMaxAge = '2y';
 	}
+
+  app.use(session({
+    store: new MemoryStore({
+      checkPeriod: 86400000,
+    }),
+    secret: 'keyboard cat',
+  }));
 
 	app.use( forceHttps( isDev ) );
 	app.use( '/public', express.static( pathToPublic, { maxAge: staticMaxAge } ) );
