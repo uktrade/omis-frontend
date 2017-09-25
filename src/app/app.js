@@ -22,7 +22,6 @@ function startApp(){
 
 		messages.push( `App running in ${env} mode, workers: ${ config.server.workers }`);
 		messages.push( `Listening at http://${serverConfig.host}:${serverConfig.port}` );
-		messages.push( `Connecting to backend at ${config.backend.href}` );
 
 		logger.info( messages.join( '   ' ) );
 	});

@@ -26,13 +26,13 @@ const config = {
 		cache: bool( 'CACHE_VIEWS', true )
 	},
 	logLevel: env( 'LOG_LEVEL', 'warn' ),
-	backend: {
-		protocol: env( 'BACKEND_PROTOCOL', 'http' ),
-		host: env( 'BACKEND_HOST', 'localhost' ),
-		port: env( 'BACKEND_PORT', 8000 )
+	api: {
+		root: env( 'API_ROOT', 'http://localhost:8000' ),
+		authUrl: env( 'API_AUTH_URL', '/token/' ),
+		clientId: env( 'API_CLIENT_ID' ),
+		clientSecret: env( 'API_CLIENT_SECRET' ),
+		clientScope: env( 'API_CLIENT_SCOPE' ),
 	}
 };
-
-config.backend.href = `${config.backend.protocol}://${config.backend.host}:${config.backend.port}`;
 
 module.exports = config;
