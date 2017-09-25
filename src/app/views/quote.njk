@@ -1,0 +1,18 @@
+{% extends 'layout.njk' %}
+
+{% block page_content %}
+  <h1>{{ order.reference }}</h1>
+
+  <p>{{ order.contact.name }}</p>
+
+  <p>
+    <strong>Created:</strong> {{ quote.created_on }}
+  </p>
+  <p>
+    <strong>Expires:</strong> {{ quote.expires_on }}
+  </p>
+
+  <div>
+    {{ quote.content }}
+  </div>
+{% endblock  %}
