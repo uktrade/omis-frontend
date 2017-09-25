@@ -4,7 +4,7 @@ const path = require( 'path' );
 const morganLogger = require( 'morgan' );
 const compression = require( 'compression' );
 
-const routes = require( './routes' );
+const router = require( './router' );
 const config = require( './config' );
 const reporter = require( './lib/reporter' );
 
@@ -50,7 +50,7 @@ module.exports = function(){
 	app.use( headers( isDev ) );
 	app.use( ping );
 
-	routes( express, app, isDev );
+  app.use( router );
 
 	app.use( errors.handle404 );
 
