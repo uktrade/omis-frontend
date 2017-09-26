@@ -13,6 +13,8 @@
   </p>
 
   <div>
-    {{ quote.content }}
+    {% markdown %}
+      {{ quote.content }}
+    {% endmarkdown %}
   </div>
 {% endblock  %}

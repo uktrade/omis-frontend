@@ -1,5 +1,10 @@
 const express = require( 'express' );
 const nunjucks = require( 'nunjucks' );
+const njkMarkdown = require('nunjucks-markdown');
+const md = require('markdown-it')({
+  html: true,
+  typographer: true,
+});
 const path = require( 'path' );
 const morganLogger = require( 'morgan' );
 const compression = require( 'compression' );
@@ -30,7 +35,7 @@ module.exports = function(){
 
 	app.disable( 'x-powered-by' );
 
-	nunjucks.configure( [
+	const nunjucksEnv = nunjucks.configure( [
 			`${__dirname}/views`
 		], {
 		autoescape: true,
@@ -38,6 +43,11 @@ module.exports = function(){
 		noCache: !config.views.cache,
 		express: app
 	} );
+
+	// Add markdown support
+	njkMarkdown.register(nunjucksEnv, (body) => {
+		return md.render(body);
+	});
 
 	reporter.setup( app );
 
