@@ -2,11 +2,11 @@ const { fetch } = require('../lib/api');
 
 async function renderQuote (req, res, next) {
   const publicToken = req.params.publicToken;
-  const token = req.session.token
+  const authToken = req.session.token
 
   try {
-    const order = await fetch(token, `/v3/omis/public/order/${publicToken}`);
-    const quote = await fetch(token, `/v3/omis/public/order/${publicToken}/quote`);
+    const order = await fetch(authToken, `/v3/omis/public/order/${publicToken}`);
+    const quote = await fetch(authToken, `/v3/omis/public/order/${publicToken}/quote`);
 
     res.render('quote', {
       order,
