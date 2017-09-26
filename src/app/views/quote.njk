@@ -17,4 +17,12 @@
       {{ quote.content }}
     {% endmarkdown %}
   </div>
+
+  {% if quote.accepted_on %}
+    <p>This quote has already been accepted.</p>
+  {% else %}
+    <form method="post" action="/{{ publicToken }}/accept">
+      <button type="submit">Accept quote</button>
+    </form>
+  {% endif %}
 {% endblock  %}
