@@ -1,27 +1,27 @@
-{% extends 'layout.njk' %}
+{% extends 'omis-base.njk' %}
 
 {% set pageTitle='Error' %}
 
-{% block page_content %}
-	<h1 class="error-heading">
-		{{ statusMessage }}
-	</h1>
+{% block body_main_content %}
+  <h1 class="error-heading">
+    {{ statusMessage }}
+  </h1>
 
-	<p>
-		This error has been reported to the team.
-	</p>
+  <p>
+    This error has been reported to the team.
+  </p>
 
-	<p>
-		Try <a href="/">visiting the homepage</a>.
-	</p>
+  <p>
+    Try <a href="/">visiting the homepage</a>.
+  </p>
 
-	{%- if showErrors -%}
-		<h2 class="error-heading">
-			{{ error.code | default(500) }}
-		</h2>
+  {%- if showErrors -%}
+    <h2 class="error-heading">
+      {{ error.code | default(500) }}
+    </h2>
 
-		<p class="stack-trace">
-			{{ error.stack }}
-		</p>
-	{%- endif -%}
+    <p class="stack-trace">
+      {{ error.stack }}
+    </p>
+  {%- endif -%}
 {% endblock  %}
