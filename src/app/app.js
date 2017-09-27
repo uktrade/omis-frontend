@@ -1,7 +1,7 @@
 require('dotenv').config()
 const cluster = require('cluster')
 
-const config = require('./config')
+const config = require('../../config')
 const logger = require('./lib/logger')
 const createApp = require('./create-app')
 

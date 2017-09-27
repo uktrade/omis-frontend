@@ -1,7 +1,7 @@
 const request = require('request-promise-native')
 const { assign, isString } = require('lodash')
 
-const { api } = require('../config')
+const { api } = require('../../../config')
 const logger = require('../lib/logger')
 
 function fetchAuthToken () {

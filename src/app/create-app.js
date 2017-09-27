@@ -14,8 +14,8 @@ const compression = require('compression')
 const session = require('express-session')
 const MemoryStore = require('memorystore')(session)
 
+const config = require('../../config')
 const router = require('./router')
-const config = require('./config')
 const reporter = require('./lib/reporter')
 
 const ping = require('./middleware/ping')

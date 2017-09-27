@@ -1,5 +1,6 @@
 const raven = require('raven')
-const config = require('../config')
+
+const config = require('../../../config')
 const logger = require('./logger')
 
 const useSentry = !!config.sentryDsn
