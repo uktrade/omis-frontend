@@ -6,6 +6,9 @@ const md = require('markdown-it')({
   typographer: true,
 });
 const path = require( 'path' );
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+const csrf = require('csurf');
 const morganLogger = require( 'morgan' );
 const compression = require( 'compression' );
 const session = require( 'express-session' );
@@ -19,6 +22,7 @@ const ping = require( './middleware/ping' );
 const forceHttps = require( './middleware/force-https' );
 const headers = require( './middleware/headers' );
 const errors = require( './middleware/errors' );
+const setCSRFToken = require('./middleware/set-csrf-token');
 
 module.exports = function(){
 
@@ -63,10 +67,14 @@ module.exports = function(){
     secret: 'keyboard cat',
   }));
 
+	app.use( cookieParser() );
+	app.use( bodyParser.urlencoded({ extended: true, limit: '1mb' }) );
 	app.use( forceHttps( isDev ) );
 	app.use( '/public', express.static( pathToPublic, { maxAge: staticMaxAge } ) );
 	app.use( morganLogger( ( isDev ? 'dev' : 'combined' ) ) );
 	app.use( headers( isDev ) );
+	app.use( csrf() );
+	app.use( setCSRFToken() );
 	app.use( ping );
 
   app.use( router );

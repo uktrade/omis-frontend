@@ -22,6 +22,8 @@
     <p>This quote has already been accepted.</p>
   {% else %}
     <form method="post" action="/{{ publicToken }}/accept">
+      <input type="hidden" name="_csrf" value="{{ CSRF_TOKEN }}">
+
       <button type="submit">Accept quote</button>
     </form>
   {% endif %}

@@ -20,6 +20,9 @@
   },
   "homepage": "https://github.com/uktrade/omis-frontend#readme",
   "dependencies": {
+    "body-parser": "^1.18.2",
+    "cookie-parser": "^1.4.3",
+    "csurf": "^1.9.0",
     "dotenv": "^4.0.0",
     "express": "4.15.4",
     "express-session": "^1.15.5",
