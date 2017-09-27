@@ -1,16 +1,14 @@
-const indexController = require( '../../../../app/controllers/index' );
+const indexController = require('../../../../app/controllers/index')
 
-describe( 'Index controller', function(){
+describe('Index controller', function () {
+  it('Should render the index view', function () {
+    const req = {}
+    const res = {
+      render: jasmine.createSpy('res.render'),
+    }
 
-	it( 'Should render the index view', function(){
+    indexController(req, res)
 
-		const req = {};
-		const res = {
-			render: jasmine.createSpy( 'res.render' )
-		};
-
-		indexController( req, res );
-
-		expect( res.render ).toHaveBeenCalledWith( 'index' );
-	} );
-} );
+    expect(res.render).toHaveBeenCalledWith('index')
+  })
+})
