@@ -1,10 +1,4 @@
 const express = require('express')
-const nunjucks = require('nunjucks')
-const njkMarkdown = require('nunjucks-markdown')
-const md = require('markdown-it')({
-  html: true,
-  typographer: true,
-})
 const path = require('path')
 const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
@@ -15,6 +9,7 @@ const session = require('express-session')
 const MemoryStore = require('memorystore')(session)
 
 const config = require('../../config')
+const nunjucks = require('../../config/nunjucks')
 const router = require('./router')
 const reporter = require('./lib/reporter')
 
@@ -35,22 +30,9 @@ module.exports = function () {
 
   app.set('view engine', 'njk')
   app.set('view cache', config.views.cache)
+  nunjucks(app, config)
 
   app.disable('x-powered-by')
-
-  const nunjucksEnv = nunjucks.configure([
-    `${__dirname}/views`,
-  ], {
-    autoescape: true,
-    watch: isDev,
-    noCache: !config.views.cache,
-    express: app,
-  })
-
-  // Add markdown support
-  njkMarkdown.register(nunjucksEnv, (body) => {
-    return md.render(body)
-  })
 
   reporter.setup(app)
 

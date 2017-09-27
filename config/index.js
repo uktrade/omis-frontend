@@ -1,4 +1,5 @@
 const os = require('os')
+const path = require('path')
 
 const cpus = (os.cpus().length || 1)
 const defaultWorkers = (cpus > 1 ? cpus - 1 : cpus)
@@ -12,8 +13,10 @@ function bool (name, defaultValue) {
 }
 
 const isProd = env('NODE_ENV') === 'production'
+const root = path.normalize(`${__dirname}/..`)
 
 const config = {
+  root,
   isProd,
   isDev: !isProd,
   showErrors: !isProd,
