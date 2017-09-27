@@ -51,22 +51,37 @@ describe( 'errors middleware', function(){
 
 					expect( res.status ).not.toHaveBeenCalled();
 					expect( res.render ).not.toHaveBeenCalled();
-					expect( logger.error ).toHaveBeenCalled();
+					expect( logger.error ).not.toHaveBeenCalled();
 					expect( next ).toHaveBeenCalledWith( err );
 				} );
 			} );
 
 			describe( 'When the headers have not been sent', function(){
+				describe('When error code is EBADCSRFTOKEN', function() {
+					it( 'Should log the error and send a response with the right status code', function(){
+						err.code = 'EBADCSRFTOKEN';
 
-				it( 'Should log the error and send a response with the right status code', function(){
+						middleware.catchAll( err, req, res, next );
 
-					middleware.catchAll( err, req, res, next );
+						expect( res.status ).toHaveBeenCalledWith( 500 );
+						expect( res.render ).toHaveBeenCalledWith( 'errors/default', { statusMessage: 'This form has been tampered with', showErrors: config.showErrors, error: err } );
+						expect( logger.error ).toHaveBeenCalled();
+						expect( next ).not.toHaveBeenCalled();
+					} );
+				});
 
-					expect( res.status ).toHaveBeenCalledWith( 500 );
-					expect( res.render ).toHaveBeenCalledWith( 'errors/default', { showErrors: config.showErrors, error: err } );
-					expect( logger.error ).toHaveBeenCalled();
-					expect( next ).not.toHaveBeenCalled();
-				} );
+				describe('When error code is anything else', function() {
+					it( 'Should log the error and send a response with the right status code', function(){
+
+						middleware.catchAll( err, req, res, next );
+
+						expect( res.status ).toHaveBeenCalledWith( 500 );
+						expect( res.render ).toHaveBeenCalledWith( 'errors/default', { statusMessage: 'Something has gone wrong', showErrors: config.showErrors, error: err } );
+						expect( logger.error ).toHaveBeenCalled();
+						expect( next ).not.toHaveBeenCalled();
+					} );
+				});
+
 			} );
 
 		} );
