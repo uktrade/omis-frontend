@@ -18,6 +18,7 @@ const forceHttps = require('./middleware/force-https')
 const headers = require('./middleware/headers')
 const errors = require('./middleware/errors')
 const setCSRFToken = require('./middleware/set-csrf-token')
+const setLocals = require('./middleware/set-locals')
 
 module.exports = function () {
   const app = express()
@@ -60,6 +61,7 @@ module.exports = function () {
   app.use(csrf())
   app.use(setCSRFToken())
   app.use(ping)
+  app.use(setLocals)
 
   app.use(router)
 
