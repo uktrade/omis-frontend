@@ -24,21 +24,25 @@ module.exports = function () {
   const env = app.get('env')
   const isDev = (env === 'development')
 
-  const pathToPublic = path.resolve(__dirname, '../public')
+  let staticMaxAge = isDev ? 0 : '2y'
 
-  let staticMaxAge = 0
+  app.disable('x-powered-by')
 
   app.set('view engine', 'njk')
   app.set('view cache', config.views.cache)
   nunjucks(app, config)
 
-  app.disable('x-powered-by')
+  // Static files
+  app.use(express.static(path.join(config.root, 'public'), { maxAge: staticMaxAge }))
+  app.use('/js', express.static(path.join(config.buildDir, 'js'), { maxAge: staticMaxAge }))
+  app.use('/css', express.static(path.join(config.buildDir, 'css'), { maxAge: staticMaxAge }))
+  app.use('/images', express.static(path.join(config.buildDir, 'images'), { maxAge: staticMaxAge }))
+  app.use('/fonts', express.static(path.join(config.buildDir, 'fonts'), { maxAge: staticMaxAge }))
 
   reporter.setup(app)
 
   if (!isDev) {
     app.use(compression())
-    // staticMaxAge = '2y';
   }
 
   app.use(session({
@@ -51,7 +55,6 @@ module.exports = function () {
   app.use(cookieParser())
   app.use(bodyParser.urlencoded({ extended: true, limit: '1mb' }))
   app.use(forceHttps(isDev))
-  app.use('/public', express.static(pathToPublic, { maxAge: staticMaxAge }))
   app.use(morganLogger((isDev ? 'dev' : 'combined')))
   app.use(headers(isDev))
   app.use(csrf())
