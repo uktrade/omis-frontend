@@ -2,28 +2,35 @@ const config = require('../../../config')
 const logger = require('../lib/logger')
 
 module.exports = {
-  handle404: function (req, res) {
-    res.status(404)
-    res.render('errors/404')
+  handle404: function (req, res, next) {
+    const error = new Error('Not Found')
+    error.statusCode = 404
+    next(error)
   },
 
-  catchAll: function (err, req, res, next) {
-    let statusMessage = 'Something has gone wrong'
+  catchAll: function (error, req, res, next) {
+    const statusCode = error.statusCode = (error.statusCode || 500)
+    let statusMessage = statusCode === 404
+      ? 'We couldn\'t find that page'
+      : 'Something has gone wrong'
 
     if (res.headersSent) {
-      return next(err)
+      return next(error)
     }
 
-    if (err.code === 'EBADCSRFTOKEN') {
+    if (error.code === 'EBADCSRFTOKEN') {
       statusMessage = 'This form has been tampered with'
     }
 
-    logger.error(err)
+    if (statusCode !== 404) {
+      logger.error(error)
+    }
 
-    res.status(500)
-    res.render('errors/default', {
+    res.status(statusCode)
+    res.render('errors', {
+      error,
+      statusCode,
       statusMessage,
-      error: err,
       showErrors: config.showErrors,
     })
   },

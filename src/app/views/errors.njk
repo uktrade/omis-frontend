@@ -1,0 +1,33 @@
+{% extends 'omis-base.njk' %}
+
+{% set pageTitle = statusMessage %}
+
+{% block body_main_content %}
+  <h1 class="error-heading">
+    {{ statusMessage }}
+  </h1>
+
+  {%- if statusCode == '404' -%}
+    <p>
+      The resource you were looking for could not be found.
+    </p>
+
+    <p>
+      Try <a href="/">visiting the homepage</a>.
+    </p>
+  {%- else -%}
+    <p>
+      This error has been reported to the team.
+    </p>
+  {%- endif -%}
+
+  {%- if showErrors -%}
+    <h2 class="error-heading">
+      {{ statusCode }}
+    </h2>
+
+    <p class="stack-trace">
+      {{ error.stack }}
+    </p>
+  {%- endif -%}
+{% endblock  %}
