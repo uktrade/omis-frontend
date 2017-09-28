@@ -20,6 +20,7 @@ const config = {
   isProd,
   isDev: !isProd,
   showErrors: !isProd,
+  buildDir: path.join(root, '.build'),
   server: {
     host: env('SERVER_HOST', 'localhost'),
     port: env('SERVER_PORT', env('PORT', 3000)),
