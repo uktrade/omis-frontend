@@ -1,0 +1,14 @@
+{
+  "restartable": "rs",
+  "watch": [
+    "config/**/*.js",
+    "src/**/*.js"
+  ],
+  "ignore": [
+    ".build/"
+  ],
+  "env": {
+    "NODE_ENV": "development"
+  },
+  "ext": "js json"
+}

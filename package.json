@@ -2,15 +2,16 @@
   "name": "omis-frontend",
   "version": "1.0.0",
   "description": "The public front end for OMIS",
-  "main": "index.js",
+  "main": "src/app/app.js",
   "scripts": {
+    "start": "NODE_ENV=production node --use-strict src/app/server.js",
+    "develop": "run-p watch:app:*",
     "test": "npm run test:unit",
     "test:unit": "NODE_ENV=development; LOG_LEVEL=error; JASMINE_CONFIG_PATH=src/test/app/jasmine.json jasmine",
     "lint": "npm-run-all lint:all:*",
     "lint:all:js": "eslint ./test ./src",
     "lint:modified:js": "CHANGED_FILES=$(git diff --staged --name-only -- '*.js'); if [ \"$CHANGED_FILES\" ]; then eslint $(echo $CHANGED_FILES); fi",
-    "start": "NODE_ENV=production node --use-strict src/app/server.js",
-    "watch": "nodemon --use-strict src/app/app.js"
+    "watch:app:server": "nodemon $NODE_DEBUG_OPTION --use-strict"
   },
   "repository": {
     "type": "git",
