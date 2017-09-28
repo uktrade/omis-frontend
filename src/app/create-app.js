@@ -5,6 +5,7 @@ const bodyParser = require('body-parser')
 const csrf = require('csurf')
 const morganLogger = require('morgan')
 const compression = require('compression')
+const favicon = require('serve-favicon')
 const session = require('express-session')
 const MemoryStore = require('memorystore')(session)
 
@@ -34,6 +35,7 @@ module.exports = function () {
   nunjucks(app, config)
 
   // Static files
+  app.use(favicon(path.join(config.root, 'public/images', 'favicon.ico')))
   app.use(express.static(path.join(config.root, 'public'), { maxAge: staticMaxAge }))
   app.use('/js', express.static(path.join(config.buildDir, 'js'), { maxAge: staticMaxAge }))
   app.use('/css', express.static(path.join(config.buildDir, 'css'), { maxAge: staticMaxAge }))
