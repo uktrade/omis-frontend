@@ -16,7 +16,7 @@ function createLogger () {
         Console: consoleStub,
       },
     },
-    '../config': config,
+    '../../../config': config,
   }
 
   return proxyquire('../../../../app/lib/logger', stubs)

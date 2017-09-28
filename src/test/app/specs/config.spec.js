@@ -11,7 +11,7 @@ function createConfig (stubs = {}) {
 
   const defaultedStubs = Object.assign({}, defaults, stubs)
 
-  return proxyquire('../../../app/config.js', defaultedStubs)
+  return proxyquire('../../../../config', defaultedStubs)
 }
 
 describe('Config', function () {

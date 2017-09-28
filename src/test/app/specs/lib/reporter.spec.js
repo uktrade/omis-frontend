@@ -26,7 +26,7 @@ describe('Error reporter', function () {
     reporter = proxyquire('../../../../app/lib/reporter', {
       'raven': opts.raven || raven,
       './logger': opts.logger || logger,
-      '../config': opts.config || { version },
+      '../../../config': opts.config || { version },
     })
   }
 
