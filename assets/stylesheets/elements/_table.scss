@@ -5,17 +5,12 @@
 table {
   border-collapse: collapse;
   border-spacing: 0;
-  margin: ($baseline-grid-unit * 4) 0 ($baseline-grid-unit * 8);
   width: 100%;
 
   caption {
     @include core-font(24);
-    margin: 0 0 $baseline-grid-unit * 4;
+    margin-bottom: $default-spacing-unit;
     text-align: left;
-
-    @include media(tablet) {
-      margin-bottom: $baseline-grid-unit * 8;
-    }
   }
 
   th,
@@ -27,7 +22,7 @@ table {
   }
 
   th {
-    @include bold-font(16);
+    font-weight: 700;
     text-align: left;
   }
 }

@@ -1,0 +1,72 @@
+@import "../settings";
+@import "../tools";
+
+.c-message-list {
+  &:focus {
+    outline: none;
+  }
+}
+
+.c-message {
+  @include bold-font(20);
+  border: 5px solid;
+  padding: $default-spacing-unit;
+  position: relative;
+  background-color: $white;
+
+  @include media(tablet) {
+    .js-Messages & {
+      padding-right: 90px;
+    }
+  }
+}
+
+.c-message__close {
+  @include bold-font(16);
+  display: table;
+  line-height: 32px;
+  text-decoration: none;
+
+  @include media(tablet) {
+    position: absolute;
+    line-height: 32px;
+    top: $default-spacing-unit;
+    right: $default-spacing-unit;
+  }
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.c-message--info {
+  border-color: $govuk-blue;
+  color: $govuk-blue;
+}
+
+.c-message--success {
+  border-color: $button-colour;
+  color: $button-colour;
+}
+
+.c-message--warning {
+  border-color: darken($orange, 20);
+  color: darken($orange, 20);
+}
+
+.c-message--error {
+  border-color: $error-colour;
+  color: $error-colour;
+}
+
+.c-message--muted {
+  border-width: 0 0 0 5px;
+  border-color: $grey-2;
+  background: $grey-4;
+  font-size: inherit;
+  font-weight: inherit;
+
+  *:not(button) {
+    font-weight: inherit;
+  }
+}

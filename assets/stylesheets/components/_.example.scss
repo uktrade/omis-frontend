@@ -1,0 +1,27 @@
+@import "../settings";
+@import "../tools";
+
+.example__header {
+  padding-top: $default-spacing-unit / 4;
+  padding-bottom: $default-spacing-unit / 4;
+}
+
+.example__title {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0;
+  display: inline-block;
+}
+
+.example__preview {
+  background-color: $white;
+  border: 2px solid $grey-2;
+  padding: $default-spacing-unit;
+}
+
+.example--wide .example__preview {
+  @include media($min-width: $site-width + $default-spacing-unit * 4) {
+    margin-left: -$default-spacing-unit * 2;
+    margin-right: -$default-spacing-unit * 2;
+  }
+}

@@ -1,0 +1,19 @@
+ul {
+  list-style-position: outside;
+  padding-left: 1em;
+}
+
+ol {
+  list-style-position: outside;
+  padding-left: 1em;
+
+  li {
+    padding-left: .2em;
+  }
+}
+
+dl {
+  dt {
+    font-weight: 700;
+  }
+}

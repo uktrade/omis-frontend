@@ -1,0 +1,73 @@
+@import "~govuk_frontend_toolkit/stylesheets/design-patterns/buttons";
+@import "../settings";
+@import "../tools";
+
+.button {
+  @include button ($button-colour);
+  vertical-align: top;
+
+  @include media (mobile) {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+
+// Fix unwanted button padding in Firefox
+.button::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+
+.button:focus {
+  outline: 3px solid $focus-colour;
+}
+
+
+// Disabled buttons
+.button[disabled="disabled"] {
+  background: $button-colour;
+}
+
+.button[disabled="disabled"]:focus {
+  outline: none;
+}
+
+
+// modifiers
+.button--secondary {
+  @include button ($grey-2);
+
+  &:link,
+  &:visited {
+    background-color: $grey-2;
+    color: $black;
+  }
+}
+
+.button--destructive {
+  @include button($red);
+}
+
+.button--link {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  color: $link-colour;
+  cursor: pointer;
+  padding: .4em 0;
+  text-align: left;
+  text-decoration: underline;
+
+  &:hover,
+  &:active,
+  &:focus {
+    background: transparent;
+    color: $link-colour;
+    top: 0;
+  }
+
+  &:hover {
+    color: $link-hover-colour;
+  }
+}
