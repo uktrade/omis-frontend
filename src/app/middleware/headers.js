@@ -1,16 +1,16 @@
-const cspValues = [
-
-  `default-src 'none'`,
-  `base-uri 'self'`,
-  `script-src 'self' 'unsafe-inline' www.google-analytics.com`,
-  `style-src 'self' 'unsafe-inline'`,
-  `font-src 'self'`,
-  `img-src 'self' www.google-analytics.com`,
-  `form-action 'self'`,
-
-].join(';')
-
 module.exports = function (isDev) {
+  const cspValues = [
+    `default-src 'none'`,
+    `base-uri 'self'`,
+    `script-src 'self' 'unsafe-inline' www.google-analytics.com`,
+    `style-src 'self' 'unsafe-inline'`,
+    `font-src 'self'`,
+    `connect-src 'self' ${isDev ? 'ws:' : ''}`,
+    `img-src 'self' www.google-analytics.com`,
+    `form-action 'self'`,
+
+  ].join(';')
+
   return function (req, res, next) {
     res.setHeader('X-Download-Options', 'noopen')
     res.setHeader('X-XSS-Protection', '1; mode=block')
