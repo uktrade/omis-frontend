@@ -37,6 +37,12 @@ const config = {
     clientSecret: env('API_CLIENT_SECRET'),
     clientScope: env('API_CLIENT_SCOPE'),
   },
+  formats: {
+    dateLong: 'D MMMM YYYY',
+    dateMedium: 'D MMM YYYY',
+    dateTimeLong: 'D MMMM YYYY, h:mma',
+    dateTimeMedium: 'D MMM YYYY, h:mma',
+  },
 }
 
 module.exports = config

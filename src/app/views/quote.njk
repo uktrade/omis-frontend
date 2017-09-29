@@ -1,30 +1,56 @@
 {% extends '_layouts/omis-base.njk' %}
 
 {% block body_main_content %}
-  <h1>{{ order.reference }}</h1>
+  <h1>Order {{ order.reference }}</h1>
 
-  <p>{{ order.contact.name }}</p>
+  {{ MetaList({
+    items: [
+      { label: 'Quote was sent on', value: quote.created_on, type: 'datetime' }
+    ],
+    itemModifier: 'stacked'
+  }) }}
 
-  <p>
-    <strong>Created:</strong> {{ quote.created_on }}
-  </p>
-  <p>
-    <strong>Expires:</strong> {{ quote.expires_on }}
-  </p>
+  {% if order.status === 'quote_accepted' %}
+    {{ Message({
+      type: 'success',
+      text: 'This quote was accepted on ' + quote.accepted_on | formatDateTime
+    }) }}
+  {% elif order.status === 'quote_awaiting_acceptance' %}
+    {% set expiryLabel %}
+      This quote {{ 'expired' if quote.expired else 'will expire' }} {{ quote.expires_on | fromNow }}.
+    {% endset %}
 
-  <div>
-    {% markdown %}
-      {{ quote.content }}
-    {% endmarkdown %}
-  </div>
+    {{ Message({
+      type: 'info',
+      text: expiryLabel
+    }) }}
+  {% endif %}
 
-  {% if quote.accepted_on %}
-    <p>This quote has already been accepted.</p>
-  {% else %}
+  <article class="example">
+    <div class="example__preview l-markdown">
+      {% markdown %}
+        {{ quote.content }}
+      {% endmarkdown %}
+    </div>
+  </article>
+
+  {% if not quote.accepted_on %}
     <form method="post" action="/{{ publicToken }}/accept">
       <input type="hidden" name="_csrf" value="{{ CSRF_TOKEN }}">
 
-      <button type="submit">Accept quote</button>
+      <button type="submit" class="button">Accept quote</button>
     </form>
   {% endif %}
+
+  <details>
+    <summary>
+      <span class="summary">
+        There is a problem with my quote
+      </span>
+    </summary>
+
+    <div class="c-message c-message--muted">
+      <p>Please contact your ITA.</p>
+    </div>
+  </details>
 {% endblock  %}
