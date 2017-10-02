@@ -9,7 +9,8 @@
 
   {{ MetaList({
     items: [
-      { label: 'Quote sent on', value: quote.created_on, type: 'datetime' }
+      { label: 'Quote sent on', value: quote.created_on, type: 'datetime' },
+      { label: 'Purchase order (PO) number', value: order.po_number }
     ],
     itemModifier: 'stacked'
   }) }}
