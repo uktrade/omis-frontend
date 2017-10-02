@@ -11,8 +11,8 @@ router.get('/', indexController)
 
 router.param(':publicToken', fetchOrderDetails)
 
-router.get('/:publicToken', renderQuote)
-router.get('/:publicToken/accepted', renderAcceptedQuote)
-router.post('/:publicToken/accept', acceptQuote)
+router.get('/:publicToken/quote', renderQuote)
+router.get('/:publicToken/quote/accepted', renderAcceptedQuote)
+router.post('/:publicToken/quote/accept', acceptQuote)
 
 module.exports = router
