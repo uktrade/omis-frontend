@@ -7,8 +7,18 @@
     </h1>
 
     <p>
-      Your order reference number is
+      Your reference number is
       <strong class="confirmation-banner__referene">{{ order.reference }}</strong>
     </p>
   </div>
+
+  <h3>What happens next</h3>
+
+  <p>You will receive a confirmation email that the quote has been accepted.</p>
+
+  <p>You will need to pay the invoice within 30 days.</p>
+
+  <p>
+    <a href="/{{ publicToken }}">Return to summary</a>
+  </p>
 {% endblock  %}

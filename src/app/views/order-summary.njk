@@ -1,0 +1,35 @@
+{% extends '_layouts/omis-base.njk' %}
+
+{% block body_main_content %}
+  <h1>{{ order.reference }}</h1>
+
+  {{ MetaList({
+    items: [
+      { label: 'Status', value: order.status | sentenceCase }
+    ],
+    itemModifier: 'stacked'
+  }) }}
+
+  <h2>Your quote</h2>
+
+  {% set expiryLabel %}
+    Expire{{ 'd' if quote.expired else 's' }}
+  {% endset %}
+
+  {{ MetaList({
+    items: [
+      { label: 'Sent on', value: quote.created_on, type: 'datetime' },
+      { label: expiryLabel, value: quote.expires_on if not quote.accepted_on, type: 'fromNow' },
+      { label: 'Accepted on', value: quote.accepted_on if quote.accepted_on, type: 'datetime' }
+    ],
+    itemModifier: 'stacked'
+  }) }}
+
+    <p>
+      <a href="/{{ publicToken }}/quote" class="{{ 'button' if order.status === 'quote_awaiting_acceptance' }}">
+        View
+        {{ 'accepted' if order.status !== 'quote_awaiting_acceptance' }}
+        quote
+      </a>
+    </p>
+{% endblock  %}
