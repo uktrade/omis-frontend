@@ -3,6 +3,13 @@
 {% from '_macros/entity.njk' import MetaList %}
 {% from "_macros/common.njk" import Message %}
 
+{% block body %}
+  {{ super() }}
+  {% block javascript %}
+    <script src="{{ getAssetPath('app.js') }}"></script>
+  {% endblock %}
+{% endblock %}
+
 {% block body_footer_content_ogl %}{% endblock %}
 
 {% block body_footer_content_copyright %}{% endblock %}

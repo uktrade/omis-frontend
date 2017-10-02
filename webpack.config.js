@@ -13,7 +13,10 @@ const common = {
   devtool: 'source-map',
   entry: {
     styles: './assets/stylesheets/app.scss',
-    app: './assets/javascripts/app.js',
+    app: [
+      './assets/javascripts/vendor/details.polyfill.js',
+      './assets/javascripts/app.js',
+    ],
   },
   output: {
     path: config.buildDir,
