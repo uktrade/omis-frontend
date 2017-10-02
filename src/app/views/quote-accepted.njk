@@ -1,7 +1,14 @@
 {% extends '_layouts/omis-base.njk' %}
 
-{% block page_content %}
-  <h1>{{ order.reference }}</h1>
+{% block body_main_content %}
+  <div class="confirmation-banner">
+    <h1 class="confirmation-banner__heading">
+      Quote accepted
+    </h1>
 
-  <p>Thank you for accepting the quote.</p>
+    <p>
+      Your order reference number is
+      <strong class="confirmation-banner__referene">{{ order.reference }}</strong>
+    </p>
+  </div>
 {% endblock  %}
