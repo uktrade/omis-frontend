@@ -1,5 +1,6 @@
 const moment = require('moment')
 const dateFns = require('date-fns')
+const Case = require('case')
 const {
   assign,
   flatten,
@@ -19,6 +20,7 @@ function isNotEmpty (value) {
 
 const filters = {
   assign,
+  sentenceCase: Case.sentence,
 
   // TODO: Temporary to allow importing of data hub macros
   highlight: (string) => {
