@@ -1,0 +1,19 @@
+@import "../settings/colours";
+@import "../tools";
+
+.confirmation-banner {
+  background: $turquoise;
+  color: $white;
+  max-width: 32em;
+  padding: $default-spacing-unit * 2;
+  text-align: center;
+}
+
+.confirmation-banner__heading {
+  @include bold-font(48);
+}
+
+.confirmation-banner__referene {
+  @include bold-font(36);
+  display: block;
+}
