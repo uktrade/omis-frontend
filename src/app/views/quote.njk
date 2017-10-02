@@ -5,7 +5,7 @@
 
   {{ MetaList({
     items: [
-      { label: 'Quote was sent on', value: quote.created_on, type: 'datetime' }
+      { label: 'Quote sent on', value: quote.created_on, type: 'datetime' }
     ],
     itemModifier: 'stacked'
   }) }}
@@ -42,15 +42,9 @@
     </form>
   {% endif %}
 
-  <details>
-    <summary>
-      <span class="summary">
-        There is a problem with my quote
-      </span>
-    </summary>
-
-    <div class="c-message c-message--muted">
-      <p>Please contact your ITA.</p>
-    </div>
-  </details>
+  {% call Reveal({ summary: 'There is a problem with my quote' }) %}
+    {% call Message({ type: 'muted' }) %}
+      Please contact your ITA.
+    {% endcall %}
+  {% endcall %}
 {% endblock  %}
