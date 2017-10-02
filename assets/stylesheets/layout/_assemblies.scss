@@ -33,3 +33,9 @@ dt + dd,
 li + li {
   margin-top: $baseline-grid-unit;
 }
+
+h2, h3, h4, h5 {
+  & + * {
+    margin-top: $default-spacing-unit / 2;
+  }
+}
