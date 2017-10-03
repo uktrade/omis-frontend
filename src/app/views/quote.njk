@@ -40,7 +40,7 @@
   </article>
 
   {% if not quote.accepted_on %}
-    <form method="post" action="/{{ publicToken }}/accept">
+    <form method="post" action="/{{ publicToken }}/quote/accept">
       <input type="hidden" name="_csrf" value="{{ CSRF_TOKEN }}">
 
       <button type="submit" class="button">Accept quote</button>

@@ -22,7 +22,7 @@ async function acceptQuote (req, res, next) {
       url: `/v3/omis/public/order/${publicToken}/quote/accept`,
     })
 
-    res.redirect(`/${publicToken}/accepted`)
+    res.redirect(`/${publicToken}/quote/accepted`)
   } catch (error) {
     next(error)
   }
