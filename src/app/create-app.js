@@ -60,10 +60,10 @@ module.exports = function () {
   app.use(forceHttps(isDev))
   app.use(morganLogger((isDev ? 'dev' : 'combined')))
   app.use(headers(isDev))
-  app.use(csrf())
-  app.use(setCSRFToken())
   app.use(ping)
   app.use(setLocals)
+  app.use(csrf())
+  app.use(setCSRFToken())
 
   app.use(router)
 
