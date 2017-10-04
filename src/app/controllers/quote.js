@@ -6,7 +6,7 @@ function renderQuote (req, res, next) {
 
 function renderAcceptedQuote (req, res, next) {
   if (!res.locals.quote.accepted_on) {
-    return res.redirect(`/${req.params.publicToken}`)
+    return res.redirect(`/${req.params.publicToken}/quote`)
   }
 
   res.render('quote-accepted')
