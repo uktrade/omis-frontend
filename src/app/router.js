@@ -14,8 +14,11 @@ router.param(':publicToken', fetchOrderDetails)
 
 router.get('/:publicToken', renderOrderSummary)
 
-router.get('/:publicToken/quote', renderQuote)
+router
+  .route('/:publicToken/quote')
+  .get(renderQuote)
+  .post(acceptQuote)
+
 router.get('/:publicToken/quote/accepted', renderAcceptedQuote)
-router.post('/:publicToken/quote/accept', acceptQuote)
 
 module.exports = router

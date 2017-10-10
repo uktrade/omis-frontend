@@ -46,6 +46,7 @@ module.exports = function () {
 
   if (!isDev) {
     app.use(compression())
+    app.use(forceHttps(isDev))
   }
 
   app.use(session({
@@ -55,15 +56,14 @@ module.exports = function () {
     secret: 'keyboard cat',
   }))
 
+  app.use(setLocals)
   app.use(cookieParser())
   app.use(bodyParser.urlencoded({ extended: true, limit: '1mb' }))
-  app.use(forceHttps(isDev))
+  app.use(csrf())
+  app.use(setCSRFToken())
   app.use(morganLogger((isDev ? 'dev' : 'combined')))
   app.use(headers(isDev))
   app.use(ping)
-  app.use(setLocals)
-  app.use(csrf())
-  app.use(setCSRFToken())
 
   app.use(router)
 
