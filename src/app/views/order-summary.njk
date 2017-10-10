@@ -26,9 +26,9 @@
   }) }}
 
     <p>
-      <a href="/{{ publicToken }}/quote" class="{{ 'button' if order.status === 'quote_awaiting_acceptance' }}">
+      <a href="/{{ publicToken }}/quote" class="{{ 'button' if not quote.accepted_on }}">
         View
-        {{ 'accepted' if order.status !== 'quote_awaiting_acceptance' }}
+        {{ 'accepted' if quote.accepted_on }}
         quote
       </a>
     </p>

@@ -15,20 +15,30 @@
     itemModifier: 'stacked'
   }) }}
 
-  {% if order.status === 'quote_accepted' %}
-    {{ Message({
-      type: 'success',
-      text: 'This quote was accepted on ' + quote.accepted_on | formatDateTime
-    }) }}
-  {% elif order.status === 'quote_awaiting_acceptance' %}
-    {% set expiryLabel %}
-      This quote {{ 'expired' if quote.expired else 'will expire' }} {{ quote.expires_on | fromNow }}.
-    {% endset %}
+  {% if quote.cancelled_on %}
+    {% call Message({ type: 'error', element: 'div' }) %}
+      <p>This quote is no longer valid.</p>
+      <p>Please contact your ITA.</p>
+    {% endcall %}
+  {% else %}
+    {% if quote.accepted_on %}
+      {{ Message({
+        type: 'success',
+        text: 'This quote was accepted on ' + quote.accepted_on | formatDateTime
+      }) }}
+    {% endif %}
 
-    {{ Message({
-      type: 'info',
-      text: expiryLabel
-    }) }}
+    {% if not quote.accepted_on %}
+      {% call Message({
+        type: 'error' if quote.expired else 'info',
+        element: 'div'
+      }) %}
+        <p>This quote {{ 'expired' if quote.expired else 'will expire' }} {{ quote.expires_on | fromNow }}.</p>
+        {% if quote.expired %}
+          <p>Please contact your ITA.</p>
+        {% endif %}
+      {% endcall %}
+    {% endif %}
   {% endif %}
 
   <article class="example">
@@ -39,16 +49,16 @@
     </div>
   </article>
 
-  {% if not quote.accepted_on %}
+  {% if not quote.expired and not quote.accepted_on and not quote.cancelled_on %}
     <form method="post">
       <input type="hidden" name="_csrf" value="{{ CSRF_TOKEN }}">
       <button type="submit" class="button">Accept quote</button>
     </form>
-  {% endif %}
 
-  {% call Reveal({ summary: 'There is a problem with my quote' }) %}
-    {% call Message({ type: 'muted' }) %}
-      Please contact your ITA.
+    {% call Reveal({ summary: 'There is a problem with my quote' }) %}
+      {% call Message({ type: 'muted' }) %}
+        Please contact your ITA.
+      {% endcall %}
     {% endcall %}
-  {% endcall %}
+  {% endif %}
 {% endblock  %}
