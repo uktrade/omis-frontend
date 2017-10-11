@@ -4,15 +4,7 @@ const path = require('path')
 const cpus = (os.cpus().length || 1)
 const defaultWorkers = (cpus > 1 ? cpus - 1 : cpus)
 
-function env (name, defaultValue) {
-  return (process.env[ name ] || defaultValue)
-}
-
-function bool (name, defaultValue) {
-  return (env(name, defaultValue) + '') === 'true'
-}
-
-const isProd = env('NODE_ENV') === 'production'
+const isProd = process.env.NODE_ENV === 'production'
 const root = path.normalize(`${__dirname}/..`)
 
 const config = {
@@ -22,25 +14,25 @@ const config = {
   showErrors: !isProd,
   buildDir: path.join(root, '.build'),
   server: {
-    host: env('SERVER_HOST', 'localhost'),
-    port: env('SERVER_PORT', env('PORT', 3000)),
-    workers: env('SERVER_WORKERS', env('WEB_CONCURRENCY', defaultWorkers)),
+    host: process.env.SERVER_HOST || 'localhost',
+    port: process.env.SERVER_PORT || (process.env.PORT || 3000),
+    workers: process.env.SERVER_WORKERS || (process.env.WEB_CONCURRENCY || defaultWorkers),
   },
   views: {
-    cache: bool('CACHE_VIEWS', true),
+    cache: (process.env.CACHE_VIEWS + '') === 'true',
   },
   session: {
-    secret: env('SESSION_SECRET', 'howdoesyourgardengrow'),
+    secret: process.env.SESSION_SECRET || 'howdoesyourgardengrow',
     // 2 hour timeout
     ttl: process.env.SESSION_TTL || (2 * 60 * 60 * 1000),
   },
-  logLevel: env('LOG_LEVEL', 'warn'),
+  logLevel: process.env.LOG_LEVEL || 'warn',
   api: {
-    root: env('API_ROOT', 'http://localhost:8000'),
-    authUrl: env('API_AUTH_URL', '/token/'),
-    clientId: env('API_CLIENT_ID'),
-    clientSecret: env('API_CLIENT_SECRET'),
-    clientScope: env('API_CLIENT_SCOPE'),
+    root: process.env.API_ROOT || 'http://localhost:8000',
+    authUrl: process.env.API_AUTH_URL || '/token/',
+    clientId: process.env.API_CLIENT_ID,
+    clientSecret: process.env.API_CLIENT_SECRET,
+    clientScope: process.env.API_CLIENT_SCOPE,
   },
   formats: {
     dateLong: 'D MMMM YYYY',
