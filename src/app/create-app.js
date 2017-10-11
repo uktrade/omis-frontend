@@ -52,8 +52,13 @@ module.exports = function () {
   app.use(session({
     store: new MemoryStore({
       checkPeriod: 86400000,
+      ttl: config.session.ttl,
     }),
-    secret: 'keyboard cat',
+    cookie: {
+      secure: !config.isDev,
+      maxAge: config.session.ttl,
+    },
+    secret: config.session.secret,
   }))
 
   app.use(setLocals)

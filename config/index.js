@@ -29,6 +29,11 @@ const config = {
   views: {
     cache: bool('CACHE_VIEWS', true),
   },
+  session: {
+    secret: env('SESSION_SECRET', 'howdoesyourgardengrow'),
+    // 2 hour timeout
+    ttl: process.env.SESSION_TTL || (2 * 60 * 60 * 1000),
+  },
   logLevel: env('LOG_LEVEL', 'warn'),
   api: {
     root: env('API_ROOT', 'http://localhost:8000'),
