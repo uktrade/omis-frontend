@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "The public front end for OMIS",
   "main": "src/app/app.js",
+  "engines": {
+    "node": "8.6.0"
+  },
   "scripts": {
     "start": "NODE_ENV=production node --use-strict src/app/server.js",
     "develop": "run-p watch:app:*",
@@ -14,7 +17,8 @@
     "lint:all:js": "eslint ./test ./src",
     "lint:modified:js": "CHANGED_FILES=$(git diff --staged --name-only -- '*.js'); if [ \"$CHANGED_FILES\" ]; then eslint $(echo $CHANGED_FILES); fi",
     "watch:app:client": "webpack --watch --progress",
-    "watch:app:server": "nodemon $NODE_DEBUG_OPTION --use-strict"
+    "watch:app:server": "nodemon $NODE_DEBUG_OPTION --use-strict",
+    "heroku-postbuild": "npm run-script build"
   },
   "repository": {
     "type": "git",
@@ -32,7 +36,9 @@
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-preset-es2015": "^6.24.1",
     "body-parser": "^1.18.2",
+    "browser-sync": "^2.18.13",
     "case": "^1.5.3",
+    "compression": "1.7.0",
     "cookie-parser": "^1.4.3",
     "css-loader": "^0.28.7",
     "csurf": "^1.9.0",
@@ -66,13 +72,11 @@
     "webpack": "^3.6.0",
     "webpack-assets-manifest": "^1.0.0",
     "webpack-merge": "^4.1.0",
+    "browser-sync-webpack-plugin": "^1.2.0",
     "winston": "2.3.1"
   },
   "devDependencies": {
     "babel-eslint": "^8.0.1",
-    "browser-sync": "^2.18.13",
-    "browser-sync-webpack-plugin": "^1.2.0",
-    "compression": "1.7.0",
     "eslint": "^4.5.0",
     "eslint-config-standard": "^10.2.1",
     "eslint-plugin-import": "^2.7.0",
