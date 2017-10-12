@@ -23,12 +23,12 @@
   line-height: line-height($level, "small");
   text-transform: none;
 
-  @include media(tablet) {
+  @include media-query(tablet, $is-print: false) {
     font-size: type-scale($level, "medium");
     line-height: line-height($level, "medium");
   }
 
-  @include media(desktop) {
+  @include media-query(desktop, $is-print: false) {
     font-size: type-scale($level);
     line-height: line-height($level);
   }
@@ -92,7 +92,7 @@
 @mixin element-spacing($position: top) {
   margin-#{$position}: $default-spacing-unit;
 
-  @include media(desktop) {
+  @include media-query(desktop) {
     margin-#{$position}: $default-spacing-unit * 2;
   }
 }
@@ -113,19 +113,19 @@
   @if $type == full {
     padding: $default-spacing-unit;
 
-    @include media(desktop) {
+    @include media-query(desktop) {
       padding: $default-spacing-unit * 2;
     }
   } @else if $type == vertical {
     padding: $default-spacing-unit 0;
 
-    @include media(desktop) {
+    @include media-query(desktop) {
       padding: ($default-spacing-unit * 2) 0;
     }
   } @else {
     padding-#{$type}: $default-spacing-unit;
 
-    @include media(desktop) {
+    @include media-query(desktop) {
       padding-#{$type}: $default-spacing-unit * 2;
     }
   }

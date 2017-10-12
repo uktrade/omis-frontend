@@ -29,14 +29,14 @@
 
 .global-footer__links,
 .global-footer__copyright {
-  @include media(tablet) {
+  @include media-query(tablet) {
     display: inline-block;
     margin-right: -4px;
   }
 }
 
 .global-footer__links {
-  @include media(tablet) {
+  @include media-query(tablet) {
     width: 75%;
   }
 }
@@ -45,7 +45,7 @@
   // TODO: Normalise units (em/rem)
   margin-top: 1em;
 
-  @include media(tablet) {
+  @include media-query(tablet) {
     padding-left: 50px;
   }
 }
@@ -61,7 +61,7 @@
     background-image: url("/images/open-government-licence_2x.png") no-repeat;
   }
 
-  @include media(tablet) {
+  @include media-query(tablet) {
     margin-top: -2px;
     margin-left: -50px;
     float: left;
@@ -72,7 +72,7 @@
   text-align: center;
   margin-top: $default-spacing-unit * 2;
 
-  @include media(tablet) {
+  @include media-query(tablet) {
     margin-top: 0;
     width: 25%;
     text-align: right;

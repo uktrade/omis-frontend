@@ -35,13 +35,13 @@
 }
 
 .u-float-left {
-  @include media(tablet) {
+  @include media-query(tablet) {
     float: left !important;
   }
 }
 
 .u-float-right {
-  @include media(tablet) {
+  @include media-query(tablet) {
     float: right !important;
   }
 }

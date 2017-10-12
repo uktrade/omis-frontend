@@ -17,7 +17,7 @@
 }
 
 .global-header__site-title {
-  @include media(tablet) {
+  @include media-query(tablet) {
     float: left;
   }
 
@@ -83,7 +83,7 @@
   color: inherit;
   line-height: .9;
 
-  @include media(tablet) {
+  @include media-query(tablet) {
     line-height: .9;
     font-size: 30px;
   }
