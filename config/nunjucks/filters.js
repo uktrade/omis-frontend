@@ -9,7 +9,7 @@ const {
   isEmpty,
   isString,
   pickBy,
-  isNil
+  isNil,
 } = require('lodash')
 
 const { formats } = require('../../config')
