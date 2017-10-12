@@ -8,6 +8,7 @@ const compression = require('compression')
 const favicon = require('serve-favicon')
 const session = require('express-session')
 const MemoryStore = require('memorystore')(session)
+const enforce = require('express-sslify')
 
 const config = require('../../config')
 const nunjucks = require('../../config/nunjucks')
@@ -15,7 +16,6 @@ const router = require('./router')
 const reporter = require('./lib/reporter')
 
 const ping = require('./middleware/ping')
-const forceHttps = require('./middleware/force-https')
 const headers = require('./middleware/headers')
 const errors = require('./middleware/errors')
 const setCSRFToken = require('./middleware/set-csrf-token')
@@ -46,7 +46,10 @@ module.exports = function () {
 
   if (!isDev) {
     app.use(compression())
-    app.use(forceHttps(isDev))
+    app.enable('trust proxy')
+    app.use(enforce.HTTPS({
+      trustProtoHeader: true,
+    }))
   }
 
   app.use(session({
