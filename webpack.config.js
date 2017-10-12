@@ -13,6 +13,7 @@ const common = {
   devtool: 'source-map',
   entry: {
     styles: './assets/stylesheets/app.scss',
+    'styles.print': './assets/stylesheets/app.print.scss',
     app: [
       './assets/javascripts/vendor/details.polyfill.js',
       './assets/javascripts/app.js',

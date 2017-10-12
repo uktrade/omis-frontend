@@ -11,4 +11,8 @@
 .main-content__inner {
   padding-top: $default-spacing-unit * 2;
   padding-bottom: $default-spacing-unit * 4;
+
+  @if $is-print {
+    padding-top: 0;
+  }
 }

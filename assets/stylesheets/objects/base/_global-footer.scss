@@ -15,6 +15,10 @@
       color: $text-colour;
     }
   }
+
+  @if $is-print {
+    display: none;
+  }
 }
 
 .global-footer__inner {
