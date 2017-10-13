@@ -1,17 +1,26 @@
 {
   "name": "omis-frontend",
-  "scripts": {
-  },
+  "scripts": {},
   "env": {
+    "NODE_MODULES_CACHE": "false",
     "SESSION_SECRET": {
       "generator": "secret"
+    },
+    "API_CLIENT_ID": {
+      "required": true
+    },
+    "API_CLIENT_SCOPE": {
+      "required": true
+    },
+    "API_CLIENT_SECRET": {
+      "required": true
+    },
+    "API_ROOT": {
+      "required": true
     }
   },
-  "formation": {
-  },
-  "addons": [
-
-  ],
+  "formation": {},
+  "addons": [],
   "buildpacks": [
     {
       "url": "heroku/nodejs"
