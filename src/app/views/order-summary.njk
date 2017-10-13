@@ -10,6 +10,21 @@
     itemModifier: 'stacked'
   }) }}
 
+  {% if invoice %}
+    <h2>Your invoice</h2>
+
+    {{ MetaList({
+      items: [
+        { label: 'Created on on', value: invoice.created_on, type: 'datetime' }
+      ],
+      itemModifier: 'stacked'
+    }) }}
+
+    <p>
+      <a href="/{{ publicToken }}/invoice">View invoice {{ invoice.invoice_number }}</a>
+    </p>
+  {% endif %}
+
   <h2>Your quote</h2>
 
   {% set expiryLabel %}
