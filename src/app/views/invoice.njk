@@ -64,7 +64,7 @@
         <th>Order number</th>
         <th>Service description</th>
         <th align="right">Net amount</th>
-        <th align="right">VAT at 20%</th>
+        <th align="right">VAT {{ 'at 20%' if order.vat_cost > 0 }}</th>
         <th align="right">Total amount</th>
       </tr>
     </thead>
@@ -72,9 +72,9 @@
       <tr>
         <td>{{ order.reference }}</td>
         <td>OMIS</td>
-        <td align="right">{{ order.net_cost }}</td>
-        <td align="right">{{ order.vat_cost }}</td>
-        <td align="right">{{ order.total_cost }}</td>
+        <td align="right">{{ order.net_cost | formatCurrency }}</td>
+        <td align="right">{{ order.vat_cost | formatCurrency }}</td>
+        <td align="right">{{ order.total_cost | formatCurrency }}</td>
       </tr>
     </tbody>
   </table>
