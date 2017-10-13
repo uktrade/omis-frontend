@@ -18,7 +18,7 @@
     "lint:modified:js": "CHANGED_FILES=$(git diff --staged --name-only -- '*.js'); if [ \"$CHANGED_FILES\" ]; then eslint $(echo $CHANGED_FILES); fi",
     "watch:app:client": "webpack --watch --progress",
     "watch:app:server": "nodemon $NODE_DEBUG_OPTION --use-strict",
-    "heroku-postbuild": "npm run-script build"
+    "heroku-postbuild": "npm rebuild && npm run build"
   },
   "repository": {
     "type": "git",
