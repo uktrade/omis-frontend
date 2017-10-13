@@ -24,5 +24,9 @@ table {
   th {
     font-weight: 700;
     text-align: left;
+
+    &[align="right"] {
+      text-align: right;
+    }
   }
 }
