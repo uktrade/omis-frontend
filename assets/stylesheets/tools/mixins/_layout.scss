@@ -34,7 +34,7 @@
   display: block;
   padding: 0 ($gutter / 2);
 
-  @include media($full-width) {
+  @include media-query($full-width) {
     float: $float;
     width: percentage($width);
   }
@@ -45,7 +45,7 @@
   @include clearfix;
   margin: 0 (-($gutter / 2));
 
-  @include media(desktop) {
+  @include media-query(desktop) {
     .page-section &,
     .local-header & {
       > * {
@@ -59,11 +59,11 @@
   margin: 0 ($gutter / 2);
   max-width: $site-width;
 
-  @include media(desktop) {
+  @include media-query(desktop) {
     margin: 0 $gutter;
   }
 
-  @include media($min-width: ($site-width + $gutter * 2)) {
+  @include media-query($min-width: ($site-width + $gutter * 2)) {
     margin: 0 auto;
   }
 }

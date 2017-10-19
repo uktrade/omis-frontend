@@ -56,7 +56,7 @@
     margin-top: $default-spacing-unit / 2;
   }
 
-  @include media(tablet) {
+  @include media-query(tablet) {
     display: inline-block;
 
     & + & {
@@ -83,7 +83,7 @@
     margin-left: 0;
   }
 
-  @include media(tablet) {
+  @include media-query(tablet) {
     .c-meta-list__item:nth-child(odd) {
       float: left;
       clear: both;

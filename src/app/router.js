@@ -3,6 +3,7 @@ const router = require('express').Router()
 const indexController = require('./controllers/index')
 const { renderOrderSummary } = require('./controllers/order')
 const { renderQuote, renderAcceptedQuote, acceptQuote } = require('./controllers/quote')
+const { renderInvoice } = require('./controllers/invoice')
 const { fetchOrderDetails } = require('./middleware/order')
 const { setAuthToken } = require('./lib/api')
 
@@ -20,5 +21,7 @@ router
   .post(acceptQuote)
 
 router.get('/:publicToken/quote/accepted', renderAcceptedQuote)
+
+router.get('/:publicToken/invoice', renderInvoice)
 
 module.exports = router

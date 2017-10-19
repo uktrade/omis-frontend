@@ -1,0 +1,107 @@
+{% extends '_layouts/omis-base.njk' %}
+
+{% block body_main_content %}
+  <p class="u-print-hide">
+    <a href="/{{ publicToken }}">Back to summary</a>
+  </p>
+
+  <img src="{{ getAssetPath('images/dit-invoice-logo.png') }}" width="200"><br>
+
+  <h1>Invoice</h1>
+
+  {% set billingAddress = [
+    invoice.billing_contact_name,
+    invoice.billing_address_1,
+    invoice.billing_address_2,
+    invoice.billing_address_town,
+    invoice.billing_address_county,
+    invoice.billing_address_postcode,
+    invoice.billing_address_country.name
+  ] | removeNilAndEmpty | join('<br>') %}
+
+  {% set invoiceAddress = [
+    invoice.invoice_company_name,
+    invoice.invoice_address_1,
+    invoice.invoice_address_2,
+    invoice.invoice_address_town,
+    invoice.invoice_address_county,
+    invoice.invoice_address_postcode,
+    invoice.invoice_address_country.name
+  ] | removeNilAndEmpty | join('<br>') %}
+
+  <div class="u-clearfix">
+    <div class="u-float-left">
+      {{ MetaList({
+        items: [
+          { label: 'To', value: billingAddress, safe: true }
+        ],
+        itemModifier: 'stacked'
+      }) }}
+    </div>
+
+    <div class="u-float-right">
+      {{ MetaList({
+        items: [
+          { label: 'From', value: invoiceAddress, safe: true }
+        ],
+        itemModifier: 'stacked'
+      }) }}
+    </div>
+  </div>
+
+  {{ MetaList({
+    items: [
+      { label: 'Created on', value: invoice.created_on, type: 'datetime' },
+      { label: 'Invoice number', value: invoice.invoice_number },
+      { label: 'Purchase order (PO) number', value: invoice.po_number }
+    ],
+    itemModifier: 'stacked'
+  }) }}
+
+  <table>
+    <thead>
+      <tr>
+        <th>Order number</th>
+        <th>Service description</th>
+        <th align="right">Net amount</th>
+        <th align="right">VAT {{ 'at 20%' if order.vat_cost > 0 }}</th>
+        <th align="right">Total amount</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{ order.reference }}</td>
+        <td>OMIS</td>
+        <td align="right">{{ order.net_cost | formatCurrency }}</td>
+        <td align="right">{{ order.vat_cost | formatCurrency }}</td>
+        <td align="right">{{ order.total_cost | formatCurrency }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Payment terms</h3>
+
+  <p>Payable within 30 days. For events, 10 working days before event date.</p>
+
+  <h3>How to pay by bank transfer</h3>
+
+  <p>Please make your payment in sterling for <strong>{{ order.total_cost | formatCurrency }}</strong> to Department for International Trade’s bank account at National Westminster Bank.</p>
+
+  <p>
+    <strong>Account Name:</strong> DIT OMIS Service<br>
+    <strong>Account Number:</strong> 10014187<br>
+    <strong>Sort Code:</strong> 60-70-80
+  </p>
+
+  <p>
+    <strong>SWIFT:</strong> NWBKGB2L<br>
+    <strong>IBAN:</strong> GB57NWBK60708010014187
+  </p>
+
+  <p>You agree to pay any bank charges incurred with this transaction. You must quote your order number, <strong>{{ order.reference }}</strong>, when arranging the payment. Please send a copy of your Payment Remittance Advice which must show your payment reference to the above Charging Point.</p>
+
+  <h3>In case of problems</h3>
+
+  <p>Contact [adviser].</p>
+
+{% endblock  %}

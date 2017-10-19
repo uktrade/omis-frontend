@@ -35,6 +35,7 @@ const config = {
     clientScope: process.env.API_CLIENT_SCOPE,
   },
   formats: {
+    currency: '$0,0.00',
     dateLong: 'D MMMM YYYY',
     dateMedium: 'D MMM YYYY',
     dateTimeLong: 'D MMMM YYYY, h:mma',

@@ -1,6 +1,7 @@
 const moment = require('moment')
 const dateFns = require('date-fns')
 const Case = require('case')
+const numeral = require('numeral')
 const {
   assign,
   flatten,
@@ -11,6 +12,8 @@ const {
   pickBy,
   isNil,
 } = require('lodash')
+require('numeral/locales/en-gb')
+numeral.locale('en-gb')
 
 const { formats } = require('../../config')
 
@@ -25,6 +28,13 @@ const filters = {
   // TODO: Temporary to allow importing of data hub macros
   highlight: (string) => {
     return string
+  },
+
+  formatCurrency: (value, format = formats.currency) => {
+    if (!value) {
+      return value
+    }
+    return numeral(value).format(format)
   },
 
   formatDate: (value, format = formats.dateLong) => {

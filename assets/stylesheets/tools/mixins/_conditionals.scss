@@ -14,12 +14,12 @@
 ///   div {
 ///     border: 1px solid;
 ///
-///     @include media(tablet) {
+///     @include media-query(tablet) {
 ///       width: 30%;
 ///       float: left;
 ///     }
 ///   }
-@mixin media($size: false, $max-width: false, $min-width: false, $ignore-for-ie: false) {
+@mixin media-query($size: false, $max-width: false, $min-width: false, $is-print: $is-print) {
   @if $size == desktop {
     @media (min-width: 925px) {
       @content;
@@ -42,6 +42,12 @@
     }
   } @else {
     @media (min-width: $size) {
+      @content;
+    }
+  }
+
+  @if $is-print {
+    @media print {
       @content;
     }
   }

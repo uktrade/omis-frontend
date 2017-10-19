@@ -4,6 +4,10 @@
 .global-header {
   background-color: $black;
   color: $white;
+
+  @if $is-print {
+    color: $black;
+  }
 }
 
 .global-header__inner {
@@ -13,7 +17,7 @@
 }
 
 .global-header__site-title {
-  @include media(tablet) {
+  @include media-query(tablet) {
     float: left;
   }
 
@@ -36,6 +40,10 @@
     background-image: url("../../../images/dit-crest__white@2x.png");
     background-size: 28px 30px;
   }
+
+  @if $is-print {
+    display: none;
+  }
 }
 
 .global-header__link {
@@ -56,6 +64,10 @@
 .global-header__logo {
   border-bottom: 1px solid transparent;
   margin-left: -4px;
+
+  @if $is-print {
+    margin-left: 0;
+  }
 }
 
 .global-header__link:hover .global-header__logo {
@@ -71,7 +83,7 @@
   color: inherit;
   line-height: .9;
 
-  @include media(tablet) {
+  @include media-query(tablet) {
     line-height: .9;
     font-size: 30px;
   }
