@@ -72,7 +72,7 @@
       <tr>
         <td>{{ order.reference }}</td>
         <td>OMIS</td>
-        <td align="right">{{ order.net_cost | formatCurrency }}</td>
+        <td align="right">{{ order.subtotal_cost | formatCurrency }}</td>
         <td align="right">{{ order.vat_cost | formatCurrency }}</td>
         <td align="right">{{ order.total_cost | formatCurrency }}</td>
       </tr>

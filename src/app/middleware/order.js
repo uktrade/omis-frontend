@@ -12,7 +12,7 @@ async function fetchOrderDetails (req, res, next, publicToken) {
     order = await fetch(authToken, `/v3/omis/public/order/${publicToken}`)
 
     assign(order, {
-      net_cost: parseInt(order.net_cost) / 100,
+      subtotal_cost: parseInt(order.subtotal_cost) / 100,
       vat_cost: parseInt(order.vat_cost) / 100,
       total_cost: parseInt(order.total_cost) / 100,
     })
