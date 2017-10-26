@@ -8,15 +8,23 @@
 
     {{ MetaList({
       items: [
+        { label: 'Invoice number', value: invoice.invoice_number },
         { label: 'Created on', value: invoice.created_on, type: 'datetime' },
-        { label: 'Invoice number', value: invoice.invoice_number }
+        { label: 'Paid on', value: invoice.paid_on, type: 'datetime' }
       ],
+      modifier: 'stacked',
       itemModifier: 'stacked'
     }) }}
 
     <p>
       <a href="/{{ publicToken }}/invoice">View your invoice</a>
     </p>
+
+    {% if order.status in ['paid', 'complete'] %}
+      <p>
+        <a href="/{{ publicToken }}/receipt">View your payment receipt</a>
+      </p>
+    {% endif %}
   {% endif %}
 
   <h2>Your quote</h2>
@@ -31,6 +39,7 @@
       { label: expiryLabel, value: quote.expires_on if not quote.accepted_on, type: 'fromNow' },
       { label: 'You accepted it on', value: quote.accepted_on if quote.accepted_on, type: 'datetime' }
     ],
+    modifier: 'stacked',
     itemModifier: 'stacked'
   }) }}
 

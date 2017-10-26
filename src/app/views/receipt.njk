@@ -1,0 +1,77 @@
+{% extends '_layouts/omis-base.njk' %}
+
+{% block body_main_content %}
+  <p class="u-print-hide">
+    <a href="/{{ publicToken }}">Back to summary</a>
+  </p>
+
+  <img src="{{ getAssetPath('images/dit-invoice-logo.png') }}" width="200"><br>
+
+  <h1>Payment receipt</h1>
+
+  {% set billingAddress = [
+    invoice.billing_contact_name,
+    invoice.billing_address_1,
+    invoice.billing_address_2,
+    invoice.billing_address_town,
+    invoice.billing_address_county,
+    invoice.billing_address_postcode,
+    invoice.billing_address_country.name
+  ] | removeNilAndEmpty | join('<br>') %}
+
+  {% set invoiceAddress = [
+    invoice.invoice_company_name,
+    invoice.invoice_address_1,
+    invoice.invoice_address_2,
+    invoice.invoice_address_town,
+    invoice.invoice_address_county,
+    invoice.invoice_address_postcode,
+    invoice.invoice_address_country.name
+  ] | removeNilAndEmpty | join('<br>') %}
+
+  <div class="u-clearfix">
+    <div class="u-float-left">
+      {{ MetaList({
+        items: [
+          { label: 'For the attention of', value: billingAddress, safe: true },
+        { label: 'Purchase order (PO) number', value: invoice.po_number },
+          { label: 'Invoice number', value: invoice.invoice_number },
+          { label: 'Receipt date', value: invoice.created_on, type: 'datetime' }
+        ],
+        modifier: 'stacked',
+        itemModifier: 'stacked'
+      }) }}
+    </div>
+
+    <div class="u-float-right">
+      {{ MetaList({
+        items: [
+          { label: 'From (charging point)', value: invoiceAddress, safe: true },
+          { label: 'VAT number', value: invoice.invoice_vat_number }
+        ],
+        modifier: 'stacked',
+        itemModifier: 'stacked'
+      }) }}
+    </div>
+  </div>
+
+  {% include '_includes/cost-table.njk' %}
+
+  <h2 class="heading-medium">Payment details ({{ payments.length }} {{ ' payment' | pluralise(payments.length) }})</h2>
+
+  {% for payment in payments %}
+    <h3 class="heading-small">Payment {{ loop.index }}</h3>
+
+    {{ MetaList({
+      items: [
+        { label: 'Method', value: payment.method | upper },
+        { label: 'Amount received', value: payment.amount | formatCurrency },
+        { label: 'Received on', value: payment.received_on, type: 'date' },
+        { label: 'Transaction reference', value: payment.transaction_reference }
+      ],
+      modifier: 'stacked',
+      itemModifier: 'stacked'
+    }) }}
+  {% endfor %}
+
+{% endblock  %}
