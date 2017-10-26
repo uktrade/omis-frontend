@@ -49,35 +49,7 @@
     </div>
   </div>
 
-  {{ MetaList({
-    items: [
-      { label: 'Created on', value: invoice.created_on, type: 'datetime' },
-      { label: 'Invoice number', value: invoice.invoice_number },
-      { label: 'Purchase order (PO) number', value: invoice.po_number }
-    ],
-    itemModifier: 'stacked'
-  }) }}
-
-  <table>
-    <thead>
-      <tr>
-        <th>Order number</th>
-        <th>Service description</th>
-        <th align="right">Net amount</th>
-        <th align="right">VAT {{ 'at 20%' if order.vat_cost > 0 }}</th>
-        <th align="right">Total amount</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>{{ order.reference }}</td>
-        <td>OMIS</td>
-        <td align="right">{{ order.subtotal_cost | formatCurrency }}</td>
-        <td align="right">{{ order.vat_cost | formatCurrency }}</td>
-        <td align="right">{{ order.total_cost | formatCurrency }}</td>
-      </tr>
-    </tbody>
-  </table>
+  {% include '_includes/cost-table.njk' %}
 
   <h3>Payment terms</h3>
 

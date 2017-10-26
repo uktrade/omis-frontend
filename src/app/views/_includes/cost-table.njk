@@ -1,0 +1,48 @@
+<table>
+  <thead>
+    <tr>
+      <th>Order number</th>
+      <th>Service description</th>
+      <th>Market (country)</th>
+      <th></th>
+      <th align="right">Net amount</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        {{ order.reference }}
+      </td>
+      <td>
+        OMIS
+      </td>
+      <td>
+        {{ order.primary_market.name }}
+      </td>
+      <td></td>
+      <td align="right">
+        {{ order.subtotal_cost | formatCurrency }}
+      </td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td colspan="3" class="table__cell--unstyled"></td>
+      <th>
+        VAT {{ 'at 20%' if order.vat_cost > 0 }}
+      </th>
+      <td align="right">
+        {{ order.vat_cost | formatCurrency }}
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3" class="table__cell--unstyled"></td>
+      <th>
+        Total amount
+      </th>
+      <td align="right">
+        <strong>{{ order.total_cost | formatCurrency }}</strong>
+      </td>
+    </tr>
+  </tfoot>
+</table>
