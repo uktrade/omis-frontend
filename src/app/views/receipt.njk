@@ -7,7 +7,7 @@
 
   <img src="{{ getAssetPath('images/dit-invoice-logo.png') }}" width="200"><br>
 
-  <h1>Invoice</h1>
+  <h1>Payment receipt</h1>
 
   {% set billingAddress = [
     invoice.billing_contact_name,
@@ -33,10 +33,10 @@
     <div class="u-float-left">
       {{ MetaList({
         items: [
-          { label: 'To', value: billingAddress, safe: true },
-          { label: 'Purchase order (PO) number', value: invoice.po_number },
+          { label: 'For the attention of', value: billingAddress, safe: true },
+        { label: 'Purchase order (PO) number', value: invoice.po_number },
           { label: 'Invoice number', value: invoice.invoice_number },
-          { label: 'Created on', value: invoice.created_on, type: 'datetime' }
+          { label: 'Receipt date', value: invoice.created_on, type: 'datetime' }
         ],
         modifier: 'stacked',
         itemModifier: 'stacked'
@@ -46,7 +46,7 @@
     <div class="u-float-right">
       {{ MetaList({
         items: [
-          { label: 'From', value: invoiceAddress, safe: true },
+          { label: 'From (charging point)', value: invoiceAddress, safe: true },
           { label: 'VAT number', value: invoice.invoice_vat_number }
         ],
         modifier: 'stacked',
@@ -57,29 +57,21 @@
 
   {% include '_includes/cost-table.njk' %}
 
-  <h3>Payment terms</h3>
+  <h2 class="heading-medium">Payment details ({{ payments.length }} {{ ' payment' | pluralise(payments.length) }})</h2>
 
-  <p>Payable within 30 days. For events, 10 working days before event date.</p>
+  {% for payment in payments %}
+    <h3 class="heading-small">Payment {{ loop.index }}</h3>
 
-  <h3>How to pay by bank transfer</h3>
-
-  <p>Please make your payment in sterling for <strong>{{ order.total_cost | formatCurrency }}</strong> to Department for International Trade’s bank account at National Westminster Bank.</p>
-
-  <p>
-    <strong>Account Name:</strong> DIT OMIS Service<br>
-    <strong>Account Number:</strong> 10014187<br>
-    <strong>Sort Code:</strong> 60-70-80
-  </p>
-
-  <p>
-    <strong>SWIFT:</strong> NWBKGB2L<br>
-    <strong>IBAN:</strong> GB57NWBK60708010014187
-  </p>
-
-  <p>You agree to pay any bank charges incurred with this transaction. You must quote your order number, <strong>{{ order.reference }}</strong>, when arranging the payment. Please send a copy of your Payment Remittance Advice which must show your payment reference to the above Charging Point.</p>
-
-  <h3>In case of problems</h3>
-
-  <p>Contact [adviser].</p>
+    {{ MetaList({
+      items: [
+        { label: 'Method', value: payment.method | upper },
+        { label: 'Amount received', value: payment.amount | formatCurrency },
+        { label: 'Received on', value: payment.received_on, type: 'date' },
+        { label: 'Transaction reference', value: payment.transaction_reference }
+      ],
+      modifier: 'stacked',
+      itemModifier: 'stacked'
+    }) }}
+  {% endfor %}
 
 {% endblock  %}

@@ -4,6 +4,7 @@ const Case = require('case')
 const numeral = require('numeral')
 const {
   assign,
+  concat,
   flatten,
   isArray,
   isPlainObject,
@@ -21,8 +22,24 @@ function isNotEmpty (value) {
   return !isNil(value) && !/^\s*$/.test(value) && !(isPlainObject(value) && isEmpty(value))
 }
 
+function pluralise (string, count, pluralisedWord) {
+  if (parseInt(count, 10) !== 1) {
+    if (pluralisedWord) {
+      string = pluralisedWord
+    } else if (string.match(/[^aeiou]y$/)) {
+      string = string.replace(/y$/, 'ies')
+    } else {
+      string += 's'
+    }
+  }
+
+  return string
+}
+
 const filters = {
   assign,
+  concat,
+  pluralise,
   sentenceCase: Case.sentence,
 
   // TODO: Temporary to allow importing of data hub macros

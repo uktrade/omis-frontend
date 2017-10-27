@@ -4,6 +4,7 @@ const indexController = require('./controllers/index')
 const { renderOrderSummary } = require('./controllers/order')
 const { renderQuote, renderAcceptedQuote, acceptQuote } = require('./controllers/quote')
 const { renderInvoice } = require('./controllers/invoice')
+const { renderReceipt } = require('./controllers/receipt')
 const { fetchOrderDetails } = require('./middleware/order')
 const { setAuthToken } = require('./lib/api')
 
@@ -23,5 +24,7 @@ router
 router.get('/:publicToken/quote/accepted', renderAcceptedQuote)
 
 router.get('/:publicToken/invoice', renderInvoice)
+
+router.get('/:publicToken/receipt', renderReceipt)
 
 module.exports = router
