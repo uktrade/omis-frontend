@@ -18,7 +18,7 @@
   {% if quote.cancelled_on %}
     {% call Message({ type: 'error', element: 'div' }) %}
       <p>This quote is no longer valid.</p>
-      <p>Please contact your ITA.</p>
+      <p>Get in touch with your DIT contact or email <a href="mailto:omis.orders@digital.trade.gov.uk">omis.orders@digital.trade.gov.uk</a></p>
     {% endcall %}
   {% else %}
     {% if quote.accepted_on %}
@@ -35,7 +35,7 @@
       }) %}
         <p>This quote {{ 'expired' if quote.expired else 'will expire' }} {{ quote.expires_on | fromNow }}.</p>
         {% if quote.expired %}
-          <p>Please contact your ITA.</p>
+          <p>Get in touch with your DIT contact or email <a href="mailto:omis.orders@digital.trade.gov.uk">omis.orders@digital.trade.gov.uk</a></p>
         {% endif %}
       {% endcall %}
     {% endif %}
@@ -57,7 +57,7 @@
 
     {% call Reveal({ summary: 'There is a problem with my quote' }) %}
       {% call Message({ type: 'muted' }) %}
-        Please contact your ITA.
+        Get in touch with your DIT contact or email <a href="mailto:omis.orders@digital.trade.gov.uk">omis.orders@digital.trade.gov.uk</a>
       {% endcall %}
     {% endcall %}
   {% endif %}
