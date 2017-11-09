@@ -9,7 +9,7 @@
 
   {{ MetaList({
     items: [
-      { label: 'Quote sent on', value: quote.created_on, type: 'datetime' },
+      { label: 'We sent it on', value: quote.created_on, type: 'datetime' },
       { label: 'Purchase order (PO) number', value: order.po_number }
     ],
     itemModifier: 'stacked'
@@ -43,9 +43,11 @@
 
   <article class="example">
     <div class="example__preview l-markdown">
-      {% markdown %}
-        {{ quote.content }}
-      {% endmarkdown %}
+{% markdown %}{{ quote.content | safe }}{% endmarkdown %}
+      {% call Reveal({ summary: 'View full terms and conditions' }) %}
+{# Ugly indentation is so that markdown spacing is handled correctly #}
+{% markdown %}{{ quote.terms_and_conditions | safe }}{% endmarkdown %}
+      {% endcall %}
     </div>
   </article>
 
