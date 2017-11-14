@@ -41,15 +41,17 @@
     {% endif %}
   {% endif %}
 
-  <article class="example">
-    <div class="example__preview l-markdown">
-{% markdown %}{{ quote.content | safe }}{% endmarkdown %}
-      {% call Reveal({ summary: 'View full terms and conditions' }) %}
-{# Ugly indentation is so that markdown spacing is handled correctly #}
-{% markdown %}{{ quote.terms_and_conditions | safe }}{% endmarkdown %}
-      {% endcall %}
-    </div>
-  </article>
+  {% if quote.content %}
+    <article class="example">
+      <div class="example__preview l-markdown">
+  {% markdown %}{{ quote.content | safe }}{% endmarkdown %}
+        {% call Reveal({ summary: 'View full terms and conditions' }) %}
+  {# Ugly indentation is so that markdown spacing is handled correctly #}
+  {% markdown %}{{ quote.terms_and_conditions | safe }}{% endmarkdown %}
+        {% endcall %}
+      </div>
+    </article>
+  {% endif %}
 
   {% if not quote.expired and not quote.accepted_on and not quote.cancelled_on %}
     <form method="post">
