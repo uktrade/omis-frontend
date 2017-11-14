@@ -52,6 +52,7 @@ module.exports = function () {
     }))
   }
 
+  app.use(cookieParser())
   app.use(session({
     store: new MemoryStore({
       checkPeriod: 86400000,
@@ -62,16 +63,19 @@ module.exports = function () {
       maxAge: config.session.ttl,
     },
     secret: config.session.secret,
+    key: 'datahub_omis.sid',
+    rolling: false,
+    resave: false,
+    saveUninitialized: true,
   }))
+  app.use(bodyParser.urlencoded({ extended: true, limit: '1mb' }))
 
   app.use(setLocals)
-  app.use(cookieParser())
-  app.use(bodyParser.urlencoded({ extended: true, limit: '1mb' }))
-  app.use(csrf())
-  app.use(setCSRFToken())
   app.use(morganLogger((isDev ? 'dev' : 'combined')))
   app.use(headers(isDev))
   app.use(ping)
+  app.use(csrf({ cookie: true }))
+  app.use(setCSRFToken())
 
   app.use(router)
 
