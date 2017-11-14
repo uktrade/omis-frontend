@@ -3,6 +3,13 @@
 {% block body_main_content %}
   <h1>{{ order.reference }}</h1>
 
+  {% if order.status === 'complete' %}
+    {% call Message({ type: 'success', element: 'div' }) %}
+      <p>Your order has been completed and you should have received any documents for this order.</p>
+      <p>If there are any problems, get in touch with your DIT contact or email <a href="mailto:omis.orders@digital.trade.gov.uk">omis.orders@digital.trade.gov.uk</a></p>
+    {% endcall %}
+  {% endif %}
+
   {% if invoice %}
     <h2>Your invoice</h2>
 
@@ -10,15 +17,17 @@
       items: [
         { label: 'Invoice number', value: invoice.invoice_number },
         { label: 'Created on', value: invoice.created_on, type: 'datetime' },
-        { label: 'Paid on', value: invoice.paid_on, type: 'datetime' }
+        { label: 'Paid on', value: order.paid_on, type: 'date' }
       ],
       modifier: 'stacked',
       itemModifier: 'stacked'
     }) }}
 
-    <p>
-      <a href="/{{ publicToken }}/invoice">View your invoice</a>
-    </p>
+    {% if invoice.company_name %}
+      <p>
+        <a href="/{{ publicToken }}/invoice">View your invoice</a>
+      </p>
+    {% endif %}
 
     {% if order.status in ['paid', 'complete'] %}
       <p>
@@ -33,11 +42,15 @@
     Expire{{ 'd' if quote.expired else 's' }}
   {% endset %}
 
+  {% set expiryValue %}
+    {{ quote.expires_on | formatDate }} ({{ quote.expires_on | fromNow }})
+  {% endset %}
+
   {{ MetaList({
     items: [
       { label: 'We sent it on', value: quote.created_on, type: 'datetime' },
-      { label: expiryLabel, value: quote.expires_on if not quote.accepted_on, type: 'fromNow' },
-      { label: 'You accepted it on', value: quote.accepted_on if quote.accepted_on, type: 'datetime' }
+      { label: expiryLabel, value: expiryValue if not quote.accepted_on },
+      { label: 'You accepted it on', value: quote.accepted_on, type: 'datetime' }
     ],
     modifier: 'stacked',
     itemModifier: 'stacked'

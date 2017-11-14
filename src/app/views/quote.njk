@@ -24,7 +24,7 @@
     {% if quote.accepted_on %}
       {{ Message({
         type: 'success',
-        text: 'This quote was accepted on ' + quote.accepted_on | formatDateTime
+        text: 'You accepted this quote on ' + quote.accepted_on | formatDateTime
       }) }}
     {% endif %}
 
@@ -33,7 +33,7 @@
         type: 'error' if quote.expired else 'info',
         element: 'div'
       }) %}
-        <p>This quote {{ 'expired' if quote.expired else 'will expire' }} {{ quote.expires_on | fromNow }}.</p>
+        <p>This quote {{ 'expired' if quote.expired else 'will expire' }} on {{ quote.expires_on | formatDate }} ({{ quote.expires_on | fromNow }}).</p>
         {% if quote.expired %}
           <p>Get in touch with your DIT contact or email <a href="mailto:omis.orders@digital.trade.gov.uk">omis.orders@digital.trade.gov.uk</a></p>
         {% endif %}
@@ -41,15 +41,17 @@
     {% endif %}
   {% endif %}
 
-  <article class="example">
-    <div class="example__preview l-markdown">
-{% markdown %}{{ quote.content | safe }}{% endmarkdown %}
-      {% call Reveal({ summary: 'View full terms and conditions' }) %}
-{# Ugly indentation is so that markdown spacing is handled correctly #}
-{% markdown %}{{ quote.terms_and_conditions | safe }}{% endmarkdown %}
-      {% endcall %}
-    </div>
-  </article>
+  {% if quote.content %}
+    <article class="example">
+      <div class="example__preview l-markdown">
+  {% markdown %}{{ quote.content | safe }}{% endmarkdown %}
+        {% call Reveal({ summary: 'View full terms and conditions' }) %}
+  {# Ugly indentation is so that markdown spacing is handled correctly #}
+  {% markdown %}{{ quote.terms_and_conditions | safe }}{% endmarkdown %}
+        {% endcall %}
+      </div>
+    </article>
+  {% endif %}
 
   {% if not quote.expired and not quote.accepted_on and not quote.cancelled_on %}
     <form method="post">
