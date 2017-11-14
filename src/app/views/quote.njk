@@ -24,7 +24,7 @@
     {% if quote.accepted_on %}
       {{ Message({
         type: 'success',
-        text: 'This quote was accepted on ' + quote.accepted_on | formatDateTime
+        text: 'You accepted this quote on ' + quote.accepted_on | formatDateTime
       }) }}
     {% endif %}
 
