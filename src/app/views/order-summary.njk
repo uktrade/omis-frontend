@@ -23,9 +23,11 @@
       itemModifier: 'stacked'
     }) }}
 
-    <p>
-      <a href="/{{ publicToken }}/invoice">View your invoice</a>
-    </p>
+    {% if invoice.company_name %}
+      <p>
+        <a href="/{{ publicToken }}/invoice">View your invoice</a>
+      </p>
+    {% endif %}
 
     {% if order.status in ['paid', 'complete'] %}
       <p>
