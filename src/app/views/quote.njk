@@ -33,7 +33,7 @@
         type: 'error' if quote.expired else 'info',
         element: 'div'
       }) %}
-        <p>This quote {{ 'expired' if quote.expired else 'will expire' }} {{ quote.expires_on | fromNow }}.</p>
+        <p>This quote {{ 'expired' if quote.expired else 'will expire' }} on {{ quote.expires_on | formatDate }} ({{ quote.expires_on | fromNow }}).</p>
         {% if quote.expired %}
           <p>Get in touch with your DIT contact or email <a href="mailto:omis.orders@digital.trade.gov.uk">omis.orders@digital.trade.gov.uk</a></p>
         {% endif %}
