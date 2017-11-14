@@ -52,10 +52,10 @@
       </div>
     </article>
   {% else %}
-    {% call Reveal({ summary: 'How can I see my quote?' }) %}
-      {% call Message({ type: 'muted' }) %}
-        Get in touch with your DIT contact or email <a href="mailto:omis.orders@digital.trade.gov.uk">omis.orders@digital.trade.gov.uk</a>
-      {% endcall %}
+    {% call Message({ type: 'muted', element: 'div' }) %}
+      <p>
+        To view your quote, get in touch with your DIT contact or email <a href="mailto:omis.orders@digital.trade.gov.uk">omis.orders@digital.trade.gov.uk</a>.
+      </p>
     {% endcall %}
   {% endif %}
 
