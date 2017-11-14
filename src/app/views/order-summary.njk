@@ -23,22 +23,24 @@
       itemModifier: 'stacked'
     }) }}
 
-    {% if invoice.company_name %}
+    {% if invoice.invoice_company_name %}
       <p>
         <a href="/{{ publicToken }}/invoice">View your invoice</a>
       </p>
-    {% else %}
-      {% call Reveal({ summary: 'How can I see my invoice?' }) %}
-        {% call Message({ type: 'muted' }) %}
-          Get in touch with your DIT contact or email <a href="mailto:omis.orders@digital.trade.gov.uk">omis.orders@digital.trade.gov.uk</a>
-        {% endcall %}
-      {% endcall %}
     {% endif %}
 
     {% if order.status in ['paid', 'complete'] %}
       <p>
         <a href="/{{ publicToken }}/receipt">View your payment receipt</a>
       </p>
+    {% endif %}
+
+    {% if not invoice.invoice_company_name %}
+      {% call Message({ type: 'muted', element: 'div' }) %}
+        <p>
+          To view your invoice, get in touch with your DIT contact or email <a href="mailto:omis.orders@digital.trade.gov.uk">omis.orders@digital.trade.gov.uk</a>.
+        </p>
+      {% endcall %}
     {% endif %}
   {% endif %}
 
