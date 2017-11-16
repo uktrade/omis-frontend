@@ -29,6 +29,12 @@ summary {
   }
 }
 
+input {
+  & + label {
+    margin-top: 0;
+  }
+}
+
 dt + dd,
 li + li {
   margin-top: $baseline-grid-unit;
