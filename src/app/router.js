@@ -19,7 +19,7 @@ router.get('/:publicToken', renderOrderSummary)
 router
   .route('/:publicToken/quote')
   .get(renderQuote)
-  .post(acceptQuote)
+  .post(acceptQuote, renderQuote)
 
 router.get('/:publicToken/quote/accepted', renderAcceptedQuote)
 
