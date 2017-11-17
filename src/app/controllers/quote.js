@@ -1,3 +1,5 @@
+const { get } = require('lodash')
+
 const { fetch } = require('../lib/api')
 
 function renderQuote (req, res, next) {
@@ -15,6 +17,12 @@ function renderAcceptedQuote (req, res, next) {
 async function acceptQuote (req, res, next) {
   const publicToken = req.params.publicToken
   const authToken = req.session.token
+
+  if (!get(req.body, 'confirm')) {
+    console.log('DOING')
+    res.locals.invalid = true
+    return next()
+  }
 
   try {
     await fetch(authToken, {

@@ -9,6 +9,7 @@ const {
   isArray,
   isPlainObject,
   isEmpty,
+  isFunction,
   isString,
   pickBy,
   isNil,
@@ -40,6 +41,7 @@ const filters = {
   assign,
   concat,
   pluralise,
+  isFunction,
   sentenceCase: Case.sentence,
 
   // TODO: Temporary to allow importing of data hub macros

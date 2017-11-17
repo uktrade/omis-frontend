@@ -5,6 +5,14 @@
     <a href="/{{ publicToken }}">Back to summary</a>
   </p>
 
+  {% if invalid %}
+    {{ ErrorSummary({
+      messages: {
+        confirm: 'Accept the terms and conditions'
+      }
+    }) }}
+  {% endif %}
+
   <h1>Your quote ({{ order.reference }})</h1>
 
   {{ MetaList({
@@ -62,6 +70,19 @@
   {% if not quote.expired and not quote.accepted_on and not quote.cancelled_on %}
     <form method="post">
       <input type="hidden" name="_csrf" value="{{ CSRF_TOKEN }}">
+
+      {{ MultipleChoiceField({
+        name: 'confirm',
+        label: 'Accept the terms and conditions',
+        isLabelHidden: true,
+        type: 'checkbox',
+        options: [{
+          value: 'true',
+          label: 'I accept the Charges and the Terms and Conditions'
+        }],
+        error: 'Confirm that you accept the Charges and the Terms and Conditions' if invalid
+      }) }}
+
       <button type="submit" class="button">Accept quote</button>
     </form>
 
