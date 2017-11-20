@@ -41,6 +41,7 @@ const config = {
     dateTimeLong: 'D MMMM YYYY, h:mma',
     dateTimeMedium: 'D MMM YYYY, h:mma',
   },
+  sentryDsn: process.env.SENTRY_DSN,
 }
 
 module.exports = config
