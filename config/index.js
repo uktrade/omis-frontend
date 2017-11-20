@@ -42,6 +42,7 @@ const config = {
     dateTimeMedium: 'D MMM YYYY, h:mma',
   },
   sentryDsn: process.env.SENTRY_DSN,
+  googleTagManagerKey: process.env.GOOGLE_TAG_MANAGER_KEY,
 }
 
 module.exports = config
