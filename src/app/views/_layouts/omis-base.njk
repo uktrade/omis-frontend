@@ -4,8 +4,31 @@
 {% from "_macros/common.njk" import Message, Reveal %}
 {% from "_macros/form.njk" import ErrorSummary, MultipleChoiceField %}
 
-{% block body %}
+{% block head %}
   {{ super() }}
+
+  {% if GOOGLE_TAG_MANAGER_KEY %}
+    <script>
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});
+        var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),
+            dl=l!='dataLayer'?'&l='+l:'';
+        j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
+        f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','{{ GOOGLE_TAG_MANAGER_KEY }}');
+    </script>
+  {% endif %}
+{% endblock %}
+
+{% block body %}
+  {% if GOOGLE_TAG_MANAGER_KEY %}
+    <noscript>
+      <iframe src="https://www.googletagmanager.com/ns.html?id={{ GOOGLE_TAG_MANAGER_KEY }}" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
+  {% endif %}
+
+  {{ super() }}
+
   {% block javascript %}
     <script src="{{ getAssetPath('app.js') }}"></script>
   {% endblock %}
