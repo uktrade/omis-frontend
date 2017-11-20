@@ -1,6 +1,7 @@
 const router = require('express').Router()
 
 const indexController = require('./controllers/index')
+const { renderPingdomXml } = require('./controllers/healthcheck')
 const { renderOrderSummary } = require('./controllers/order')
 const { renderQuote, renderAcceptedQuote, acceptQuote } = require('./controllers/quote')
 const { renderInvoice } = require('./controllers/invoice')
@@ -11,6 +12,8 @@ const { setAuthToken } = require('./lib/api')
 router.use(setAuthToken())
 
 router.get('/', indexController)
+
+router.get('/ping.xml', renderPingdomXml)
 
 router.param(':publicToken', fetchOrderDetails)
 
