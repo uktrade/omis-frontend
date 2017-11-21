@@ -15,7 +15,6 @@ const nunjucks = require('../../config/nunjucks')
 const router = require('./router')
 const reporter = require('./lib/reporter')
 
-const ping = require('./middleware/ping')
 const headers = require('./middleware/headers')
 const errors = require('./middleware/errors')
 const setCSRFToken = require('./middleware/set-csrf-token')
@@ -73,7 +72,6 @@ module.exports = function () {
   app.use(setLocals)
   app.use(morganLogger((isDev ? 'dev' : 'combined')))
   app.use(headers(isDev))
-  app.use(ping)
   app.use(csrf({ cookie: true }))
   app.use(setCSRFToken())
 
