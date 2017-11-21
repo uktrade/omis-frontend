@@ -9,11 +9,12 @@ const { renderReceipt } = require('./controllers/receipt')
 const { fetchOrderDetails } = require('./middleware/order')
 const { setAuthToken } = require('./lib/api')
 
+// NOTE: ping has to be defined before the auth token middleware
+router.get('/ping.xml', renderPingdomXml)
+
 router.use(setAuthToken())
 
 router.get('/', indexController)
-
-router.get('/ping.xml', renderPingdomXml)
 
 router.param(':publicToken', fetchOrderDetails)
 
