@@ -26,7 +26,7 @@
   {% if quote.cancelled_on %}
     {% call Message({ type: 'error', element: 'div' }) %}
       <p>This quote is no longer valid.</p>
-      <p>Get in touch with your DIT contact or email <a href="mailto:omis.orders@digital.trade.gov.uk">omis.orders@digital.trade.gov.uk</a></p>
+      <p>Get in touch with your DIT contact or email <a href="mailto:omis.orders@digital.trade.gov.uk">omis.orders@digital.trade.gov.uk</a>.</p>
     {% endcall %}
   {% else %}
     {% if quote.accepted_on %}
@@ -43,7 +43,7 @@
       }) %}
         <p>This quote {{ 'expired' if quote.expired else 'will expire' }} on {{ quote.expires_on | formatDate }} ({{ quote.expires_on | fromNow }}).</p>
         {% if quote.expired %}
-          <p>Get in touch with your DIT contact or email <a href="mailto:omis.orders@digital.trade.gov.uk">omis.orders@digital.trade.gov.uk</a></p>
+          <p>Get in touch with your DIT contact or email <a href="mailto:omis.orders@digital.trade.gov.uk">omis.orders@digital.trade.gov.uk</a>.</p>
         {% endif %}
       {% endcall %}
     {% endif %}
@@ -52,18 +52,17 @@
   {% if quote.content %}
     <article class="example">
       <div class="example__preview l-markdown">
-  {% markdown %}{{ quote.content | safe }}{% endmarkdown %}
+{# Ugly indentation is so that markdown spacing is handled correctly #}
+{% markdown %}{{ quote.content | safe }}{% endmarkdown %}
         {% call Reveal({ summary: 'View full terms and conditions' }) %}
-  {# Ugly indentation is so that markdown spacing is handled correctly #}
-  {% markdown %}{{ quote.terms_and_conditions | safe }}{% endmarkdown %}
+{# Ugly indentation is so that markdown spacing is handled correctly #}
+{% markdown %}{{ quote.terms_and_conditions | safe }}{% endmarkdown %}
         {% endcall %}
       </div>
     </article>
   {% else %}
-    {% call Message({ type: 'muted', element: 'div' }) %}
-      <p>
-        To view your quote, get in touch with your DIT contact or email <a href="mailto:omis.orders@digital.trade.gov.uk">omis.orders@digital.trade.gov.uk</a>.
-      </p>
+    {% call Message({ type: 'muted' }) %}
+      To view your quote, get in touch with your DIT contact or email <a href="mailto:omis.orders@digital.trade.gov.uk">omis.orders@digital.trade.gov.uk</a>.
     {% endcall %}
   {% endif %}
 
