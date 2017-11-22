@@ -10,23 +10,23 @@
   <h1>Invoice</h1>
 
   {% set billingAddress = [
-    invoice.billing_contact_name,
-    invoice.billing_address_1,
-    invoice.billing_address_2,
-    invoice.billing_address_town,
-    invoice.billing_address_county,
-    invoice.billing_address_postcode,
-    invoice.billing_address_country.name
+    invoice.billing_contact_name | escape,
+    invoice.billing_address_1 | escape,
+    invoice.billing_address_2 | escape,
+    invoice.billing_address_town | escape,
+    invoice.billing_address_county | escape,
+    invoice.billing_address_postcode | escape,
+    invoice.billing_address_country.name | escape
   ] | removeNilAndEmpty | join('<br>') %}
 
   {% set invoiceAddress = [
-    invoice.invoice_company_name,
-    invoice.invoice_address_1,
-    invoice.invoice_address_2,
-    invoice.invoice_address_town,
-    invoice.invoice_address_county,
-    invoice.invoice_address_postcode,
-    invoice.invoice_address_country.name
+    invoice.invoice_company_name | escape,
+    invoice.invoice_address_1 | escape,
+    invoice.invoice_address_2 | escape,
+    invoice.invoice_address_town | escape,
+    invoice.invoice_address_county | escape,
+    invoice.invoice_address_postcode | escape,
+    invoice.invoice_address_country.name | escape
   ] | removeNilAndEmpty | join('<br>') %}
 
   <div class="u-clearfix">
