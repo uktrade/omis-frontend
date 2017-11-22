@@ -33,7 +33,7 @@
     <div class="u-float-left">
       {{ MetaList({
         items: [
-          { label: 'For the attention of', value: billingAddress, safe: true },
+          { label: 'For the attention of', value: billingAddress | safe },
         { label: 'Purchase order (PO) number', value: invoice.po_number },
           { label: 'Invoice number', value: invoice.invoice_number },
           { label: 'Receipt date', value: invoice.created_on, type: 'datetime' }
@@ -46,7 +46,7 @@
     <div class="u-float-right">
       {{ MetaList({
         items: [
-          { label: 'From (charging point)', value: invoiceAddress, safe: true },
+          { label: 'From (charging point)', value: invoiceAddress | safe },
           { label: 'VAT number', value: invoice.invoice_vat_number }
         ],
         modifier: 'stacked',
