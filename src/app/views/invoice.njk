@@ -34,6 +34,7 @@
       {{ MetaList({
         items: [
           { label: 'To', value: billingAddress | safe },
+          { label: 'VAT number', value: order.vat_number },
           { label: 'Purchase order (PO) number', value: invoice.po_number },
           { label: 'Invoice number', value: invoice.invoice_number },
           { label: 'Created on', value: invoice.created_on, type: 'datetime' }
@@ -47,7 +48,7 @@
       {{ MetaList({
         items: [
           { label: 'From', value: invoiceAddress | safe },
-          { label: 'VAT number', value: invoice.invoice_vat_number }
+          { label: 'VAT number', value: 'GB ' + invoice.invoice_vat_number }
         ],
         modifier: 'stacked',
         itemModifier: 'stacked'
