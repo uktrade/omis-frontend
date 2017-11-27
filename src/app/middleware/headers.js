@@ -7,6 +7,7 @@ module.exports = function (isDev) {
     `font-src 'self'`,
     `connect-src 'self' ${isDev ? 'ws:' : ''}`,
     `img-src 'self' www.google-analytics.com`,
+    `frame-src www.googletagmanager.com`,
     `form-action 'self'`,
 
   ].join(';')
