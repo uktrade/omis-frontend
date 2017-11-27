@@ -2,7 +2,7 @@ module.exports = function (isDev) {
   const cspValues = [
     `default-src 'none'`,
     `base-uri 'self'`,
-    `script-src 'self' 'unsafe-inline' www.google-analytics.com`,
+    `script-src 'self' 'unsafe-inline' www.google-analytics.com www.googletagmanager.com`,
     `style-src 'self' 'unsafe-inline'`,
     `font-src 'self'`,
     `connect-src 'self' ${isDev ? 'ws:' : ''}`,
