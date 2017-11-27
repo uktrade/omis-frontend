@@ -43,6 +43,7 @@ const config = {
   },
   sentryDsn: process.env.SENTRY_DSN,
   googleTagManagerKey: process.env.GOOGLE_TAG_MANAGER_KEY,
+  googleTagManagerSuffix: process.env.GOOGLE_TAG_MANAGER_SUFFIX,
 }
 
 module.exports = config
