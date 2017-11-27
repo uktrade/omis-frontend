@@ -16,6 +16,7 @@ module.exports = function setLocals (req, res, next) {
     CANONICAL_URL: baseUrl + req.originalUrl,
     CURRENT_PATH: req.path,
     GOOGLE_TAG_MANAGER_KEY: config.googleTagManagerKey,
+    GOOGLE_TAG_MANAGER_SUFFIX: config.googleTagManagerSuffix,
 
     getMessages () {
       return req.flash()
