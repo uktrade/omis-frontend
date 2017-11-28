@@ -24,7 +24,10 @@
     "type": "git",
     "url": "git+https://github.com/uktrade/omis-frontend.git"
   },
-  "author": "Graham Veal",
+  "contributors": [
+    "Dom Smith <dom@teneightfive.com> (http://github.com/teneightfive)",
+    "Graham Veal (https://github.com/web-bert)"
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/uktrade/omis-frontend/issues"
