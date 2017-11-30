@@ -13,7 +13,7 @@ module.exports = function setLocals (req, res, next) {
 
   res.locals = Object.assign({}, res.locals, {
     BASE_URL: baseUrl,
-    CANONICAL_URL: baseUrl + req.originalUrl,
+    CANONICAL_URL: baseUrl + req.path,
     CURRENT_PATH: req.path,
     GOOGLE_TAG_MANAGER_KEY: config.googleTagManagerKey,
     GOOGLE_TAG_MANAGER_SUFFIX: config.googleTagManagerSuffix,
