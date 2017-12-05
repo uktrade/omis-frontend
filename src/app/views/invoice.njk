@@ -30,7 +30,7 @@
   ] | removeNilAndEmpty | join('<br>') %}
 
   <div class="u-clearfix">
-    <div class="u-float-left">
+    <div class="u-float-left u-max-half">
       {{ MetaList({
         items: [
           { label: 'To', value: billingAddress | safe },
@@ -44,7 +44,7 @@
       }) }}
     </div>
 
-    <div class="u-float-right">
+    <div class="u-float-right u-max-half">
       {{ MetaList({
         items: [
           { label: 'From', value: invoiceAddress | safe },
