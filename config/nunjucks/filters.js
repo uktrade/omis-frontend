@@ -50,9 +50,6 @@ const filters = {
   },
 
   formatCurrency: (value, format = formats.currency) => {
-    if (!value) {
-      return value
-    }
     return numeral(value).format(format)
   },
 
