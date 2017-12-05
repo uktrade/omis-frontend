@@ -11,6 +11,7 @@
 
   {% set billingAddress = [
     invoice.billing_contact_name | escape,
+    invoice.billing_company_name | escape,
     invoice.billing_address_1 | escape,
     invoice.billing_address_2 | escape,
     invoice.billing_address_town | escape,
