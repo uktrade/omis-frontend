@@ -33,7 +33,8 @@ a {
 
 a,
 input,
-textarea {
+textarea,
+button {
   outline: 3px solid transparent;
 
   &:focus,
@@ -49,4 +50,3 @@ textarea {
 input:focus + label::before {
   outline: none;
 }
-
