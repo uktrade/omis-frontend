@@ -20,6 +20,7 @@
 .c-meta-list__item-value {
   color: $text-colour;
   display: inline-block;
+  word-break: break-all;
 
   &:link,
   &:visited {

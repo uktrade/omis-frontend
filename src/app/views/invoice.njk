@@ -11,6 +11,7 @@
 
   {% set billingAddress = [
     invoice.billing_contact_name | escape,
+    invoice.billing_company_name | escape,
     invoice.billing_address_1 | escape,
     invoice.billing_address_2 | escape,
     invoice.billing_address_town | escape,
@@ -30,7 +31,7 @@
   ] | removeNilAndEmpty | join('<br>') %}
 
   <div class="u-clearfix">
-    <div class="u-float-left">
+    <div class="u-float-left u-max-half">
       {{ MetaList({
         items: [
           { label: 'To', value: billingAddress | safe },
@@ -44,7 +45,7 @@
       }) }}
     </div>
 
-    <div class="u-float-right">
+    <div class="u-float-right u-max-half">
       {{ MetaList({
         items: [
           { label: 'From', value: invoiceAddress | safe },
