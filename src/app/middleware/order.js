@@ -22,7 +22,8 @@ async function fetchOrderDetails (req, res, next, publicToken) {
 
   try {
     quote = await fetch(authToken, `/v3/omis/public/order/${publicToken}/quote`)
-    quote.expired = new Date(quote.expires_on) < new Date()
+    quote.expires_on = new Date(quote.expires_on + 'T23:59:59')
+    quote.expired = quote.expires_on < new Date()
 
     invoice = await fetch(authToken, `/v3/omis/public/order/${publicToken}/invoice`)
   } catch (error) {
