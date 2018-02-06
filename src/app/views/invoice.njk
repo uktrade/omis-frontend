@@ -61,7 +61,7 @@
 
   <h3>Payment terms</h3>
 
-  <p>Payable within 30 days. For events, 10 working days before event date.</p>
+  <p>Payable by {{ invoice.payment_due_date | formatDate }} ({{ invoice.payment_due_date | fromNow }}).</p>
 
   <h3>How to pay by bank transfer</h3>
 
