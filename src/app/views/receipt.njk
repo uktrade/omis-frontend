@@ -58,10 +58,17 @@
 
   {% include '_includes/cost-table.njk' %}
 
-  <h2 class="heading-medium">Payment details ({{ payments.length }} {{ ' payment' | pluralise(payments.length) }})</h2>
+  <h2 class="heading-medium">
+    Payment details
+    {% if payments.length > 1 %}
+      ({{ payments.length }} {{ ' payment' | pluralise(payments.length) }})
+    {% endif %}
+  </h2>
 
   {% for payment in payments %}
-    <h3 class="heading-small">Payment {{ loop.index }}</h3>
+    {% if payments.length > 1 %}
+      <h3 class="heading-small">Payment {{ loop.index }}</h3>
+    {% endif %}
 
     {{ MetaList({
       items: [
