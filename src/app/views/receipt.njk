@@ -58,30 +58,32 @@
 
   {% include '_includes/cost-table.njk' %}
 
-  <h2 class="heading-medium">
-    Payment details
-    {% if payments.length > 1 %}
-      ({{ payments.length }} {{ ' payment' | pluralise(payments.length) }})
-    {% endif %}
-  </h2>
+  <div class="l-reading-width">
+    <h2 class="heading-medium">
+      Payment details
+      {% if payments.length > 1 %}
+        ({{ payments.length }} {{ ' payment' | pluralise(payments.length) }})
+      {% endif %}
+    </h2>
 
-  {% for payment in payments %}
-    {% if payments.length > 1 %}
-      <h3 class="heading-small">Payment {{ loop.index }}</h3>
-    {% endif %}
+    {% for payment in payments %}
+      {% if payments.length > 1 %}
+        <h3 class="heading-small">Payment {{ loop.index }}</h3>
+      {% endif %}
 
-    {{ MetaList({
-      items: [
-        { label: 'Method', value: payment.method | upper },
-        { label: 'Amount received', value: payment.amount | formatCurrency },
-        { label: 'Received on', value: payment.received_on, type: 'date' },
-        { label: 'Transaction reference', value: payment.transaction_reference }
-      ],
-      modifier: 'stacked',
-      itemModifier: 'stacked'
-    }) }}
-  {% endfor %}
+      {{ MetaList({
+        items: [
+          { label: 'Method', value: payment.method | upper },
+          { label: 'Amount received', value: payment.amount | formatCurrency },
+          { label: 'Received on', value: payment.received_on, type: 'date' },
+          { label: 'Transaction reference', value: payment.transaction_reference }
+        ],
+        modifier: 'stacked',
+        itemModifier: 'stacked'
+      }) }}
+    {% endfor %}
 
-  <button class="u-icon-print u-no-js-hidden u-print-hide js-print">Print this page</button>
+    <button class="u-icon-print u-no-js-hidden u-print-hide js-print">Print this page</button>
+  </div>
 
 {% endblock  %}
