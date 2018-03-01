@@ -16,7 +16,7 @@ router.use(setAuthToken())
 
 router.get('/', indexController)
 
-router.param(':publicToken', fetchOrderDetails)
+router.param('publicToken', fetchOrderDetails)
 
 router.get('/:publicToken', renderOrderSummary)
 
