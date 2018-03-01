@@ -73,7 +73,7 @@ describe('Config', function () {
         process.env.SERVER_WORKERS = 3
         const config = createConfig()
 
-        expect(config.server.workers).toEqual(3)
+        expect(parseInt(config.server.workers)).toEqual(3)
       })
     })
 
