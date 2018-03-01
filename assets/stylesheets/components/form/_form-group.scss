@@ -20,6 +20,7 @@
 .c-form-group__label {
   display: table;
   line-height: 1.1;
+  margin-bottom: $baseline-grid-unit * 3;
 
   * + * {
     margin-top: $default-spacing-unit / 2;

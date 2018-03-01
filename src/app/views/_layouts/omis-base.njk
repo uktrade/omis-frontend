@@ -34,6 +34,12 @@
   {% endblock %}
 {% endblock %}
 
+{% block body_main_content %}
+  <article class="l-reading-width">
+    {% block main_content %}{% endblock %}
+  </article>
+{% endblock %}
+
 {% block body_footer_content_ogl %}{% endblock %}
 
 {% block body_footer_content_copyright %}{% endblock %}

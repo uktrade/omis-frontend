@@ -59,31 +59,33 @@
 
   {% include '_includes/cost-table.njk' %}
 
-  <h3>Payment terms</h3>
+  <div class="l-reading-width">
+    <h3>Payment terms</h3>
 
-  <p>Payable by {{ invoice.payment_due_date | formatDate }} ({{ invoice.payment_due_date | fromNow }}).</p>
+    <p>Payable by {{ invoice.payment_due_date | formatDate }} ({{ invoice.payment_due_date | fromNow }}).</p>
 
-  <h3>How to pay by bank transfer</h3>
+    <h3>How to pay by bank transfer</h3>
 
-  <p>Please make your payment in sterling for <strong>{{ order.total_cost | formatCurrency }}</strong> to Department for International Trade’s bank account at National Westminster Bank.</p>
+    <p>Please make your payment in sterling for <strong>{{ order.total_cost | formatCurrency }}</strong> to Department for International Trade’s bank account at National Westminster Bank.</p>
 
-  <p>
-    <strong>Account Name:</strong> DIT OMIS Service<br>
-    <strong>Account Number:</strong> 10014187<br>
-    <strong>Sort Code:</strong> 60-70-80
-  </p>
+    <p>
+      <strong>Account Name:</strong> DIT OMIS Service<br>
+      <strong>Account Number:</strong> 10014187<br>
+      <strong>Sort Code:</strong> 60-70-80
+    </p>
 
-  <p>
-    <strong>SWIFT:</strong> NWBKGB2L<br>
-    <strong>IBAN:</strong> GB57NWBK60708010014187
-  </p>
+    <p>
+      <strong>SWIFT:</strong> NWBKGB2L<br>
+      <strong>IBAN:</strong> GB57NWBK60708010014187
+    </p>
 
-  <p>You agree to pay any bank charges incurred with this transaction. You must quote your order number, <strong>{{ order.reference }}</strong>, when arranging the payment. Please send a copy of your Payment Remittance Advice which must show your payment reference to the above Charging Point.</p>
+    <p>You agree to pay any bank charges incurred with this transaction. You must quote your order number, <strong>{{ order.reference }}</strong>, when arranging the payment. Please send a copy of your Payment Remittance Advice which must show your payment reference to the above Charging Point.</p>
 
-  <h3>In case of problems</h3>
+    <h3>In case of problems</h3>
 
-  <p>Get in touch with your DIT contact or email <a href="mailto:omis.orders@digital.trade.gov.uk">omis.orders@digital.trade.gov.uk</a>.</p>
+    <p>Get in touch with your DIT contact or email <a href="mailto:omis.orders@digital.trade.gov.uk">omis.orders@digital.trade.gov.uk</a>.</p>
 
-  <button class="u-icon-print u-no-js-hidden u-print-hide js-print">Print this page</button>
+    <button class="u-icon-print u-no-js-hidden u-print-hide js-print">Print this page</button>
+  </div>
 
 {% endblock  %}
