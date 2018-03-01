@@ -1,5 +1,6 @@
 const router = require('express').Router()
 
+const paymentRouter = require('./payment')
 const { renderOrderSummary } = require('../controllers/order')
 const { renderQuote, renderAcceptedQuote, acceptQuote } = require('../controllers/quote')
 const { renderInvoice } = require('../controllers/invoice')
@@ -17,5 +18,7 @@ router.get('/quote/accepted', renderAcceptedQuote)
 router.get('/invoice', renderInvoice)
 
 router.get('/receipt', renderReceipt)
+
+router.use('/payment', paymentRouter)
 
 module.exports = router

@@ -1,0 +1,18 @@
+{% extends '_layouts/omis-base.njk' %}
+
+{% block main_content %}
+  <h1>Paying by credit or debit card</h1>
+
+  <p>Credit and debit card payments are made through the government’s secure payment service.</p>
+
+  <p>
+    Amount to pay:
+    <strong>{{ order.total_cost | formatCurrency }}</strong>
+  </p>
+
+  <form method="post">
+    <input type="hidden" name="_csrf" value="{{ CSRF_TOKEN }}">
+
+    <button type="submit" class="button">Continue to secure payment</button>
+  </form>
+{% endblock %}

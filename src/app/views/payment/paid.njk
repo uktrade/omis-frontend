@@ -1,0 +1,11 @@
+{% extends '_layouts/omis-base.njk' %}
+
+{% block main_content %}
+  <h1>Your order has already been paid</h1>
+
+  <p>Your payment was received on {{ order.paid_on | formatDateTime }}.</p>
+
+  <p>
+    <a href="/{{ publicToken }}/receipt">View your payment receipt</a>
+  </p>
+{% endblock %}

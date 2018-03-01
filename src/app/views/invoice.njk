@@ -66,20 +66,7 @@
 
     <h3>How to pay by bank transfer</h3>
 
-    <p>Please make your payment in sterling for <strong>{{ order.total_cost | formatCurrency }}</strong> to Department for International Trade’s bank account at National Westminster Bank.</p>
-
-    <p>
-      <strong>Account Name:</strong> DIT OMIS Service<br>
-      <strong>Account Number:</strong> 10014187<br>
-      <strong>Sort Code:</strong> 60-70-80
-    </p>
-
-    <p>
-      <strong>SWIFT:</strong> NWBKGB2L<br>
-      <strong>IBAN:</strong> GB57NWBK60708010014187
-    </p>
-
-    <p>You agree to pay any bank charges incurred with this transaction. You must quote your order number, <strong>{{ order.reference }}</strong>, when arranging the payment. Please send a copy of your Payment Remittance Advice which must show your payment reference to the above Charging Point.</p>
+    {% include '_includes/bank-transfer-instructions.njk' %}
 
     <h3>In case of problems</h3>
 
