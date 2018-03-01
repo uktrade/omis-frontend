@@ -12,7 +12,7 @@ const enforce = require('express-sslify')
 
 const config = require('../../config')
 const nunjucks = require('../../config/nunjucks')
-const router = require('./router')
+const router = require('./routers')
 const reporter = require('./lib/reporter')
 
 const headers = require('./middleware/headers')
