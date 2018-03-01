@@ -19,7 +19,6 @@ async function acceptQuote (req, res, next) {
   const authToken = req.session.token
 
   if (!get(req.body, 'confirm')) {
-    console.log('DOING')
     res.locals.invalid = true
     return next()
   }
