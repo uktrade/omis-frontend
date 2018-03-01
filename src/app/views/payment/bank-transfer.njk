@@ -1,0 +1,17 @@
+{% extends '_layouts/omis-base.njk' %}
+
+{% block main_content %}
+  <h1>Paying by bank transfer</h1>
+
+  {% include '_includes/bank-transfer-instructions.njk' %}
+
+  <p>
+    <a href="/{{ publicToken }}/invoice">View your invoice</a>
+  </p>
+
+  <h3>Can't pay by bank transfer</h3>
+
+  <p>
+    Alternatively, you can <a href="/{{ publicToken }}/payment/card">pay by card</a>.
+  </p>
+{% endblock %}

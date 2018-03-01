@@ -1,0 +1,33 @@
+{% extends '_layouts/omis-base.njk' %}
+
+{% block main_content %}
+  <h1>Paying for your order</h1>
+
+  {% if invalid %}
+    {{ ErrorSummary({
+      messages: {
+        'payment-method': 'Choose a payment method cannot be blank'
+      }
+    }) }}
+  {% endif %}
+
+  <form method="post">
+    <input type="hidden" name="_csrf" value="{{ CSRF_TOKEN }}">
+
+    {{ MultipleChoiceField({
+      name: 'payment-method',
+      label: 'Choose a payment method',
+      type: 'radio',
+      options: [{
+        value: 'card',
+        label: 'By credit or debit card'
+      }, {
+        value: 'bank-transfer',
+        label: 'By bank transfer'
+      }],
+      error: 'cannot be blank' if invalid
+    }) }}
+
+    <button type="submit" class="button">Continue</button>
+  </form>
+{% endblock %}
