@@ -3,3 +3,9 @@
   <a href="/{{ publicToken }}/invoice">the invoice</a>
   by {{ invoice.payment_due_date | formatDate }} ({{ invoice.payment_due_date | fromNow(invoice.overdue) }}{{ ' overdue' if invoice.overdue }}).
 </p>
+
+<p>
+  <a href="/{{ publicToken }}/payment" class="button">
+    View payment options
+  </a>
+</p>

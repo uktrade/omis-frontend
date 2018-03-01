@@ -5,6 +5,14 @@
 
   <p>Payable by {{ invoice.payment_due_date | formatDate }} ({{ invoice.payment_due_date | fromNow }}).</p>
 
+  <h3>How to pay by credit or debit card</h3>
+
+  <p>You can pay online using the government’s secure payment service.</p>
+
+  <p>
+    <a href="/{{ publicToken }}/payment/card">Pay by credit or debit card</a>
+  </p>
+
   <h3>How to pay by bank transfer</h3>
 
   {% include '_includes/bank-transfer-instructions.njk' %}
