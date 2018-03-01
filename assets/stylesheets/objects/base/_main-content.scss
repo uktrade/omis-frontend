@@ -9,6 +9,7 @@
 }
 
 .main-content__inner {
+  @include site-width-container;
   padding-top: $default-spacing-unit * 2;
   padding-bottom: $default-spacing-unit * 4;
 
