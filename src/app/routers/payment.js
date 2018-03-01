@@ -6,6 +6,12 @@ const {
   renderCardMethod,
   renderBankTransferMethod,
 } = require('../controllers/payment')
+const {
+  checkOrderStatus,
+  checkPaidStatus,
+} = require('../middleware/payment')
+
+router.use(checkOrderStatus, checkPaidStatus)
 
 router
   .route('/')
