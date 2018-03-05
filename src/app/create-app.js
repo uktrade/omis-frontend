@@ -9,6 +9,7 @@ const favicon = require('serve-favicon')
 const session = require('express-session')
 const MemoryStore = require('memorystore')(session)
 const enforce = require('express-sslify')
+const sessions = require('client-sessions')
 
 const config = require('../../config')
 const nunjucks = require('../../config/nunjucks')
@@ -66,6 +67,11 @@ module.exports = function () {
     rolling: false,
     resave: false,
     saveUninitialized: true,
+  }))
+  app.use(sessions({
+    cookieName: 'paymentGatewaySession',
+    secret: config.session.secret,
+    duration: config.session.ttl,
   }))
   app.use(bodyParser.urlencoded({ extended: true, limit: '1mb' }))
 
