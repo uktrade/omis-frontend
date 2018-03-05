@@ -10,7 +10,7 @@ const {
   checkOrderStatus,
   checkPaidStatus,
   createPaymentGatewaySession,
-  setPaymentGatewayUrl,
+  setPaymentGatewaySession,
 } = require('../middleware/payment')
 
 router.use(checkOrderStatus, checkPaidStatus)
@@ -22,7 +22,7 @@ router
 
 router.get('/card',
   createPaymentGatewaySession,
-  setPaymentGatewayUrl,
+  setPaymentGatewaySession,
   renderCardMethod
 )
 router.get('/bank-transfer', renderBankTransferMethod)
