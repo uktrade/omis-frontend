@@ -10,9 +10,7 @@
     <strong>{{ order.total_cost | formatCurrency }}</strong>
   </p>
 
-  <form method="post">
-    <input type="hidden" name="_csrf" value="{{ CSRF_TOKEN }}">
-
-    <button type="submit" class="button">Continue to secure payment</button>
-  </form>
+  <p>
+    <a href="{{ paymentUrl }}" class="button">Continue to secure payment</a>
+  </p>
 {% endblock %}
