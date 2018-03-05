@@ -15,6 +15,7 @@ const {
   createPaymentGatewaySession,
   setPaymentGatewaySession,
   checkPaymentGatewaySessionStatus,
+  validatePaymentGatewaySession,
 } = require('../middleware/payment')
 
 router.use(checkOrderStatus, checkPaidStatus)

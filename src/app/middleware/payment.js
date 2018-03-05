@@ -79,10 +79,24 @@ function checkPaymentGatewaySessionStatus (req, res, next) {
   next()
 }
 
+function validatePaymentGatewaySession (req, res, next) {
+  const publicToken = res.locals.publicToken
+  const requestSessionId = req.params.paymentSessionId
+  const sessionCookieId = get(req, `paymentGatewaySession.${publicToken}`)
+
+  if (sessionCookieId !== requestSessionId) {
+    req.paymentGatewaySession = {}
+    return res.redirect(`/${publicToken}/payment/card/failure`)
+  }
+
+  next()
+}
+
 module.exports = {
   checkOrderStatus,
   checkPaidStatus,
   createPaymentGatewaySession,
   setPaymentGatewaySession,
   checkPaymentGatewaySessionStatus,
+  validatePaymentGatewaySession,
 }
