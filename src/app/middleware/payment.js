@@ -63,9 +63,26 @@ async function setPaymentGatewaySession (req, res, next) {
   }
 }
 
+function checkPaymentGatewaySessionStatus (req, res, next) {
+  const publicToken = res.locals.publicToken
+  const status = get(res.locals, 'paymentGatewaySession.status')
+
+  if (status === 'success') {
+    return res.redirect(`/${publicToken}/payment/card/success`)
+  }
+
+  if (['failed', 'cancelled', 'error'].includes(status)) {
+    req.paymentGatewaySession = {}
+    return res.redirect(`/${publicToken}/payment/card/failure`)
+  }
+
+  next()
+}
+
 module.exports = {
   checkOrderStatus,
   checkPaidStatus,
   createPaymentGatewaySession,
   setPaymentGatewaySession,
+  checkPaymentGatewaySessionStatus,
 }
