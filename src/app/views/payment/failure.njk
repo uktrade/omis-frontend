@@ -1,0 +1,11 @@
+{% extends '_layouts/omis-base.njk' %}
+
+{% block main_content %}
+  <h1>Your payment failed</h1>
+
+  <p>There was a problem with the secure payment provider. No money has been taken from your account.</p>
+
+  <p>
+    <a href="/{{ publicToken }}/payment/card" class="button">Try the payment again</a>
+  </p>
+{% endblock %}

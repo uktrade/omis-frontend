@@ -27,9 +27,19 @@ function renderCardMethod (req, res) {
   res.render('payment/card')
 }
 
+function renderCardFailure (req, res) {
+  res.render('payment/failure')
+}
+
+function renderCardSuccess (req, res) {
+  res.render('payment/success')
+}
+
 module.exports = {
   renderPaymentOptions,
   handlePaymentOptions,
   renderBankTransferMethod,
   renderCardMethod,
+  renderCardFailure,
+  renderCardSuccess,
 }

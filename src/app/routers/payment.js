@@ -5,6 +5,8 @@ const {
   handlePaymentOptions,
   renderCardMethod,
   renderBankTransferMethod,
+  renderCardFailure,
+  renderCardSuccess,
 } = require('../controllers/payment')
 const {
   checkOrderStatus,
@@ -20,11 +22,14 @@ router
   .get(renderPaymentOptions)
   .post(handlePaymentOptions)
 
+router.get('/bank-transfer', renderBankTransferMethod)
+
 router.get('/card',
   createPaymentGatewaySession,
   setPaymentGatewaySession,
   renderCardMethod
 )
-router.get('/bank-transfer', renderBankTransferMethod)
+router.get('/card/failure', renderCardFailure)
+router.get('/card/success', renderCardSuccess)
 
 module.exports = router

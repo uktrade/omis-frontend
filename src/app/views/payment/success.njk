@@ -1,0 +1,22 @@
+{% extends '_layouts/omis-base.njk' %}
+
+{% block main_content %}
+  <div class="confirmation-banner">
+    <h1 class="confirmation-banner__heading">
+      Payment successful
+    </h1>
+
+    <p>
+      Your reference number is
+      <strong class="confirmation-banner__referene">
+        {{ order.reference }}
+      </strong>
+    </p>
+  </div>
+
+  <h3>What happens next</h3>
+
+  <p>You will receive a confirmation email that your payment has been received.</p>
+
+  <p><a href="/{{ publicToken }}/receipt">View your payment receipt</a></p>
+{% endblock %}
