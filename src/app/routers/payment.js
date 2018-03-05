@@ -7,6 +7,7 @@ const {
   renderBankTransferMethod,
   renderCardFailure,
   renderCardSuccess,
+  redirectReturnUrl,
 } = require('../controllers/payment')
 const {
   checkOrderStatus,
@@ -30,6 +31,12 @@ router.get('/card',
   setPaymentGatewaySession,
   checkPaymentGatewaySessionStatus,
   renderCardMethod
+)
+router.get('/card/:paymentSessionId',
+  validatePaymentGatewaySession,
+  setPaymentGatewaySession,
+  checkPaymentGatewaySessionStatus,
+  redirectReturnUrl
 )
 router.get('/card/failure', renderCardFailure)
 router.get('/card/success', renderCardSuccess)

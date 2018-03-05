@@ -48,7 +48,7 @@ async function createPaymentGatewaySession (req, res, next) {
 
 async function setPaymentGatewaySession (req, res, next) {
   const publicToken = res.locals.publicToken
-  const sessionId = get(req, `paymentGatewaySession.${publicToken}`)
+  const sessionId = req.params.paymentSessionId || get(req, `paymentGatewaySession.${publicToken}`)
 
   if (!sessionId) {
     return next()

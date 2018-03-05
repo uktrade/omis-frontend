@@ -35,6 +35,10 @@ function renderCardSuccess (req, res) {
   res.render('payment/success')
 }
 
+function redirectReturnUrl (req, res) {
+  res.redirect(`/${res.locals.publicToken}/payment/card`)
+}
+
 module.exports = {
   renderPaymentOptions,
   handlePaymentOptions,
@@ -42,4 +46,5 @@ module.exports = {
   renderCardMethod,
   renderCardFailure,
   renderCardSuccess,
+  redirectReturnUrl,
 }
