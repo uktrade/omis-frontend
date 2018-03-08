@@ -4,13 +4,14 @@ function renderPaymentOptions (req, res) {
 
 function handlePaymentOptions (req, res) {
   const paymentMethod = req.body['payment-method']
+  const publicToken = res.locals.publicToken
 
   if (paymentMethod === 'card') {
-    return res.redirect('payment/card')
+    return res.redirect(`/${publicToken}/payment/card`)
   }
 
   if (paymentMethod === 'bank-transfer') {
-    return res.redirect('payment/bank-transfer')
+    return res.redirect(`/${publicToken}/payment/bank-transfer`)
   }
 
   res.render('payment/options', {
