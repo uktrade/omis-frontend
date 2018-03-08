@@ -18,7 +18,20 @@ const {
   validatePaymentGatewaySession,
 } = require('../middleware/payment')
 
-router.use(checkOrderStatus, checkPaidStatus)
+router.use(checkOrderStatus)
+
+router.get('/card/failure', renderCardFailure)
+router.get('/card/success', renderCardSuccess)
+router.get('/card/:paymentSessionId',
+  validatePaymentGatewaySession,
+  setPaymentGatewaySession,
+  checkPaymentGatewaySessionStatus,
+  redirectReturnUrl
+)
+
+// Placed specifically to prevent beginning of journey
+// being access if order has been paid
+router.use(checkPaidStatus)
 
 router
   .route('/')
@@ -33,13 +46,5 @@ router.get('/card',
   checkPaymentGatewaySessionStatus,
   renderCardMethod
 )
-router.get('/card/:paymentSessionId',
-  validatePaymentGatewaySession,
-  setPaymentGatewaySession,
-  checkPaymentGatewaySessionStatus,
-  redirectReturnUrl
-)
-router.get('/card/failure', renderCardFailure)
-router.get('/card/success', renderCardSuccess)
 
 module.exports = router
