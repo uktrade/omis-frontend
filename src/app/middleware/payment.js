@@ -27,20 +27,19 @@ function checkPaidStatus (req, res, next) {
 }
 
 async function createPaymentGatewaySession (req, res, next) {
-  if (get(req, 'paymentGatewaySession.id')) {
+  const publicToken = res.locals.publicToken
+
+  if (get(req, `paymentGatewaySession.${publicToken}`)) {
     return next()
   }
 
   try {
-    const publicToken = res.locals.publicToken
-    const authToken = req.session.token
-
-    const paymentGatewaySession = await fetch(authToken, {
+    const paymentGatewaySession = await fetch(req.session.token, {
       method: 'post',
       url: `/v3/omis/public/order/${publicToken}/payment-gateway-session`,
     })
 
-    req.paymentGatewaySession.id = paymentGatewaySession.id
+    req.paymentGatewaySession[publicToken] = paymentGatewaySession.id
     next()
   } catch (error) {
     next(error)
@@ -48,17 +47,15 @@ async function createPaymentGatewaySession (req, res, next) {
 }
 
 async function setPaymentGatewaySession (req, res, next) {
-  const sessionId = get(req, 'paymentGatewaySession.id')
+  const publicToken = res.locals.publicToken
+  const sessionId = get(req, `paymentGatewaySession.${publicToken}`)
 
   if (!sessionId) {
     return next()
   }
 
   try {
-    const publicToken = res.locals.publicToken
-    const authToken = req.session.token
-
-    res.locals.paymentGatewaySession = await fetch(authToken, `/v3/omis/public/order/${publicToken}/payment-gateway-session/${sessionId}`)
+    res.locals.paymentGatewaySession = await fetch(req.session.token, `/v3/omis/public/order/${publicToken}/payment-gateway-session/${sessionId}`)
 
     next()
   } catch (error) {
