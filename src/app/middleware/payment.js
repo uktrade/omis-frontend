@@ -42,6 +42,10 @@ async function createPaymentGatewaySession (req, res, next) {
     req.paymentGatewaySession[publicToken] = paymentGatewaySession.id
     next()
   } catch (error) {
+    if (error.statusCode === 409) {
+      return res.redirect(`/${publicToken}/payment`)
+    }
+
     next(error)
   }
 }
