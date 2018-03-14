@@ -11,6 +11,12 @@
   </p>
 
   <p>
-    <a href="{{ paymentGatewaySession.payment_url }}" class="button">Continue to secure payment</a>
+    <a href="{{ paymentGatewaySession.payment_url }}" class="button">Continue to secure payment service</a>
+  </p>
+
+  <h3>Can’t pay by credit or debit card</h3>
+
+  <p>
+    Alternatively, you can <a href="/{{ publicToken }}/payment/bank-transfer">pay by bank transfer</a>.
   </p>
 {% endblock %}
