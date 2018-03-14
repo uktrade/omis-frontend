@@ -42,13 +42,17 @@ async function createPaymentGatewaySession (req, res, next) {
     req.paymentGatewaySession[publicToken] = paymentGatewaySession.id
     next()
   } catch (error) {
+    if (error.statusCode === 409) {
+      return res.redirect(`/${publicToken}/payment`)
+    }
+
     next(error)
   }
 }
 
 async function setPaymentGatewaySession (req, res, next) {
   const publicToken = res.locals.publicToken
-  const sessionId = get(req, `paymentGatewaySession.${publicToken}`)
+  const sessionId = req.params.paymentSessionId || get(req, `paymentGatewaySession.${publicToken}`)
 
   if (!sessionId) {
     return next()
@@ -63,9 +67,40 @@ async function setPaymentGatewaySession (req, res, next) {
   }
 }
 
+function checkPaymentGatewaySessionStatus (req, res, next) {
+  const publicToken = res.locals.publicToken
+  const status = get(res.locals, 'paymentGatewaySession.status')
+
+  if (status === 'success') {
+    return res.redirect(`/${publicToken}/payment/card/success`)
+  }
+
+  if (['failed', 'cancelled', 'error'].includes(status)) {
+    req.paymentGatewaySession = {}
+    return res.redirect(`/${publicToken}/payment/card/failure`)
+  }
+
+  next()
+}
+
+function validatePaymentGatewaySession (req, res, next) {
+  const publicToken = res.locals.publicToken
+  const requestSessionId = req.params.paymentSessionId
+  const sessionCookieId = get(req, `paymentGatewaySession.${publicToken}`)
+
+  if (sessionCookieId !== requestSessionId) {
+    req.paymentGatewaySession = {}
+    return res.redirect(`/${publicToken}/payment/card/failure`)
+  }
+
+  next()
+}
+
 module.exports = {
   checkOrderStatus,
   checkPaidStatus,
   createPaymentGatewaySession,
   setPaymentGatewaySession,
+  checkPaymentGatewaySessionStatus,
+  validatePaymentGatewaySession,
 }
