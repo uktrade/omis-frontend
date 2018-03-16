@@ -17,11 +17,12 @@ const {
   checkPaymentGatewaySessionStatus,
   validatePaymentGatewaySession,
 } = require('../middleware/payment')
+const { setPayments } = require('../middleware/order')
 
 router.use(checkOrderStatus)
 
 router.get('/card/failure', renderCardFailure)
-router.get('/card/success', renderCardSuccess)
+router.get('/card/success', setPayments, renderCardSuccess)
 router.get('/card/:paymentSessionId',
   validatePaymentGatewaySession,
   setPaymentGatewaySession,

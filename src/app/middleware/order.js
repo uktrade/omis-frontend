@@ -1,4 +1,4 @@
-const { assign } = require('lodash')
+const { assign, map } = require('lodash')
 
 const { fetch } = require('../lib/api')
 
@@ -41,6 +41,22 @@ async function fetchOrderDetails (req, res, next, publicToken) {
   next()
 }
 
+async function setPayments (req, res, next) {
+  try {
+    const paymentsResponse = await fetch(req.session.token, `/v3/omis/public/order/${res.locals.publicToken}/payment`)
+
+    res.locals.payments = map(paymentsResponse, (payment) => {
+      payment.amount = parseInt(payment.amount) / 100
+      return payment
+    })
+
+    next()
+  } catch (error) {
+    return next(error)
+  }
+}
+
 module.exports = {
   fetchOrderDetails,
+  setPayments,
 }

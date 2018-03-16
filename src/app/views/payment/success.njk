@@ -8,8 +8,8 @@
 
     <p>
       Your reference number is
-      <strong class="confirmation-banner__referene">
-        {{ order.reference }}
+      <strong class="confirmation-banner__reference">
+        {{ payments[0].transaction_reference or order.reference }}
       </strong>
     </p>
   </div>
