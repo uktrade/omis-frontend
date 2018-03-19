@@ -1,5 +1,7 @@
 {% extends '_layouts/omis-base.njk' %}
 
+{% set hideReturnLink = true %}
+
 {% block main_content %}
   <div class="confirmation-banner">
     <h1 class="confirmation-banner__heading">
@@ -19,6 +21,6 @@
   {% include '_includes/payment-instructions.njk' %}
 
   <p>
-    <a href="/{{ publicToken }}">Return to summary</a>
+    <a href="/{{ publicToken }}">Return to overview</a>
   </p>
 {% endblock  %}

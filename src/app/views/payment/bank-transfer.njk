@@ -1,8 +1,8 @@
 {% extends '_layouts/omis-base.njk' %}
 
-{% block main_content %}
-  <h1>Paying by bank transfer</h1>
+{% set heading = 'Paying by bank transfer' %}
 
+{% block main_content %}
   {% include '_includes/bank-transfer-instructions.njk' %}
 
   <p>

@@ -1,12 +1,10 @@
 {% extends '_layouts/omis-base.njk' %}
 
+{% set hideReturnLink = true %}
 {% set pageTitle = statusMessage %}
+{% set heading = statusMessage %}
 
 {% block main_content %}
-  <h1 class="error-heading">
-    {{ statusMessage }}
-  </h1>
-
   {%- if statusCode == '404' -%}
     <p>
       The resource you were looking for could not be found.
