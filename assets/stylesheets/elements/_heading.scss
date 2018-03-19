@@ -5,17 +5,17 @@ h1 {
 }
 
 h2 {
-  @include bold-font(36);
-}
-
-h3 {
   @include bold-font(24);
 }
 
-h4 {
+h3 {
   @include bold-font(20);
 }
 
-h5 {
+h4 {
   @include bold-font(16);
+}
+
+h5 {
+  @include core-font(16);
 }
