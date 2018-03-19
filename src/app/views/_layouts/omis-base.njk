@@ -36,6 +36,24 @@
 
 {% block body_main_content %}
   <article class="l-reading-width">
+    {% if heading or subHeading %}
+      <header class="local-header">
+        {% if not hideReturnLink %}
+          <p class="local-header__back u-print-hide">
+            <a href="/{{ publicToken }}">Return to overview</a>
+          </p>
+        {% endif %}
+
+        {% if heading %}
+          <h1 class="local-header__heading">{{ heading }}</h1>
+        {% endif %}
+
+        {% if subHeading %}
+          <p class="local-header__subheading">{{ subHeading }}</p>
+        {% endif %}
+      </header>
+    {% endif %}
+
     {% block main_content %}{% endblock %}
   </article>
 {% endblock %}
