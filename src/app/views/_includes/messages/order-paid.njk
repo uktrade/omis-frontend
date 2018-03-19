@@ -1,0 +1,5 @@
+{% call Message({ type: 'info', element: 'div' }) %}
+  <p>Completed work for your order will be sent directly to {{ order.contact_email or 'you by email' }}.</p>
+
+  <p>If there are any problems, get in touch with your DIT contact or email <a href="mailto:omis.orders@digital.trade.gov.uk">omis.orders@digital.trade.gov.uk</a>.</p>
+{% endcall %}
