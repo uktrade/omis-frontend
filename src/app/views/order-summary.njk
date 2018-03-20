@@ -10,15 +10,7 @@
   {% if invoice %}
     <h2>Your invoice</h2>
 
-    {{ MetaList({
-      items: [
-        { label: 'Invoice number', value: invoice.invoice_number },
-        { label: 'Created on', value: invoice.created_on, type: 'datetime' },
-        { label: 'Paid on', value: order.paid_on, type: 'date' }
-      ],
-      modifier: 'stacked',
-      itemModifier: 'stacked'
-    }) }}
+    {% include '_includes/meta-lists/invoice.njk' %}
 
     {% if invoice.invoice_company_name %}
       <p>
@@ -39,25 +31,13 @@
 
   <h2>Your quote</h2>
 
-  {% set expiryValue %}
-    {{ quote.expires_on | formatDate }} ({{ quote.expires_on | fromNow }})
-  {% endset %}
+  {% include '_includes/meta-lists/quote.njk' %}
 
-  {{ MetaList({
-    items: [
-      { label: 'We sent it on', value: quote.created_on, type: 'datetime' },
-      { label: 'Expiry date', value: expiryValue if not quote.accepted_on },
-      { label: 'You accepted it on', value: quote.accepted_on, type: 'datetime' }
-    ],
-    modifier: 'stacked',
-    itemModifier: 'stacked'
-  }) }}
-
-    <p>
-      <a href="/{{ publicToken }}/quote" class="{{ 'button' if not quote.accepted_on }}">
-        View your
-        {{ 'accepted' if quote.accepted_on }}
-        quote
-      </a>
-    </p>
+  <p>
+    <a href="/{{ publicToken }}/quote" class="{{ 'button' if not quote.accepted_on }}">
+      View your
+      {{ 'accepted' if quote.accepted_on }}
+      quote
+    </a>
+  </p>
 {% endblock  %}
