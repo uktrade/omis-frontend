@@ -63,7 +63,7 @@ const filters = {
     return dateFns.format(parsedDate, format)
   },
 
-  formatDateTime: (value, format = formats.dateTimeMedium) => {
+  formatDateTime: (value, format = formats.dateTimeLong) => {
     if (!value) {
       return value
     }
