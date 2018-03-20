@@ -75,8 +75,8 @@ const filters = {
     return dateFns.format(parsedDate, format)
   },
 
-  fromNow: (value) => {
-    return moment(value).fromNow()
+  fromNow: (value, removeSuffix = false) => {
+    return moment(value).fromNow(removeSuffix)
   },
 
   removeNilAndEmpty: (collection) => {
