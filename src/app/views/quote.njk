@@ -32,15 +32,7 @@
   }) }}
 
   {% if quote.expired or quote.cancelled_on %}
-    {% call Message({ type: 'error', element: 'div' }) %}
-      {% if quote.cancelled_on %}
-        <p>This quote is no longer valid.</p>
-      {% else %}
-        <p>This quote expired on {{ quote.expires_on | formatDate }} ({{ quote.expires_on | fromNow }}).</p>
-      {% endif %}
-
-      <p>Get in touch with your DIT contact or email <a href="mailto:omis.orders@digital.trade.gov.uk">omis.orders@digital.trade.gov.uk</a>.</p>
-    {% endcall %}
+    {% include '_includes/messages/quote-invalid.njk' %}
   {% endif %}
 
   {% if quote.content %}
@@ -56,9 +48,7 @@
       </div>
     </article>
   {% else %}
-    {% call Message({ type: 'muted' }) %}
-      To view your quote, get in touch with your DIT contact or email <a href="mailto:omis.orders@digital.trade.gov.uk">omis.orders@digital.trade.gov.uk</a>.
-    {% endcall %}
+    {% include '_includes/messages/legacy-quote.njk' %}
   {% endif %}
 
   {% if not quote.expired and not quote.accepted_on and not quote.cancelled_on %}
@@ -81,9 +71,7 @@
     </form>
 
     {% call Reveal({ summary: 'There is a problem with my quote' }) %}
-      {% call Message({ type: 'muted' }) %}
-        Get in touch with your DIT contact or email <a href="mailto:omis.orders@digital.trade.gov.uk">omis.orders@digital.trade.gov.uk</a>
-      {% endcall %}
+      {% include '_includes/messages/general-contact.njk' %}
     {% endcall %}
   {% endif %}
 {% endblock  %}

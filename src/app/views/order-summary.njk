@@ -4,10 +4,7 @@
   <h1>{{ order.reference }}</h1>
 
   {% if order.status === 'complete' %}
-    {% call Message({ type: 'success', element: 'div' }) %}
-      <p>Your order has been completed and you should have received any documents for this order.</p>
-      <p>If there are any problems, get in touch with your DIT contact or email <a href="mailto:omis.orders@digital.trade.gov.uk">omis.orders@digital.trade.gov.uk</a>.</p>
-    {% endcall %}
+    {% include '_includes/messages/order-complete.njk' %}
   {% endif %}
 
   {% if invoice %}
@@ -36,11 +33,7 @@
     {% endif %}
 
     {% if not invoice.invoice_company_name %}
-      {% call Message({ type: 'muted', element: 'div' }) %}
-        <p>
-          To view your invoice, get in touch with your DIT contact or email <a href="mailto:omis.orders@digital.trade.gov.uk">omis.orders@digital.trade.gov.uk</a>.
-        </p>
-      {% endcall %}
+      {% include '_includes/messages/legacy-invoice.njk' %}
     {% endif %}
   {% endif %}
 

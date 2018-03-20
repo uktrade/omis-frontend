@@ -1,0 +1,9 @@
+{% call Message({ type: 'error', element: 'div' }) %}
+  {% if quote.cancelled_on %}
+    <p>Your quote is no longer valid.</p>
+  {% else %}
+    <p>Your quote expired on {{ quote.expires_on | formatDate }} ({{ quote.expires_on | fromNow }}).</p>
+  {% endif %}
+
+  <p>Get in touch with your DIT contact or email <a href="mailto:omis.orders@digital.trade.gov.uk">omis.orders@digital.trade.gov.uk</a>.</p>
+{% endcall %}
