@@ -16,7 +16,7 @@
 
   <p>You will receive a confirmation email that the quote has been accepted.</p>
 
-  <p>You will need to pay <a href="/{{ publicToken }}/invoice">the invoice</a> by {{ invoice.payment_due_date | formatDate }} ({{ invoice.payment_due_date | fromNow }}).</p>
+  {% include '_includes/payment-instructions.njk' %}
 
   <p>
     <a href="/{{ publicToken }}">Return to summary</a>

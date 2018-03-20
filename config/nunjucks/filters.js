@@ -63,7 +63,7 @@ const filters = {
     return dateFns.format(parsedDate, format)
   },
 
-  formatDateTime: (value, format = formats.dateTimeMedium) => {
+  formatDateTime: (value, format = formats.dateTimeLong) => {
     if (!value) {
       return value
     }
@@ -75,8 +75,8 @@ const filters = {
     return dateFns.format(parsedDate, format)
   },
 
-  fromNow: (value) => {
-    return moment(value).fromNow()
+  fromNow: (value, removeSuffix = false) => {
+    return moment(value).fromNow(removeSuffix)
   },
 
   removeNilAndEmpty: (collection) => {

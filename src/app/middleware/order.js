@@ -26,6 +26,7 @@ async function fetchOrderDetails (req, res, next, publicToken) {
     quote.expired = quote.expires_on < new Date()
 
     invoice = await fetch(authToken, `/v3/omis/public/order/${publicToken}/invoice`)
+    invoice.overdue = invoice.payment_due_date < new Date()
   } catch (error) {
     if (error.statusCode !== 404) {
       return next(error)
