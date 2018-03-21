@@ -38,7 +38,7 @@
           { label: 'VAT number', value: order.vat_number },
           { label: 'Purchase order (PO) number', value: invoice.po_number },
           { label: 'Invoice number', value: invoice.invoice_number },
-          { label: creationDateLabel | default('Invoice date'), value: invoice.created_on, type: 'datetime' }
+          { label: creationDateLabel | default('Invoice date'), value: creationDateValue | default(invoice.created_on), type: 'date' }
         ],
         modifier: 'stacked',
         itemModifier: 'stacked'
