@@ -1,12 +1,8 @@
 {% extends '_layouts/omis-base.njk' %}
 
+{% set heading = 'Your order has already been paid for' %}
+
 {% block main_content %}
-  <p class="u-print-hide">
-    <a href="/{{ publicToken }}">Back to summary</a>
-  </p>
-
-  <h1>Your order has already been paid for</h1>
-
   <p>Your payment was received on {{ order.paid_on | formatDate }}.</p>
 
   <p>

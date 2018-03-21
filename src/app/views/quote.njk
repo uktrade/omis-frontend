@@ -1,10 +1,9 @@
 {% extends '_layouts/omis-base.njk' %}
 
-{% block main_content %}
-  <p>
-    <a href="/{{ publicToken }}">Back to summary</a>
-  </p>
+{% set heading = 'Your quote' %}
+{% set subHeading = 'Order reference ' + order.reference + ' for ' + order.primary_market.name %}
 
+{% block main_content %}
   {% if invalid %}
     {{ ErrorSummary({
       messages: {
@@ -12,9 +11,6 @@
       }
     }) }}
   {% endif %}
-
-  <a name="terms-and-conditions" id="terms-and-conditions"></a>
-  <h1>Your quote ({{ order.reference }})</h1>
 
   {% include '_includes/meta-lists/quote.njk' %}
 
@@ -30,7 +26,7 @@
         {% call Reveal({ summary: 'View full terms and conditions' }) %}
 {# Ugly indentation is so that markdown spacing is handled correctly #}
 {% markdown %}{{ quote.terms_and_conditions | safe }}{% endmarkdown %}
-          <p><a href="#terms-and-conditions">Back to top</a></p>
+          <p><a href="#main-content">Back to top</a></p>
         {% endcall %}
       </div>
     </article>

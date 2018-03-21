@@ -51,6 +51,10 @@ p + p {
   margin-top: $default-spacing-unit;
 }
 
+.c-meta-list + .list-unstyled {
+  margin-top: $baseline-grid-unit;
+}
+
 .u-clearfix {
   > * {
     @include media-query(tablet) {

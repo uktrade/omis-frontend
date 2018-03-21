@@ -1,43 +1,70 @@
 {% extends '_layouts/omis-base.njk' %}
 
-{% block main_content %}
-  <h1>{{ order.reference }}</h1>
+{% set hideReturnLink = true %}
+{% set heading = 'Your order' %}
+{% set subHeading = 'Order reference ' + order.reference + ' for ' + order.primary_market.name %}
 
-  {% if order.status === 'complete' %}
+{% block main_content %}
+  {% if not quote.accepted_on and (quote.expired or quote.cancelled_on) %}
+    {% include '_includes/messages/quote-invalid.njk' %}
+  {% elif order.status === 'complete' %}
     {% include '_includes/messages/order-complete.njk' %}
+  {% elif order.status === 'paid' %}
+    {% include '_includes/messages/order-paid.njk' %}
+  {% endif %}
+
+  <h2>Your actions</h2>
+
+  {% if not quote.accepted_on and not (quote.expired or quote.cancelled_on) %}
+    <p>Please review and accept your quote so that we can start delivering the work.</p>
+
+    <p>
+      <a href="/{{ publicToken }}/quote" class="button">
+        Accept quote
+      </a>
+    </p>
+  {% elif order.status === 'quote_accepted' %}
+    <p>You must pay for your order to receive the work.</p>
+
+    {% include '_includes/payment-instructions.njk' %}
+  {% else %}
+    <p>You have no actions for this order.</p>
   {% endif %}
 
   {% if invoice %}
-    <h2>Your invoice</h2>
+    <h3>Your invoice</h3>
 
     {% include '_includes/meta-lists/invoice.njk' %}
 
-    {% if invoice.invoice_company_name %}
-      <p>
-        <a href="/{{ publicToken }}/invoice">View your invoice</a>
-      </p>
-    {% endif %}
-
-    {% if order.status in ['paid', 'complete'] %}
-      <p>
-        <a href="/{{ publicToken }}/receipt">View your payment receipt</a>
-      </p>
-    {% endif %}
+    <ul class="list-unstyled">
+      {% if invoice.invoice_company_name %}
+        <li>
+          <a href="/{{ publicToken }}/invoice">View your invoice</a>
+        </li>
+      {% endif %}
+      {% if order.status in ['paid', 'complete'] %}
+        <li>
+          <a href="/{{ publicToken }}/receipt">View your payment receipt</a>
+        </li>
+      {% endif %}
+    </ul>
 
     {% if not invoice.invoice_company_name %}
       {% include '_includes/messages/legacy-invoice.njk' %}
     {% endif %}
   {% endif %}
 
-  <h2>Your quote</h2>
+  <h3>Your quote</h3>
 
   {% include '_includes/meta-lists/quote.njk' %}
 
-  <p>
-    <a href="/{{ publicToken }}/quote" class="{{ 'button' if not quote.accepted_on }}">
-      View your
-      {{ 'accepted' if quote.accepted_on }}
-      quote
-    </a>
-  </p>
+  {% if quote.accepted_on or quote.expired or quote.cancelled_on %}
+    <ul class="list-unstyled">
+      <li>
+        <a href="/{{ publicToken }}/quote">
+          View your {{ 'accepted' if quote.accepted_on }} quote
+        </a>
+      </li>
+    </ul>
+  {% endif %}
 {% endblock  %}

@@ -1,5 +1,7 @@
 {% extends '_layouts/omis-base.njk' %}
 
+{% set hideReturnLink = true %}
+
 {% block main_content %}
   <div class="confirmation-banner">
     <h1 class="confirmation-banner__heading">
@@ -19,4 +21,6 @@
   <p>You will receive a confirmation email that your payment has been received.</p>
 
   <p><a href="/{{ publicToken }}/receipt">View your payment receipt</a></p>
+
+  <p><a href="/{{ publicToken }}">Return to overview</a></p>
 {% endblock %}

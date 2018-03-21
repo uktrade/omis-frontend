@@ -1,8 +1,8 @@
 {% extends '_layouts/omis-base.njk' %}
 
-{% block main_content %}
-  <h1>Your payment failed</h1>
+{% set heading = 'Your payment failed' %}
 
+{% block main_content %}
   <p>There was a problem with the secure payment provider. No money has been taken from your account.</p>
 
   <p>
