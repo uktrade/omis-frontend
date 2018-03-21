@@ -1,78 +1,15 @@
-{% extends '_layouts/omis-base.njk' %}
+{% extends '_layouts/invoice.njk' %}
 
-{% block body_main_content %}
-  <p class="local-header__back u-print-hide">
-    <a href="/{{ publicToken }}">Return to overview</a>
-  </p>
+{% block invoice_payment_information %}
+  <h3>Payment terms</h3>
 
-  <img src="{{ getAssetPath('images/dit-invoice-logo.png') }}" width="200"><br>
+  <p>Payable by {{ invoice.payment_due_date | formatDate }} ({{ invoice.payment_due_date | fromNow }}).</p>
 
-  <h1>Invoice</h1>
+  <h3>How to pay by bank transfer</h3>
 
-  {% set billingAddress = [
-    invoice.billing_contact_name | escape,
-    invoice.billing_company_name | escape,
-    invoice.billing_address_1 | escape,
-    invoice.billing_address_2 | escape,
-    invoice.billing_address_town | escape,
-    invoice.billing_address_county | escape,
-    invoice.billing_address_postcode | escape,
-    invoice.billing_address_country.name | escape
-  ] | removeNilAndEmpty | join('<br>') %}
+  {% include '_includes/bank-transfer-instructions.njk' %}
 
-  {% set invoiceAddress = [
-    invoice.invoice_company_name | escape,
-    invoice.invoice_address_1 | escape,
-    invoice.invoice_address_2 | escape,
-    invoice.invoice_address_town | escape,
-    invoice.invoice_address_county | escape,
-    invoice.invoice_address_postcode | escape,
-    invoice.invoice_address_country.name | escape
-  ] | removeNilAndEmpty | join('<br>') %}
+  <h3>In case of problems</h3>
 
-  <div class="u-clearfix">
-    <div class="u-float-left u-max-half">
-      {{ MetaList({
-        items: [
-          { label: 'To', value: billingAddress | safe },
-          { label: 'VAT number', value: order.vat_number },
-          { label: 'Purchase order (PO) number', value: invoice.po_number },
-          { label: 'Invoice number', value: invoice.invoice_number },
-          { label: 'Created on', value: invoice.created_on, type: 'datetime' }
-        ],
-        modifier: 'stacked',
-        itemModifier: 'stacked'
-      }) }}
-    </div>
-
-    <div class="u-float-right u-max-half">
-      {{ MetaList({
-        items: [
-          { label: 'From', value: invoiceAddress | safe },
-          { label: 'VAT number', value: 'GB ' + invoice.invoice_vat_number }
-        ],
-        modifier: 'stacked',
-        itemModifier: 'stacked'
-      }) }}
-    </div>
-  </div>
-
-  {% include '_includes/cost-table.njk' %}
-
-  <div class="l-reading-width">
-    <h3>Payment terms</h3>
-
-    <p>Payable by {{ invoice.payment_due_date | formatDate }} ({{ invoice.payment_due_date | fromNow }}).</p>
-
-    <h3>How to pay by bank transfer</h3>
-
-    {% include '_includes/bank-transfer-instructions.njk' %}
-
-    <h3>In case of problems</h3>
-
-    <p>Get in touch with your DIT contact or email <a href="mailto:omis.orders@digital.trade.gov.uk">omis.orders@digital.trade.gov.uk</a>.</p>
-
-    <button class="u-icon-print u-no-js-hidden u-print-hide js-print">Print this page</button>
-  </div>
-
-{% endblock  %}
+  <p>Get in touch with your DIT contact or email <a href="mailto:omis.orders@digital.trade.gov.uk">omis.orders@digital.trade.gov.uk</a>.</p>
+{% endblock %}

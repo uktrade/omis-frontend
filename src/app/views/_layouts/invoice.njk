@@ -1,0 +1,67 @@
+{% extends '_layouts/omis-base.njk' %}
+
+{% set invoiceAddress = [
+  invoice.invoice_company_name | escape,
+  invoice.invoice_address_1 | escape,
+  invoice.invoice_address_2 | escape,
+  invoice.invoice_address_town | escape,
+  invoice.invoice_address_county | escape,
+  invoice.invoice_address_postcode | escape,
+  invoice.invoice_address_country.name | escape
+] | removeNilAndEmpty | join('<br>') %}
+
+{% set billingAddress = [
+  invoice.billing_contact_name | escape,
+  invoice.billing_company_name | escape,
+  invoice.billing_address_1 | escape,
+  invoice.billing_address_2 | escape,
+  invoice.billing_address_town | escape,
+  invoice.billing_address_county | escape,
+  invoice.billing_address_postcode | escape,
+  invoice.billing_address_country.name | escape
+] | removeNilAndEmpty | join('<br>') %}
+
+{% block body_main_content %}
+  <p class="local-header__back u-print-hide">
+    <a href="/{{ publicToken }}">Return to overview</a>
+  </p>
+
+  <img src="{{ getAssetPath('images/dit-invoice-logo.png') }}" width="200"><br>
+
+  <h1>{{ heading | default('Invoice') }}</h1>
+
+  <div class="u-clearfix">
+    <div class="u-float-left u-max-half">
+      {{ MetaList({
+        items: [
+          { label: 'To', value: billingAddress | safe },
+          { label: 'VAT number', value: order.vat_number },
+          { label: 'Purchase order (PO) number', value: invoice.po_number },
+          { label: 'Invoice number', value: invoice.invoice_number },
+          { label: creationDateLabel | default('Invoice date'), value: invoice.created_on, type: 'datetime' }
+        ],
+        modifier: 'stacked',
+        itemModifier: 'stacked'
+      }) }}
+    </div>
+
+    <div class="u-float-right u-max-half">
+      {{ MetaList({
+        items: [
+          { label: 'From', value: invoiceAddress | safe },
+          { label: 'VAT number', value: 'GB ' + invoice.invoice_vat_number }
+        ],
+        modifier: 'stacked',
+        itemModifier: 'stacked'
+      }) }}
+    </div>
+  </div>
+
+  {% include '_includes/cost-table.njk' %}
+
+  <div class="l-reading-width">
+    {% block invoice_payment_information %}{% endblock %}
+
+    <button class="u-icon-print u-no-js-hidden u-print-hide js-print">Print this page</button>
+  </div>
+{% endblock  %}

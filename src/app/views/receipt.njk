@@ -1,89 +1,30 @@
-{% extends '_layouts/omis-base.njk' %}
+{% extends '_layouts/invoice.njk' %}
 
-{% block body_main_content %}
-  <p class="local-header__back u-print-hide">
-    <a href="/{{ publicToken }}">Return to overview</a>
-  </p>
+{% set heading = 'Receipt' %}
+{% set creationDateLabel = 'Receipt date' %}
 
-  <img src="{{ getAssetPath('images/dit-invoice-logo.png') }}" width="200"><br>
+{% block invoice_payment_information %}
+  <h2 class="heading-medium">
+    Payment details
+    {% if payments.length > 1 %}
+      ({{ payments.length }} {{ ' payment' | pluralise(payments.length) }})
+    {% endif %}
+  </h2>
 
-  <h1>Payment receipt</h1>
+  {% for payment in payments %}
+    {% if payments.length > 1 %}
+      <h3 class="heading-small">Payment {{ loop.index }}</h3>
+    {% endif %}
 
-  {% set billingAddress = [
-    invoice.billing_contact_name | escape,
-    invoice.billing_company_name | escape,
-    invoice.billing_address_1 | escape,
-    invoice.billing_address_2 | escape,
-    invoice.billing_address_town | escape,
-    invoice.billing_address_county | escape,
-    invoice.billing_address_postcode | escape,
-    invoice.billing_address_country.name | escape
-  ] | removeNilAndEmpty | join('<br>') %}
-
-  {% set invoiceAddress = [
-    invoice.invoice_company_name | escape,
-    invoice.invoice_address_1 | escape,
-    invoice.invoice_address_2 | escape,
-    invoice.invoice_address_town | escape,
-    invoice.invoice_address_county | escape,
-    invoice.invoice_address_postcode | escape,
-    invoice.invoice_address_country.name | escape
-  ] | removeNilAndEmpty | join('<br>') %}
-
-  <div class="u-clearfix">
-    <div class="u-float-left u-max-half">
-      {{ MetaList({
-        items: [
-          { label: 'For the attention of', value: billingAddress | safe },
-        { label: 'Purchase order (PO) number', value: invoice.po_number },
-          { label: 'Invoice number', value: invoice.invoice_number },
-          { label: 'Receipt date', value: invoice.created_on, type: 'datetime' }
-        ],
-        modifier: 'stacked',
-        itemModifier: 'stacked'
-      }) }}
-    </div>
-
-    <div class="u-float-right u-max-half">
-      {{ MetaList({
-        items: [
-          { label: 'From (charging point)', value: invoiceAddress | safe },
-          { label: 'VAT number', value: invoice.invoice_vat_number }
-        ],
-        modifier: 'stacked',
-        itemModifier: 'stacked'
-      }) }}
-    </div>
-  </div>
-
-  {% include '_includes/cost-table.njk' %}
-
-  <div class="l-reading-width">
-    <h2 class="heading-medium">
-      Payment details
-      {% if payments.length > 1 %}
-        ({{ payments.length }} {{ ' payment' | pluralise(payments.length) }})
-      {% endif %}
-    </h2>
-
-    {% for payment in payments %}
-      {% if payments.length > 1 %}
-        <h3 class="heading-small">Payment {{ loop.index }}</h3>
-      {% endif %}
-
-      {{ MetaList({
-        items: [
-          { label: 'Method', value: payment.method | upper },
-          { label: 'Amount received', value: payment.amount | formatCurrency },
-          { label: 'Received on', value: payment.received_on, type: 'date' },
-          { label: 'Transaction reference', value: payment.transaction_reference }
-        ],
-        modifier: 'stacked',
-        itemModifier: 'stacked'
-      }) }}
-    {% endfor %}
-
-    <button class="u-icon-print u-no-js-hidden u-print-hide js-print">Print this page</button>
-  </div>
-
-{% endblock  %}
+    {{ MetaList({
+      items: [
+        { label: 'Method', value: payment.method | sentenceCase },
+        { label: 'Amount received', value: payment.amount | formatCurrency },
+        { label: 'Received on', value: payment.received_on, type: 'date' },
+        { label: 'Transaction reference', value: payment.transaction_reference }
+      ],
+      modifier: 'stacked',
+      itemModifier: 'stacked'
+    }) }}
+  {% endfor %}
+{% endblock %}
