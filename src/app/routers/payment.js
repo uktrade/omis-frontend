@@ -26,7 +26,7 @@ router.get('/card/success', setPayments, renderCardSuccess)
 router.get('/card/:paymentSessionId',
   validatePaymentGatewaySession,
   setPaymentGatewaySession,
-  checkPaymentGatewaySessionStatus,
+  checkPaymentGatewaySessionStatus(true),
   redirectReturnUrl
 )
 
@@ -44,7 +44,7 @@ router.get('/bank-transfer', renderBankTransferMethod)
 router.get('/card',
   createPaymentGatewaySession,
   setPaymentGatewaySession,
-  checkPaymentGatewaySessionStatus,
+  checkPaymentGatewaySessionStatus(),
   renderCardMethod
 )
 
