@@ -3,7 +3,6 @@
     <tr>
       <th>Order number</th>
       <th>Service description</th>
-      <th>Market (country)</th>
       <th></th>
       <th align="right">Net amount</th>
     </tr>
@@ -14,10 +13,7 @@
         {{ order.reference }}
       </td>
       <td>
-        OMIS
-      </td>
-      <td>
-        {{ order.primary_market.name }}
+        UK Government support in {{ order.primary_market.name }}
       </td>
       <td></td>
       <td align="right">
@@ -27,7 +23,7 @@
   </tbody>
   <tfoot>
     <tr>
-      <td colspan="3" class="table__cell--plain"></td>
+      <td colspan="2" class="table__cell--plain"></td>
       <th>
         VAT {{ 'at 20%' if order.vat_cost > 0 }}
       </th>
@@ -36,7 +32,7 @@
       </td>
     </tr>
     <tr>
-      <td colspan="3" class="table__cell--plain"></td>
+      <td colspan="2" class="table__cell--plain"></td>
       <th>
         Total amount
       </th>

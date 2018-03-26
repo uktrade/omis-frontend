@@ -1,12 +1,12 @@
 {% extends '_layouts/omis-base.njk' %}
 
-{% set heading = 'Paying for your order' %}
+{% set heading = 'Choose a payment method' %}
 
 {% block main_content %}
   {% if invalid %}
     {{ ErrorSummary({
       messages: {
-        'payment-method': 'Choose a payment method cannot be blank'
+        'payment-method': 'Payment method cannot be blank'
       }
     }) }}
   {% endif %}
@@ -16,14 +16,14 @@
 
     {{ MultipleChoiceField({
       name: 'payment-method',
-      label: 'Choose a payment method',
+      label: 'Pay by',
       type: 'radio',
       options: [{
         value: 'card',
-        label: 'By credit or debit card'
+        label: 'credit or debit card'
       }, {
         value: 'bank-transfer',
-        label: 'By bank transfer'
+        label: 'bank transfer'
       }],
       error: 'cannot be blank' if invalid
     }) }}
