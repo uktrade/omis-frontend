@@ -2,7 +2,7 @@
 
 {% set hideReturnLink = true %}
 {% set heading = 'Your order' %}
-{% set subHeading = 'Order reference ' + order.reference + ' for ' + order.primary_market.name %}
+{% set subHeading = 'Order reference ' + order.reference + ' in ' + order.primary_market.name %}
 
 {% block main_content %}
   {% if not quote.accepted_on and (quote.expired or quote.cancelled_on) %}
@@ -20,7 +20,7 @@
 
     <p>
       <a href="/{{ publicToken }}/quote" class="button">
-        Accept quote
+        Review your quote
       </a>
     </p>
   {% elif order.status === 'quote_accepted' %}

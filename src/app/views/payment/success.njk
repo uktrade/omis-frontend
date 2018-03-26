@@ -20,7 +20,9 @@
 
   <p>You will receive a confirmation email that your payment has been received.</p>
 
+  <p>Completed work for your order will be sent directly to {{ order.contact_email or 'you by email' }}.</p>
+
   <p><a href="/{{ publicToken }}/receipt">View your payment receipt</a></p>
 
-  <p><a href="/{{ publicToken }}">Return to overview</a></p>
+  <p><a href="/{{ publicToken }}">View your order history</a></p>
 {% endblock %}
