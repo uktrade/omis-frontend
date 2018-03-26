@@ -1,3 +1,25 @@
 $is-print: true;
 
+a[href^="/"],
+a[href^="http://"],
+a[href^="https://"] {
+  &:after {
+    content: " (" attr(href) ")";
+    font-size: 90%;
+  }
+}
+
+a[href^="/"]:after {
+  content: " (https://omis.trade.gov.uk/" attr(href) ")";
+  font-size: 90%;
+}
+
+a[href^="javascript:"],
+a[href^="#"],
+a.global-header__link {
+  &:after {
+    content: "";
+  }
+}
+
 @import "app";
