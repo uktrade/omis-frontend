@@ -11,6 +11,8 @@
     }) }}
   {% endif %}
 
+  {% include '_includes/amount-due.njk' %}
+
   <form method="post">
     <input type="hidden" name="_csrf" value="{{ CSRF_TOKEN }}">
 

@@ -1,0 +1,22 @@
+{% set costText %}
+  <strong>{{ order.total_cost | formatCurrency }}</strong>
+
+  (
+    {%- if order.vat_cost > 0 -%}
+      {{ order.subtotal_cost | formatCurrency }} excluding VAT
+    {%- else -%}
+      No VAT applies
+    {%- endif -%}
+
+    {%- if order.discount_value -%}
+      , includes a net discount of {{ order.discount_value | formatCurrency }}
+    {%- endif -%}
+  )
+{% endset %}
+
+{% call Message({ type: 'muted', element: 'div' }) %}
+  Amount to pay:
+  <span class="u-block font-large">
+    {{ costText | safe }}
+  </span>
+{% endcall %}
