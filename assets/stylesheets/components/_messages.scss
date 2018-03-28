@@ -19,6 +19,10 @@
       padding-right: 90px;
     }
   }
+
+  span + span {
+    margin-top: 0;
+  }
 }
 
 .c-message__close {
