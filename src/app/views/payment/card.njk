@@ -5,10 +5,7 @@
 {% block main_content %}
   <p>Credit and debit card payments are made through the government’s secure payment service.</p>
 
-  <p>
-    Amount to pay:
-    <strong>{{ order.total_cost | formatCurrency }}</strong>
-  </p>
+  {% include '_includes/amount-due.njk' %}
 
   <p>
     <a href="{{ paymentGatewaySession.payment_url }}" class="button">Continue to secure payment service</a>

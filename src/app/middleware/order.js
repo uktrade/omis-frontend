@@ -15,6 +15,7 @@ async function fetchOrderDetails (req, res, next, publicToken) {
       subtotal_cost: parseInt(order.subtotal_cost) / 100,
       vat_cost: parseInt(order.vat_cost) / 100,
       total_cost: parseInt(order.total_cost) / 100,
+      discount_value: parseInt(order.discount_value) / 100,
     })
   } catch (error) {
     return next(error)
