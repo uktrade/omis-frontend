@@ -37,7 +37,7 @@ const common = {
         loader: 'file-loader?name=fonts/[name].[hash:8].[ext]',
       },
       {
-        test: /\.(png|svg|jpe?g)$/,
+        test: /\.(png|svg|jpe?g|ico)$/,
         loader: [
           'file-loader?name=images/[name].[hash:8].[ext]',
           'image-webpack-loader',
