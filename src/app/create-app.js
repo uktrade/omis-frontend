@@ -35,7 +35,7 @@ module.exports = function () {
   nunjucks(app, config)
 
   // Static files
-  app.use(favicon(path.join(config.root, 'public/images', 'favicon.ico')))
+  app.use(favicon(path.join(config.root, 'assets/images', 'favicon.ico')))
   app.use(express.static(path.join(config.root, 'public'), { maxAge: staticMaxAge }))
   app.use('/js', express.static(path.join(config.buildDir, 'js'), { maxAge: staticMaxAge }))
   app.use('/css', express.static(path.join(config.buildDir, 'css'), { maxAge: staticMaxAge }))
