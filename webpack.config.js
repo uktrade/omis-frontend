@@ -37,7 +37,7 @@ const common = {
         loader: 'file-loader?name=fonts/[name].[hash:8].[ext]',
       },
       {
-        test: /\.(png|svg|jpe?g)$/,
+        test: /\.(png|svg|jpe?g|ico)$/,
         loader: [
           'file-loader?name=images/[name].[hash:8].[ext]',
           'image-webpack-loader',
@@ -133,7 +133,7 @@ webpackConfigs.prod = merge.smart(common, {
       sourceMap: true,
       dead_code: true,
     }),
-    new ExtractTextPlugin('css/[name].[chunkhash:8].css'),
+    new ExtractTextPlugin('css/[name].[contenthash:8].css'),
   ],
 })
 

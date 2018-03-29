@@ -1,3 +1,7 @@
+require('../images/apple-touch-icon.png')
+require('../images/favicon-192x192.png')
+require('../images/favicon.ico')
+require('../images/opengraph-image.png')
 require('../images/dit-invoice-logo.png')
 
 const cookieMessage = require('./modules/cookie-message')
