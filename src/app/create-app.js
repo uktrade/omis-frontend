@@ -78,7 +78,12 @@ module.exports = function () {
   app.use(setLocals)
   app.use(morganLogger((isDev ? 'dev' : 'combined')))
   app.use(headers(isDev))
-  app.use(csrf({ cookie: true }))
+  app.use(csrf({
+    cookie: {
+      httpOnly: true,
+      secure: !config.isDev,
+    },
+  }))
   app.use(setCSRFToken())
 
   app.use(router)
