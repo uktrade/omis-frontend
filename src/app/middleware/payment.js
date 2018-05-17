@@ -1,15 +1,11 @@
 const { get } = require('lodash')
 
 const { fetch } = require('../lib/api')
-const { isProd, showPaymentJourney } = require('../../../config')
 
 function checkOrderStatus (req, res, next) {
   const orderStatus = get(res.locals, 'order.status')
 
-  if (
-    (isProd && !showPaymentJourney) ||
-    !['quote_accepted', 'paid', 'complete'].includes(orderStatus)
-  ) {
+  if (!['quote_accepted', 'paid', 'complete'].includes(orderStatus)) {
     return res.redirect(`/${res.locals.publicToken}`)
   }
 
