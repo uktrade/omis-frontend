@@ -18,7 +18,9 @@
     "lint:modified:js": "CHANGED_FILES=$(git diff --staged --name-only -- '*.js'); if [ \"$CHANGED_FILES\" ]; then eslint $(echo $CHANGED_FILES); fi",
     "watch:app:client": "webpack --watch --progress",
     "watch:app:server": "nodemon $NODE_DEBUG_OPTION --use-strict",
-    "heroku-postbuild": "npm rebuild && npm run build"
+    "heroku-postbuild": "npm rebuild && npm run build",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "repository": {
     "type": "git",
@@ -80,7 +82,8 @@
     "webpack": "^3.11.0",
     "webpack-assets-manifest": "^1.0.0",
     "webpack-merge": "^4.1.2",
-    "winston": "^2.4.2"
+    "winston": "^2.4.2",
+    "snyk": "^1.88.0"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.3",
@@ -94,5 +97,6 @@
     "jasmine-core": "^2.99.1",
     "nodemon": "^1.17.4",
     "proxyquire": "^2.0.1"
-  }
+  },
+  "snyk": true
 }
