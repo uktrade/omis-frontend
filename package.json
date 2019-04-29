@@ -4,7 +4,7 @@
   "description": "The public front end for OMIS",
   "main": "src/app/app.js",
   "engines": {
-    "node": "8.11.1"
+    "node": "10.15.3"
   },
   "scripts": {
     "start": "NODE_ENV=production node --use-strict src/app/server.js",
