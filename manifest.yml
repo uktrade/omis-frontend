@@ -1,4 +1,4 @@
 ---
 applications:
   - disk_quota: 2G
-    buildpack: https://github.com/cloudfoundry/nodejs-buildpack.git#v1.6.23
+    buildpack: https://github.com/cloudfoundry/nodejs-buildpack.git#v1.6.49
