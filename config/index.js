@@ -29,10 +29,11 @@ const config = {
   logLevel: process.env.LOG_LEVEL || 'warn',
   api: {
     root: process.env.API_ROOT || 'http://localhost:8000',
-    authUrl: process.env.API_AUTH_URL || '/token/',
-    clientId: process.env.API_CLIENT_ID,
-    clientSecret: process.env.API_CLIENT_SECRET,
-    clientScope: process.env.API_CLIENT_SCOPE,
+    hawkCredentials: {
+      id: process.env.API_CLIENT_HAWK_ACCESS_KEY_ID,
+      key: process.env.API_CLIENT_HAWK_SECRET_ACCESS_KEY,
+      algorithm: 'sha256',
+    },
   },
   formats: {
     currency: '$0,0.00',

@@ -1,64 +1,73 @@
-const request = require('request-promise-native')
-const { assign, isString } = require('lodash')
+const { isString } = require('lodash')
 
-const { api } = require('../../../config')
-const logger = require('../lib/logger')
+const axios = require('axios')
+const hawk = require('@hapi/hawk')
 
-function fetchAuthToken () {
-  const options = {
-    method: 'POST',
-    json: true,
-    url: api.root + api.authUrl,
-    form: {
-      grant_type: 'client_credentials',
-      client_id: api.clientId,
-      client_secret: api.clientSecret,
-      scope: api.clientScope,
+const config = require('../../../config')
+
+function getHawkHeader (credentials, uri, method) {
+  // Generate Authorization request header
+  // Ensure backend is using same protocol for hash generation
+  return hawk.client.header(uri, method, {
+    credentials,
+    payload: '',
+    contentType: 'application/json',
+  })
+}
+
+function parseOptions (options) {
+  if (isString(options)) {
+    return {
+      url: options,
+      method: 'GET',
+    }
+  }
+
+  return {
+    url: options.url,
+    method: options.method.toUpperCase(),
+  }
+}
+
+function buildRequestOptions (method, url, hawkHeader) {
+  return {
+    method,
+    url,
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': hawkHeader.header,
     },
   }
+}
 
-  return request(options)
-};
+async function fetch (options, hawkCredentials = config.api.hawkCredentials) {
+  const { url, method } = parseOptions(options)
 
-function setAuthToken () {
-  return async function (req, res, next) {
-    if (req.session.token) {
-      return next()
-    }
+  const completeURL = `${config.api.root}${url}`
 
-    try {
-      const response = await fetchAuthToken()
+  const request = axios.create({
+    baseURL: config.api.root,
+    timeout: 3600,
+  })
+  const hawkHeader = getHawkHeader(hawkCredentials, completeURL, method)
 
-      req.session.token = response.access_token
-      next()
-    } catch (error) {
-      logger.error(error)
-      next()
-    }
-  }
-};
+  const requestOptions = buildRequestOptions(method, completeURL, hawkHeader)
 
-function fetch (token, options) {
-  const settings = {
-    baseUrl: api.root,
-    headers: {},
-    json: true,
-  }
+  let response
+  response = await request(requestOptions)
+  // If the response can't be authorised, an exception will be thrown
+  hawk.client.authenticate(
+    response,
+    hawkCredentials,
+    hawkHeader.artifacts,
+    // Axios returns a JSON object and to authenticate the request
+    // we need a string.
+    { payload: JSON.stringify(response.data) },
+  )
 
-  if (isString(options)) {
-    settings.url = options
-  } else {
-    assign(settings, options)
-  }
-
-  if (token) {
-    settings.headers.Authorization = `Bearer ${token}`
-  }
-
-  return request(settings)
+  return response.data
 }
 
 module.exports = {
   fetch,
-  setAuthToken,
 }

@@ -16,7 +16,6 @@ function renderAcceptedQuote (req, res, next) {
 
 async function acceptQuote (req, res, next) {
   const publicToken = res.locals.publicToken
-  const authToken = req.session.token
 
   if (!get(req.body, 'confirm')) {
     res.locals.invalid = true
@@ -24,9 +23,9 @@ async function acceptQuote (req, res, next) {
   }
 
   try {
-    await fetch(authToken, {
+    await fetch({
       method: 'post',
-      url: `/v3/omis/public/order/${publicToken}/quote/accept`,
+      url: `/v3/public/omis/order/${publicToken}/quote/accept`,
     })
 
     res.redirect(`/${publicToken}/quote/accepted`)
