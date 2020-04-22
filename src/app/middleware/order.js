@@ -3,13 +3,12 @@ const { assign, map } = require('lodash')
 const { fetch } = require('../lib/api')
 
 async function fetchOrderDetails (req, res, next, publicToken) {
-  const authToken = req.session.token
   let order
   let quote
   let invoice
 
   try {
-    order = await fetch(authToken, `/v3/omis/public/order/${publicToken}`)
+    order = await fetch(`/v3/public/omis/order/${publicToken}`)
 
     assign(order, {
       subtotal_cost: parseInt(order.subtotal_cost) / 100,
@@ -22,14 +21,14 @@ async function fetchOrderDetails (req, res, next, publicToken) {
   }
 
   try {
-    quote = await fetch(authToken, `/v3/omis/public/order/${publicToken}/quote`)
+    quote = await fetch(`/v3/public/omis/order/${publicToken}/quote`)
     quote.expires_on = new Date(quote.expires_on + 'T23:59:59')
     quote.expired = quote.expires_on < new Date()
 
-    invoice = await fetch(authToken, `/v3/omis/public/order/${publicToken}/invoice`)
+    invoice = await fetch(`/v3/public/omis/order/${publicToken}/invoice`)
     invoice.overdue = invoice.payment_due_date < new Date()
   } catch (error) {
-    if (error.statusCode !== 404) {
+    if (error.response.status !== 404) {
       return next(error)
     }
   }
@@ -45,7 +44,7 @@ async function fetchOrderDetails (req, res, next, publicToken) {
 
 async function setPayments (req, res, next) {
   try {
-    const paymentsResponse = await fetch(req.session.token, `/v3/omis/public/order/${res.locals.publicToken}/payment`)
+    const paymentsResponse = await fetch(`/v3/public/omis/order/${res.locals.publicToken}/payment`)
 
     res.locals.payments = map(paymentsResponse, (payment) => {
       payment.amount = parseInt(payment.amount) / 100

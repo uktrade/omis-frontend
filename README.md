@@ -101,10 +101,8 @@ environment.
 | `SESSION_TTL` | session expiration | 2 hours |
 | `LOG_LEVEL` | level of logs to output to console | warn |
 | `API_ROOT` | root for API | http://localhost:8000 |
-| `API_AUTH_URL` | auth endpoint for API | /token/ |
-| `API_CLIENT_ID` | auth client ID | |
-| `API_CLIENT_SECRET` | auth client secret | |
-| `API_CLIENT_SCOPE` | auth client scope | |
+| `API_CLIENT_HAWK_ACCESS_KEY_ID` | hawk client access key id | |
+| `API_CLIENT_HAWK_SECRET_ACCESS_KEY` | hawk client secret access key | |
 | `SENTRY_DSN` | sentry data source name | |
 | `GOOGLE_TAG_MANAGER_KEY` | key for Google Tag Manager | |
 | `GOOGLE_TAG_MANAGER_SUFFIX` | value to append to Google Tag Manager key | |
