@@ -30,9 +30,9 @@ async function createPaymentGatewaySession (req, res, next) {
   }
 
   try {
-    const paymentGatewaySession = await fetch(req.session.token, {
+    const paymentGatewaySession = await fetch({
       method: 'post',
-      url: `/v3/omis/public/order/${publicToken}/payment-gateway-session`,
+      url: `/v3/public/omis/order/${publicToken}/payment-gateway-session`,
     })
 
     req.paymentGatewaySession[publicToken] = paymentGatewaySession.id
@@ -55,7 +55,7 @@ async function setPaymentGatewaySession (req, res, next) {
   }
 
   try {
-    res.locals.paymentGatewaySession = await fetch(req.session.token, `/v3/omis/public/order/${publicToken}/payment-gateway-session/${sessionId}`)
+    res.locals.paymentGatewaySession = await fetch(`/v3/public/omis/order/${publicToken}/payment-gateway-session/${sessionId}`)
 
     next()
   } catch (error) {

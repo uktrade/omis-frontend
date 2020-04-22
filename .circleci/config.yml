@@ -34,4 +34,11 @@ jobs:
           key: v1-dependencies-{{ checksum "package-lock.json" }}
 
       # run tests!
-      - run: npm test
+      - run:
+          name: Run unit tests
+          command: npm test
+          environment:
+            API_CLIENT_HAWK_ACCESS_KEY_ID: access-key-id
+            API_CLIENT_HAWK_SECRET_ACCESS_KEY: secret-access-key
+          when: always
+
