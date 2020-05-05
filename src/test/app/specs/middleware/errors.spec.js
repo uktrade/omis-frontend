@@ -53,7 +53,25 @@ describe('errors middleware', function () {
         describe('When error code is 404', function () {
           it('Should log the error and send a response with the right status code', function () {
             err.statusCode = 404
+            middleware.catchAll(err, req, res, next)
 
+            expect(res.status).toHaveBeenCalledWith(404)
+            expect(res.render).toHaveBeenCalledWith('errors', {
+              error: err,
+              statusCode: 404,
+              statusMessage: 'We couldn\'t find that page',
+              showErrors: config.showErrors,
+            })
+            expect(logger.error).not.toHaveBeenCalled()
+            expect(next).not.toHaveBeenCalled()
+          })
+        })
+
+        describe('When axios returns an error with response status 404', function () {
+          it('Should log the error and send a response with the right status code', function () {
+            err.response = {
+              status: 404,
+            }
             middleware.catchAll(err, req, res, next)
 
             expect(res.status).toHaveBeenCalledWith(404)
@@ -108,7 +126,6 @@ describe('errors middleware', function () {
       it('Should call next with error', function () {
         const expectedError = new Error('Not Found')
         expectedError.statusCode = 404
-
         middleware.handle404(req, res, next)
 
         expect(next).toHaveBeenCalledWith(expectedError)
