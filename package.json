@@ -4,7 +4,7 @@
   "description": "The public front end for OMIS",
   "main": "src/app/app.js",
   "engines": {
-    "node": "10.15.3"
+    "node": "16.18.1"
   },
   "scripts": {
     "start": "NODE_ENV=production node --use-strict src/app/server.js",
@@ -35,7 +35,6 @@
   },
   "homepage": "https://github.com/uktrade/omis-frontend#readme",
   "dependencies": {
-    "@hapi/hawk": "^7.1.2",
     "axios": "^0.18.1",
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.4",
@@ -57,16 +56,17 @@
     "express-session": "^1.15.6",
     "express-sslify": "^1.2.0",
     "extract-text-webpack-plugin": "^3.0.2",
-    "fast-sass-loader": "^1.4.5",
+    "fast-sass-loader": "^2.0.1",
     "file-loader": "^1.1.11",
     "govuk_frontend_toolkit": "^7.5.0",
+    "hawk": "^9.0.1",
     "image-webpack-loader": "^4.3.0",
     "lodash": "^4.17.10",
     "markdown-it": "^8.4.1",
     "memorystore": "^1.6.0",
     "moment": "^2.22.2",
     "morgan": "^1.9.0",
-    "node-sass": "^4.9.0",
+    "node-sass": "^8.0.0",
     "npm-run-all": "^4.1.5",
     "numeral": "^2.0.6",
     "nunjucks": "^3.1.3",

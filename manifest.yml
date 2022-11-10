@@ -1,4 +1,7 @@
----
 applications:
-  - disk_quota: 2G
-    buildpack: https://github.com/cloudfoundry/nodejs-buildpack.git#v1.6.49
+  - buildpacks:
+      - https://github.com/cloudfoundry/nodejs-buildpack.git#v1.8.3
+    health-check-type: http
+    health-check-http-endpoint: /healthcheck
+    memory: 2G
+    disk_quota: 2G
