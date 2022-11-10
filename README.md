@@ -1,7 +1,6 @@
 # Overseas Market Introduction Service (OMIS) frontend
 
 [![CircleCI](https://circleci.com/gh/uktrade/omis-frontend.svg?style=svg)](https://circleci.com/gh/uktrade/omis-frontend)
-[![Dependency Status](https://gemnasium.com/badges/github.com/uktrade/omis-frontend.svg)](https://gemnasium.com/github.com/uktrade/omis-frontend)
 
 An express application that fetches data from a JSON based API and handles
 the rendering and processing of forms and data.
@@ -11,8 +10,7 @@ number of settings, and be provided with an API service.
 
 ## Dependencies
 
-- [Node.js v8.5](https://nodejs.org/en/)
-- [NPM v5](https://github.com/npm/npm)
+- [Node.js v16.18.1](https://nodejs.org/en/)
 
 ## Installation
 
@@ -23,6 +21,10 @@ number of settings, and be provided with an API service.
   ```
 
 2. Install node dependencies:
+
+  ```
+  nvm use 16.18.1
+  ```
 
   ```
   npm install
@@ -126,9 +128,7 @@ Tests and code linting are all run on [CircleCI](https://circleci.com/).
 
 ## Deployment
 
-Commits to `develop` are automatically deployed to a Heroku instance. Pull
-requests deploy to a [review app](https://devcenter.heroku.com/articles/github-integration-review-apps)
-from this Heroku instance.
-
 Deployments to staging and production are done manually through Jenkins and are
 deployed from the `master` branch.
+
+Please use the same process as the [Data Hub frontend](https://github.com/uktrade/data-hub-frontend/blob/main/docs/Deployments.md)
