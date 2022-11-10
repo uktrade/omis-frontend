@@ -74,7 +74,7 @@
     "postcss-loader": "^2.1.5",
     "raven": "^2.6.2",
     "request": "^2.87.0",
-    "resolve-url-loader": "^2.3.0",
+    "resolve-url-loader": "^5.0.0",
     "serve-favicon": "^2.5.0",
     "style-loader": "^0.21.0",
     "webpack": "^3.12.0",
