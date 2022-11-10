@@ -63,7 +63,7 @@
     "image-webpack-loader": "^4.3.0",
     "lodash": "^4.17.10",
     "markdown-it": "^8.4.1",
-    "memorystore": "^1.6.0",
+    "memorystore": "^1.6.7",
     "moment": "^2.22.2",
     "morgan": "^1.9.0",
     "node-sass": "^4.9.0",
