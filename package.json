@@ -35,7 +35,6 @@
   },
   "homepage": "https://github.com/uktrade/omis-frontend#readme",
   "dependencies": {
-    "@hapi/hawk": "^7.1.2",
     "axios": "^0.18.1",
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.4",
@@ -60,6 +59,7 @@
     "fast-sass-loader": "^1.4.5",
     "file-loader": "^1.1.11",
     "govuk_frontend_toolkit": "^7.5.0",
+    "hawk": "^9.0.1",
     "image-webpack-loader": "^4.3.0",
     "lodash": "^4.17.10",
     "markdown-it": "^8.4.1",

@@ -1,7 +1,7 @@
 const { isString } = require('lodash')
 
 const axios = require('axios')
-const hawk = require('@hapi/hawk')
+const hawk = require('hawk')
 
 const config = require('../../../config')
 
