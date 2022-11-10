@@ -100,6 +100,7 @@
     "proxyquire": "^2.0.1"
   },
   "overrides": {
-    "is-svg": "4.3.0"
+    "is-svg": "4.3.0",
+    "nth-check": "2.0.1"
   }
 }
