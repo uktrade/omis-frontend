@@ -42,7 +42,7 @@
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-preset-es2015": "^6.24.1",
     "body-parser": "^1.18.3",
-    "browser-sync": "^2.24.4",
+    "browser-sync": "^2.27.10",
     "browser-sync-webpack-plugin": "^2.2.2",
     "case": "^1.5.5",
     "client-sessions": "^0.8.0",
