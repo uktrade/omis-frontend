@@ -106,7 +106,6 @@
     "trim-newlines": "3.0.1",
     "glob-parent": "5.1.2",
     "js-yaml": "3.13.1",
-    "got": "11.8.5",
     "postcss": "7.0.36",
     "color-string": "1.5.5",
     "ajv": "6.12.3",
