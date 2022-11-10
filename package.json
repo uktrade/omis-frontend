@@ -35,7 +35,7 @@
   },
   "homepage": "https://github.com/uktrade/omis-frontend#readme",
   "dependencies": {
-    "axios": "^0.18.1",
+    "axios": "^0.21.2",
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.4",
     "babel-plugin-transform-class-properties": "^6.24.1",
