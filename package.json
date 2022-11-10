@@ -107,6 +107,7 @@
     "glob-parent": "5.1.2",
     "got": "11.8.5",
     "postcss": "7.0.36",
-    "color-string": "1.5.5"
+    "color-string": "1.5.5",
+    "ajv": "6.12.3"
   }
 }
