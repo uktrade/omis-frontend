@@ -1,16 +1,14 @@
-const webpack = require('webpack')
-const merge = require('webpack-merge')
 const path = require('path')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const WebpackAssetsManifest = require('webpack-assets-manifest')
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin')
 
 const config = require('./config')
 
-const webpackConfigs = {}
-
-const common = {
-  devtool: 'source-map',
+module.exports = {
+  target: 'node',
+  devtool: config.isProd ? 'false' : 'source-map',
+  mode: config.isProd ? 'production' : 'development',
   entry: {
     styles: './assets/stylesheets/app.scss',
     'styles.print': './assets/stylesheets/app.print.scss',
@@ -22,13 +20,46 @@ const common = {
   output: {
     path: config.buildDir,
     publicPath: '/',
+    filename: config.isProd ? 'js/[name].[chunkhash:8].js' : 'js/[name].js',
+    devtoolModuleFilenameTemplate: '[absolute-resource-path]',
+    devtoolFallbackModuleFilenameTemplate: '[absolute-resource-path]?[hash]',
+  },
+  plugins: [
+    new MiniCssExtractPlugin({
+      filename: config.isProd
+        ? 'css/[name].[contenthash:8].css'
+        : 'css/[name].css',
+      chunkFilename: 'css/[name].[id].css',
+    }),
+    new BrowserSyncPlugin({
+      port: 3001,
+      proxy: `http://localhost:${config.server.port}`,
+      open: false,
+      files: [
+        '.build/css/*.css',
+        '.build/js/*.js',
+        '.build/images/*',
+        'src/**/*.njk',
+      ],
+    }, {
+      reload: false,
+    }),
+    new WebpackAssetsManifest(),
+  ],
+  resolve: {
+    modules: [
+      'node_modules',
+      path.resolve(__dirname, 'src'),
+    ],
+    extensions: ['*', '.js', '.jsx', '.json'],
   },
   module: {
     rules: [
       {
         test: /\.js$/,
         loader: 'babel-loader',
-        query: {
+        exclude: '/node_modules/',
+        options: {
           cacheDirectory: './babel_cache',
         },
       },
@@ -45,103 +76,43 @@ const common = {
       },
       {
         test: /\.scss$/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: [
-            {
-              loader: 'css-loader',
-              options: {
-                sourceMap: config.isDev,
-                minimize: config.isProd,
-              },
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: config.isDev,
             },
-            {
-              loader: 'postcss-loader',
-              options: {
-                plugins: (loader) => [
-                  require('autoprefixer')(),
-                ],
-                sourceMap: config.isDev,
-              },
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              sourceMap: config.isDev,
             },
-            'resolve-url-loader',
-            {
-              loader: 'fast-sass-loader',
-              options: {
-                sourceMap: true, // required for resolve-url-loader
+          },
+          'resolve-url-loader',
+          {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: true, // required for resolve-url-loader
+              sassOptions: {
                 includePaths: [
                   path.resolve(__dirname, 'node_modules/govuk_frontend_toolkit/stylesheets'),
                 ],
               },
             },
-          ],
-        }),
+          },
+        ],
       },
     ],
   },
-  resolve: {
-    modules: [
-      'node_modules',
-      path.resolve(__dirname, 'src'),
-    ],
+  node: {
+    fs: 'empty',
+    child_process: 'empty',
+    module: 'empty',
+    net: 'empty',
+    tls: 'empty',
   },
-  plugins: [
-    new WebpackAssetsManifest(),
-  ],
 }
-
-webpackConfigs.develop = merge.smart(common, {
-  output: {
-    filename: 'js/[name].js',
-  },
-  plugins: [
-    new ExtractTextPlugin('css/[name].css'),
-    new BrowserSyncPlugin({
-      port: 3001,
-      proxy: `http://localhost:${config.server.port}`,
-      open: false,
-      files: [
-        '.build/css/*.css',
-        '.build/js/*.js',
-        '.build/images/*',
-        'src/**/*.njk',
-      ],
-    }, {
-      reload: false,
-    }),
-  ],
-})
-
-webpackConfigs.prod = merge.smart(common, {
-  devtool: false,
-  output: {
-    filename: 'js/[name].[chunkhash:8].js',
-  },
-  plugins: [
-    new webpack.DefinePlugin({
-      'process.env': {
-        'NODE_ENV': JSON.stringify('production'),
-      },
-    }),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false,
-      },
-      output: {
-        comments: false,
-      },
-      sourceMap: true,
-      dead_code: true,
-    }),
-    new ExtractTextPlugin('css/[name].[contenthash:8].css'),
-  ],
-})
-
-webpackConfigs.docker = merge.smart(webpackConfigs.develop, {
-  watchOptions: {
-    poll: 1000,
-  },
-})
-
-const webpackEnv = process.env.WEBPACK_ENV || (config.isProd ? 'prod' : 'develop')
-module.exports = webpackConfigs[webpackEnv]

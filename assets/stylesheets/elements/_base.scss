@@ -15,7 +15,7 @@ body {
 
 a {
   color: $link-colour;
-  text-decoration-skip: ink;
+  text-decoration-skip-ink: auto;
   outline-color: transparent;
 
   &:hover {
