@@ -7,7 +7,7 @@ const config = require('./config')
 
 module.exports = {
   target: 'node',
-  devtool: config.isProd ? 'false' : 'source-map',
+  devtool: config.isProd ? false : 'source-map',
   mode: config.isProd ? 'production' : 'development',
   entry: {
     styles: './assets/stylesheets/app.scss',
@@ -44,13 +44,27 @@ module.exports = {
     }, {
       reload: false,
     }),
-    new WebpackAssetsManifest(),
+    new WebpackAssetsManifest({ output: 'manifest.json' }),
   ],
   resolve: {
     modules: [
       'node_modules',
       path.resolve(__dirname, 'src'),
     ],
+    fallback: {
+      path: false,
+      fs: false,
+      child_process: false,
+      module: false,
+      net: false,
+      tls: false,
+      process: false,
+      os: false,
+      http: false,
+      https: false,
+      stream: false,
+      zlib: false,
+    },
     extensions: ['*', '.js', '.jsx', '.json'],
   },
   module: {
@@ -64,15 +78,25 @@ module.exports = {
         },
       },
       {
+        test: /\.m?js/,
+        resolve: {
+          fullySpecified: false,
+        },
+      },
+      {
         test: /\.(eot|ttf|woff|woff2)$/,
-        loader: 'file-loader?name=fonts/[name].[hash:8].[ext]',
+        type: 'asset/resource',
+        generator: {
+          filename: 'fonts/[name].[hash:8].[ext]',
+        },
       },
       {
         test: /\.(png|svg|jpe?g|ico)$/,
-        loader: [
-          'file-loader?name=images/[name].[hash:8].[ext]',
-          'image-webpack-loader',
-        ],
+        type: 'asset/resource',
+        generator: {
+          filename: 'images/[name].[hash:8].[ext]',
+        },
+        use: [{ loader: 'image-webpack-loader' }],
       },
       {
         test: /\.scss$/,
@@ -107,12 +131,5 @@ module.exports = {
         ],
       },
     ],
-  },
-  node: {
-    fs: 'empty',
-    child_process: 'empty',
-    module: 'empty',
-    net: 'empty',
-    tls: 'empty',
   },
 }
