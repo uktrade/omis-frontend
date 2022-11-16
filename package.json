@@ -51,7 +51,7 @@
     "express": "^4.16.3",
     "express-session": "^1.15.6",
     "express-sslify": "^1.2.0",
-    "govuk_frontend_toolkit": "^7.5.0",
+    "govuk_frontend_toolkit": "^9.0.1",
     "hawk": "^9.0.1",
     "image-webpack-loader": "^8.1.0",
     "lodash": "^4.17.10",
