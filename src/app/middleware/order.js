@@ -1,3 +1,4 @@
+const { endOfDay } = require('date-fns')
 const { assign, map } = require('lodash')
 
 const { fetch } = require('../lib/api')
@@ -22,7 +23,7 @@ async function fetchOrderDetails (req, res, next, publicToken) {
 
   try {
     quote = await fetch(`/v3/public/omis/order/${publicToken}/quote`)
-    quote.expires_on = new Date(quote.expires_on + 'T23:59:59')
+    quote.expires_on = endOfDay(new Date(quote.expires_on))
     quote.expired = quote.expires_on < new Date()
 
     invoice = await fetch(`/v3/public/omis/order/${publicToken}/invoice`)

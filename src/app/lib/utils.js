@@ -8,16 +8,16 @@ const formatDate = (date, dateFormat) => {
     }
     
     const parsedDate = parseDate(date)
-    
-    if (!isValid(parsedDate)) { return date }
-    
-    return format(parsedDate, dateFormat)
+    const dateToUse = !isValid(parsedDate) ? date : parsedDate
+    return format(dateToUse, dateFormat)
 }
 
 const getDifferenceInMonths = (date) => {
     const parsedDate = parseDate(date)
-    const difference = differenceInMonths(parsedDate, new Date()) + 1
-    return Math.abs(difference) === 1 ? 'in a month' : 'in ' + difference + ' months'
+    const dateToUse = !isValid(parsedDate) ? date : parsedDate
+    const difference = differenceInMonths(dateToUse, new Date())
+    const verifiedDifference = difference === 0 ? 1 : difference
+    return Math.abs(verifiedDifference) === 1 ? 'in a month' : 'in ' + difference + ' months'
 }
 
 module.exports = {
