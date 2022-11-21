@@ -44,6 +44,23 @@ number of settings, and be provided with an API service.
 
 ## Development
 
+### .env file
+
+`npm run develop` command pre-loads local ENV variables from `.env` file (ignored by Git) before running development server.
+If you need to include local environment variables in development add them to `.env` file in the root of the app directory in the following format:
+
+```
+VARIABLE_NAME=value
+```
+
+There's an `.env.example` with pre-populated development data including urls to the Content Store. It's set to use the `file` system if the Content Store is not available.
+
+To use that, copy the file:
+
+```
+cp .env.sample .env
+```
+
 ### Run in development mode
 
 You can run the server in develop mode. Develop mode auto restarts
@@ -70,22 +87,37 @@ or lint the code for styleguide warnings and errors:
 npm run lint
 ```
 
-### .env file
+### Running against a local API instance
 
-`npm run develop` command pre-loads local ENV variables from `.env` file (ignored by Git) before running development server.
-If you need to include local environment variables in development add them to `.env` file in the root of the app directory in the following format:
+It is possible to run the service against a local instance of the Data Hub API following these instructions. Note that you will need local copies of the DH API and Frontend. The frontend should be pointing to the local API instance rather than an external environment.
 
+2. Add the variables `OMIS_PUBLIC_ACCESS_KEY_ID` and `OMIS_PUBLIC_SECRET_ACCESS_KEY` to the API's `.env` file (the values are in Vault). Once you have done this, bring up the API.
+3. Bring up the frontend, navigate to the 'Orders' tab and create an OMIS order.
+4. Add an 'Adviser in the market', set it as the lead adviser and add some estimated hours.
+5. Click on 'Preview quote' and complete the fields that show as incomplete (helpfully it won't tell you about any of the items from Step 3 being missing so that needs to be done first).
+6. When all fields are filled in, click 'Preview quote' again, scroll down to the bottom of the page and click 'Send quote to client'.
+7. Create a copy of this project's `.env` file if you haven't already done this
 ```
-VARIABLE_NAME=value
+cp .env.sample .env
 ```
+8. Open this project's `.env` file and make the following changes:
+  - `API_ROOT` should be set to `http://localhost:8000`
+  - `API_CLIENT_HAWK_ACCESS_KEY_ID` should be set to the same value as `OMIS_PUBLIC_ACCESS_KEY_ID` in the API
+  - `API_CLIENT_HAWK_SECRET_ACCESS_KEY` should be set to the same value as `OMIS_PUBLIC_SECRET_ACCESS_KEY` in the API
+  - `SERVER_PORT` should be set to `4000` (this is because the API expects the OMIS service to be running on this port)
+9. Start this project with `npm run develop`. Note that the console will tell you that the service is running on port 3000 when it's actually running on 4000.
+10. Open up the API admin screen and navigate to the `Orders` interface. Open the order created in step 2 and click on the `Public facing URL`, which will open the order within this microservice.
 
-There's an `.env.example` with pre-populated development data including urls to the Content Store. It's set to use the `file` system if the Content Store is not available.
+### Running against an external API
 
-To use that, copy the file:
+It is also possible to run this service against an external Data Hub enrivonment (such as dev/staging). You don't need to have any other DH projects running to do this.
 
-```
-cp .env.example .env
-```
+1. Create a copy of the `.env` file if you haven't already done this (use the command from step 7 above)
+2. Set the `API_ROOT` variable to the correct URL for the environment you want to use (you can get this from the playbook or from the DH frontend's `.env` file if you run that project in this manner).
+3. Set the `API_CLIENT_HAWK_ACCESS_KEY_ID` and `API_CLIENT_HAWK_SECRET_ACCESS_KEY` with the correct values from Vault.
+4. Open the relevant frontend and follow steps 4-6 from the local API instructions to generate an order.
+5. Open the relevant Django Admin interface, navigate to your order and copy the public token.
+6. Start this project by running `npm run develop`. Paste the public token at the end of the URL (e.g. `localhost:3000/your_token`). You should now be able to interact with your order within the local frontend.
 
 ### Environment variables
 

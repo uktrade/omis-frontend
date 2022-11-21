@@ -1,5 +1,4 @@
-const moment = require('moment')
-const dateFns = require('date-fns')
+const { formatDate, getDifferenceInMonths } = require('../../src/app/lib/utils')
 const Case = require('case')
 const numeral = require('numeral')
 const {
@@ -54,29 +53,15 @@ const filters = {
   },
 
   formatDate: (value, format = formats.dateLong) => {
-    if (!value) {
-      return value
-    }
-    const parsedDate = dateFns.parse(value)
-
-    if (!dateFns.isValid(parsedDate)) { return value }
-    return dateFns.format(parsedDate, format)
+    return formatDate(value, format)
   },
 
   formatDateTime: (value, format = formats.dateTimeLong) => {
-    if (!value) {
-      return value
-    }
-
-    const parsedDate = dateFns.parse(value)
-
-    if (!dateFns.isValid(parsedDate)) { return value }
-
-    return dateFns.format(parsedDate, format)
+    return formatDate(value, format)
   },
 
-  fromNow: (value, removeSuffix = false) => {
-    return moment(value).fromNow(removeSuffix)
+  fromNow: (value) => {
+    return getDifferenceInMonths(value)
   },
 
   removeNilAndEmpty: (collection) => {
