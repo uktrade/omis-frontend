@@ -15,7 +15,7 @@ const formatDate = (date, dateFormat) => {
 }
 
 const getDifferenceInMonths = (date) => {
-    const parsedDate = parseDate(value)
+    const parsedDate = parseDate(date)
     const difference = differenceInMonths(parsedDate, new Date()) + 1
     return Math.abs(difference) === 1 ? 'in a month' : 'in ' + difference + ' months'
 }
