@@ -24,11 +24,6 @@
     "type": "git",
     "url": "git+https://github.com/uktrade/omis-frontend.git"
   },
-  "contributors": [
-    "Dom Smith <dom@teneightfive.com> (http://github.com/teneightfive)",
-    "Graham Veal (https://github.com/web-bert)",
-    "Zac Tolley <zac@thetolleys.com> (https://github.com/ztolley)"
-  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/uktrade/omis-frontend/issues"
@@ -98,8 +93,6 @@
     "proxyquire": "^2.0.1"
   },
   "overrides": {
-    "semver-regex": "3.1.4",
-    "trim-newlines": "3.0.1",
-    "glob-parent": "5.1.2"
+    "semver-regex": "3.1.4"
   }
 }
