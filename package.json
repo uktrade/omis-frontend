@@ -37,7 +37,7 @@
     "axios": "^1.2.1",
     "babel-loader": "^9.1.0",
     "body-parser": "^1.18.3",
-    "browser-sync": "^2.27.10",
+    "browser-sync": "^2.27.11",
     "browser-sync-webpack-plugin": "^2.3.0",
     "case": "^1.5.5",
     "client-sessions": "^0.8.0",
