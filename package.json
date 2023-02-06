@@ -95,6 +95,7 @@
   "overrides": {
     "semver-regex": "3.1.4",
     "qs": "6.2.4",
-    "ua-parser-js": "1.0.33"
+    "ua-parser-js": "1.0.33",
+    "http-cache-semantics": "4.1.1"
   }
 }
