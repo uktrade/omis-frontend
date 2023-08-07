@@ -10,7 +10,7 @@ number of settings, and be provided with an API service.
 
 ## Dependencies
 
-- [Node.js v18.15.0](https://nodejs.org/en/)
+- [Node.js v20.4.0](https://nodejs.org/en/)
 
 ## Installation
 
@@ -23,7 +23,7 @@ number of settings, and be provided with an API service.
 2. Install node dependencies:
 
   ```
-  nvm use 18.15.0
+  nvm use 20.4.0
   ```
 
   ```
