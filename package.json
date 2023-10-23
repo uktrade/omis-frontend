@@ -73,7 +73,7 @@
     "style-loader": "^3.3.3",
     "webpack-assets-manifest": "^5.1.0",
     "webpack-cli": "^5.1.4",
-    "webpack-merge": "^5.9.0",
+    "webpack-merge": "^5.10.0",
     "winston": "^3.11.0"
   },
   "devDependencies": {
