@@ -89,7 +89,7 @@
     "jasmine": "^5.1.0",
     "jasmine-core": "^5.1.1",
     "nock": "^13.3.8",
-    "nodemon": "^3.0.1",
+    "nodemon": "^3.0.2",
     "proxyquire": "^2.0.1"
   },
   "overrides": {
