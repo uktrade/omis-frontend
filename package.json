@@ -47,7 +47,7 @@
     "csurf": "^1.9.0",
     "date-fns": "^3.0.6",
     "del-cli": "^5.1.0",
-    "dotenv": "^16.3.1",
+    "dotenv": "^16.4.1",
     "express": "^4.16.3",
     "express-session": "^1.15.6",
     "express-sslify": "^1.2.0",
@@ -77,7 +77,7 @@
     "winston": "^3.11.0"
   },
   "devDependencies": {
-    "@babel/eslint-parser": "^7.23.3",
+    "@babel/eslint-parser": "^7.23.9",
     "chai": "^4.3.10",
     "chai-as-promised": "^7.1.1",
     "chai-subset": "^1.6.0",
@@ -88,7 +88,7 @@
     "eslint-plugin-promise": "^6.1.1",
     "jasmine": "^5.1.0",
     "jasmine-core": "^5.1.1",
-    "nock": "^13.5.0",
+    "nock": "^13.5.1",
     "nodemon": "^3.0.3",
     "proxyquire": "^2.0.1"
   },
