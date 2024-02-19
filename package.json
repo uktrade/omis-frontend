@@ -88,7 +88,7 @@
     "eslint-plugin-promise": "^6.1.1",
     "jasmine": "^5.1.0",
     "jasmine-core": "^5.1.1",
-    "nock": "^13.5.0",
+    "nock": "^13.5.3",
     "nodemon": "^3.0.2",
     "proxyquire": "^2.0.1"
   },
