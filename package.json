@@ -66,7 +66,7 @@
     "postcss-loader": "^8.1.0",
     "raven": "^2.6.2",
     "resolve-url-loader": "^5.0.0",
-    "sass": "^1.69.7",
+    "sass": "^1.71.0",
     "sass-loader": "^14.1.0",
     "serve-favicon": "^2.5.0",
     "style-loader": "^3.3.4",
@@ -87,7 +87,7 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^6.1.1",
     "jasmine": "^5.1.0",
-    "jasmine-core": "^5.1.1",
+    "jasmine-core": "^5.1.2",
     "nock": "^13.5.3",
     "nodemon": "^3.0.2",
     "proxyquire": "^2.0.1"
