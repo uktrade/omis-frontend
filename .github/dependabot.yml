@@ -12,5 +12,5 @@ updates:
     open-pull-requests-limit: 10
     ignore:
     - dependency-name: date-fns 
-    versions:
-      - "> 2.3.0"
+      versions:
+        - "> 2.3.0"
