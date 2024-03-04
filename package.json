@@ -70,7 +70,7 @@
     "sass-loader": "^14.1.0",
     "serve-favicon": "^2.5.0",
     "style-loader": "^3.3.4",
-    "webpack": "^5.90.2",
+    "webpack": "^5.90.3",
     "webpack-assets-manifest": "^5.2.1",
     "webpack-cli": "^5.1.4",
     "webpack-merge": "^5.10.0",
