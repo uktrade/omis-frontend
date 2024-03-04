@@ -67,7 +67,7 @@
     "raven": "^2.6.2",
     "resolve-url-loader": "^5.0.0",
     "sass": "^1.71.1",
-    "sass-loader": "^14.1.0",
+    "sass-loader": "^14.1.1",
     "serve-favicon": "^2.5.0",
     "style-loader": "^3.3.4",
     "webpack": "^5.90.3",
