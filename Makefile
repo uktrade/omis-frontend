@@ -1,12 +1,6 @@
 SHELL = /bin/bash
 
-CURRENT_UID := $(shell id -u)
-CURRENT_GID := $(shell id -g)
-
-export CURRENT_UID
-export CURRENT_GID
-
-docker-e2e = docker-compose -p omis-frontend -f docker-compose.yml
+docker-e2e = docker-compose -p omis -f docker-compose.yml
 
 ifdef CI
 	start-command = up --build --force-recreate -d
@@ -21,6 +15,7 @@ endif
 start-e2e:
 	@echo "*** To stop this stack run 'make stop-e2e' ***"
 	$(docker-e2e) $(start-command)
+	$(docker-e2e) $(log-command)
 
 stop-e2e:
 	docker-compose down -v --remove-orphans
