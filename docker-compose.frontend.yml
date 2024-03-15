@@ -1,0 +1,15 @@
+version: "3"
+services:
+  frontend:
+    platform: linux/amd64
+    build:
+      context: .
+    volumes:
+      - ./:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - 4000:4000
+    env_file: .env
+    environment:
+      API_ROOT: ${API_ROOT}
+    command: npm run develop
