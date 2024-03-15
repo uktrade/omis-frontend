@@ -16,31 +16,31 @@ number of settings, and be provided with an API service.
 
 1. Clone repository:
 
-  ```
-  git clone https://github.com/uktrade/omis-frontend
-  ```
+```
+git clone https://github.com/uktrade/omis-frontend
+```
 
 2. Install node dependencies:
 
-  ```
-  nvm use 20.4.0
-  ```
+```
+nvm use 20.4.0
+```
 
-  ```
-  npm install
-  ```
+```
+npm install
+```
 
 3. Build assets
 
-  ```
-  npm run build
-  ```
+```
+npm run build
+```
 
 4. Run application
 
-  ```
-  npm start
-  ```
+```
+npm start
+```
 
 ## Development
 
@@ -97,14 +97,18 @@ It is possible to run the service against a local instance of the Data Hub API f
 5. Click on 'Preview quote' and complete the fields that show as incomplete (helpfully it won't tell you about any of the items from Step 3 being missing so that needs to be done first).
 6. When all fields are filled in, click 'Preview quote' again, scroll down to the bottom of the page and click 'Send quote to client'.
 7. Create a copy of this project's `.env` file if you haven't already done this
+
 ```
 cp .env.sample .env
 ```
+
 8. Open this project's `.env` file and make the following changes:
-  - `API_ROOT` should be set to `http://localhost:8000`
-  - `API_CLIENT_HAWK_ACCESS_KEY_ID` should be set to the same value as `OMIS_PUBLIC_ACCESS_KEY_ID` in the API
-  - `API_CLIENT_HAWK_SECRET_ACCESS_KEY` should be set to the same value as `OMIS_PUBLIC_SECRET_ACCESS_KEY` in the API
-  - `SERVER_PORT` should be set to `4000` (this is because the API expects the OMIS service to be running on this port)
+
+- `API_ROOT` should be set to `http://localhost:8000`
+- `API_CLIENT_HAWK_ACCESS_KEY_ID` should be set to the same value as `OMIS_PUBLIC_ACCESS_KEY_ID` in the API
+- `API_CLIENT_HAWK_SECRET_ACCESS_KEY` should be set to the same value as `OMIS_PUBLIC_SECRET_ACCESS_KEY` in the API
+- `SERVER_PORT` should be set to `4000` (this is because the API expects the OMIS service to be running on this port)
+
 9. Start this project with `npm run develop`. Note that the console will tell you that the service is running on port 3000 when it's actually running on 4000.
 10. Open up the API admin screen and navigate to the `Orders` interface. Open the order created in step 2 and click on the `Public facing URL`, which will open the order within this microservice.
 
@@ -119,28 +123,41 @@ It is also possible to run this service against an external Data Hub enrivonment
 5. Open the relevant Django Admin interface, navigate to your order and copy the public token.
 6. Start this project by running `npm run develop`. Paste the public token at the end of the URL (e.g. `localhost:3000/your_token`). You should now be able to interact with your order within the local frontend.
 
+### Running in Docker
+
+Prerequisite: Ensure `data-hub-api` is sitting in the same directory as `omis-frontend`
+Open this project's `.env` file and make the following changes:
+
+- `API_ROOT` should be set to `http://docker.for.mac.localhost:8000`
+
+#### Bring up the Dev environment
+
+    make start-dev          // bring up the containers
+    make stop-dev           // stop and remove the containers
+
+Once the containers are up, go into the django admin: `http://localhost:8000` and go the orders list. Click on an order and click the public facing url. This should take you to the Omis order in the browser.
+
 ### Environment variables
 
 Environment variables are used to set application level settings for each
 environment.
 
-| Variable | Description | Default |
-|:---------|:------------|:--------|
-| `NODE_ENV` | Node environment | development |
-| `SERVER_HOST` | server hostname | localhost |
-| `SERVER_PORT` or `PORT` | server port | 3000 |
-| `SERVER_WORKERS` or `WEB_CONCURRENCY` | number of workers | dependant on CPU |
-| `CACHE_VIEWS` | whether to cache Nunjucks views | false |
-| `SESSION_SECRET` | secret used by session store | |
-| `SESSION_TTL` | session expiration | 2 hours |
-| `LOG_LEVEL` | level of logs to output to console | warn |
-| `API_ROOT` | root for API | http://localhost:8000 |
-| `API_CLIENT_HAWK_ACCESS_KEY_ID` | hawk client access key id | |
-| `API_CLIENT_HAWK_SECRET_ACCESS_KEY` | hawk client secret access key | |
-| `SENTRY_DSN` | sentry data source name | |
-| `GOOGLE_TAG_MANAGER_KEY` | key for Google Tag Manager | |
-| `GOOGLE_TAG_MANAGER_SUFFIX` | value to append to Google Tag Manager key | |
-
+| Variable                              | Description                               | Default               |
+| :------------------------------------ | :---------------------------------------- | :-------------------- |
+| `NODE_ENV`                            | Node environment                          | development           |
+| `SERVER_HOST`                         | server hostname                           | localhost             |
+| `SERVER_PORT` or `PORT`               | server port                               | 3000                  |
+| `SERVER_WORKERS` or `WEB_CONCURRENCY` | number of workers                         | dependant on CPU      |
+| `CACHE_VIEWS`                         | whether to cache Nunjucks views           | false                 |
+| `SESSION_SECRET`                      | secret used by session store              |                       |
+| `SESSION_TTL`                         | session expiration                        | 2 hours               |
+| `LOG_LEVEL`                           | level of logs to output to console        | warn                  |
+| `API_ROOT`                            | root for API                              | http://localhost:8000 |
+| `API_CLIENT_HAWK_ACCESS_KEY_ID`       | hawk client access key id                 |                       |
+| `API_CLIENT_HAWK_SECRET_ACCESS_KEY`   | hawk client secret access key             |                       |
+| `SENTRY_DSN`                          | sentry data source name                   |                       |
+| `GOOGLE_TAG_MANAGER_KEY`              | key for Google Tag Manager                |                       |
+| `GOOGLE_TAG_MANAGER_SUFFIX`           | value to append to Google Tag Manager key |                       |
 
 ### Testing
 
@@ -152,7 +169,14 @@ To run unit tests:
 
 ```
 npm run test:unit
+
 ```
+
+#### Start the E2E tests - ACTUAL RUNNING OF THESE TESTS YET TO BE IMPLEMENTED
+
+    make start-e2e          // bring up the containers
+    make e2e-tests          // run the tests inside the container
+    make stop-e2e           // stop and remove the containers
 
 ### Continuous integration
 
