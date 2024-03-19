@@ -54,3 +54,34 @@ jobs:
             API_CLIENT_HAWK_ACCESS_KEY_ID: access-key-id
             API_CLIENT_HAWK_SECRET_ACCESS_KEY: secret-access-key
           when: always
+
+commands:
+  run_make:
+    description: Run makefile target with some setup
+    parameters:
+      label:
+        type: string
+        default: Execute make << parameters.target >>
+      target:
+        type: string
+    steps:
+      - run:
+          name: Copy config
+          commmand: cp sample.env .env
+      - run:
+          name: << parameters.label >>
+          command: make << parameters.target >>
+          environment:
+            API_CLIENT_HAWK_ACCESS_KEY_ID: access-key-id
+            API_CLIENT_HAWK_SECRET_ACCESS_KEY: secret-access-key
+    store_cypress_artifacts:
+      description: Store Cypress artifacts like screenshots and videos
+      steps:
+        - store_test_results:
+            path: cypress-coverage
+        - store_artifacts:
+            path: cypress-coverage
+        - store_artifacts:
+            path: cypress/screenshots
+        - store_artifacts:
+            path: cypress/videos
