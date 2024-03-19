@@ -4,6 +4,19 @@
 #
 version: 2
 jobs:
+  e2e_tests:
+    machine:
+      image: ubuntu-2004:2024.01.1
+      docker_layer_caching: true
+    parallelism: true
+    resource_class: xlarge
+    steps:
+      - checkout
+      - run_make:
+          label: Run e2e tests
+          target: start-e2e e2e-tests
+      - store_cypress_artifacts
+
   build:
     docker:
       # specify the version you desire here
@@ -22,9 +35,9 @@ jobs:
       # Download and cache dependencies
       - restore_cache:
           keys:
-          - v1-dependencies-{{ checksum "package-lock.json" }}
-          # fallback to using the latest cache if no exact match is found
-          - v1-dependencies-
+            - v1-dependencies-{{ checksum "package-lock.json" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
 
       - run: npm install
 
@@ -41,4 +54,3 @@ jobs:
             API_CLIENT_HAWK_ACCESS_KEY_ID: access-key-id
             API_CLIENT_HAWK_SECRET_ACCESS_KEY: secret-access-key
           when: always
-
