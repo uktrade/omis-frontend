@@ -3,6 +3,8 @@ SHELL = /bin/bash
 docker-e2e = docker-compose -p omis -f docker-compose.frontend.yml -f docker-compose.backend.yml
 docker-dev = COMPOSE_HTTP_TIMEOUT=300 docker-compose -p omis -f docker-compose.frontend.yml
 
+wait-for-frontend = dockerize -wait tcp://localhost:4000/healthcheck -time out 5m -wait-retry-interval 5s
+
 ifdef CI
 	start-command = up --build --force-recreate -d
 	cypress-args = -- --parallel --record --key $(CYPRESS_DASHBOARD_KEY) --ci-build-id $(CIRCLE_BUILD_NUM)
@@ -28,3 +30,7 @@ stop-e2e:
 stop-dev:
 	$(MAKE) -C ../data-hub-api stop-dev
 	$(docker-dev) down -v --remove-orphans
+
+e2e-tests:
+	@echo "*** Requires the e2e stack, it can be started with 'make start-e2e' ***"
+	$(docker-e2e) exec frontend bash -c '$(wait-for-frontend) && npm run test:e2e $(cypress-args)'
