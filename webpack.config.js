@@ -1,7 +1,7 @@
 const path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const WebpackAssetsManifest = require("webpack-assets-manifest");
-const BrowserSyncPlugin = require("browser-sync-webpack-plugin");
+const BrowserSyncPlugin = require("browser-sync-v3-webpack-plugin");
 const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
 
 const config = require("./config");
