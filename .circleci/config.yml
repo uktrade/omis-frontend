@@ -2,7 +2,7 @@
 #
 # Check https://circleci.com/docs/2.0/language-javascript/ for more details
 #
-version: 2
+version: 2.1
 jobs:
   e2e_tests:
     machine:
@@ -16,7 +16,6 @@ jobs:
           label: Run e2e tests
           target: start-e2e e2e-tests
       - store_cypress_artifacts
-
   build:
     docker:
       # specify the version you desire here
@@ -67,30 +66,28 @@ commands:
     steps:
       - run:
           name: Copy config
-          commmand: cp sample.env .env
+          command: cp .env.sample .env
       - run:
           name: << parameters.label >>
           command: make << parameters.target >>
           environment:
             API_CLIENT_HAWK_ACCESS_KEY_ID: access-key-id
             API_CLIENT_HAWK_SECRET_ACCESS_KEY: secret-access-key
-    store_cypress_artifacts:
-      description: Store Cypress artifacts like screenshots and videos
-      steps:
-        - store_test_results:
-            path: cypress-coverage
-        - store_artifacts:
-            path: cypress-coverage
-        - store_artifacts:
-            path: cypress/screenshots
-        - store_artifacts:
-            path: cypress/videos
+  store_cypress_artifacts:
+    description: Store Cypress artifacts like screenshots and videos
+    steps:
+      - store_test_results:
+          path: cypress-coverage
+      - store_artifacts:
+          path: cypress-coverage
+      - store_artifacts:
+          path: cypress/screenshots
+      - store_artifacts:
+          path: cypress/videos
 
-worklows:
+workflows:
   version: 2
-  omis:
+  workflow:
     jobs:
-      - e2e_tests:
-          name: e2e_tests
-      - build:
-          name: build
+      - e2e_tests
+      - build
