@@ -85,3 +85,12 @@ commands:
             path: cypress/screenshots
         - store_artifacts:
             path: cypress/videos
+
+worklows:
+  version: 2
+  omis:
+    jobs:
+      - e2e_tests:
+          name: e2e_tests
+      - build:
+          name: build
