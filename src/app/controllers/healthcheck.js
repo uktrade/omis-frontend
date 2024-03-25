@@ -5,7 +5,7 @@ const logger = require('../lib/logger')
 const serviceDependencies = [
   {
     name: 'leeloo',
-    healthCheck: () => axios.get(`${api.root}/ping.xml`),
+    healthCheck: () => axios.get(`${api.root}/pingdom/ping.xml`),
   },
 ]
 
