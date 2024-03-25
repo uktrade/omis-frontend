@@ -7,7 +7,7 @@ const { renderPingdomXml } = require('../controllers/healthcheck')
 const { fetchOrderDetails } = require('../middleware/order')
 
 // NOTE: ping has to be defined before the auth token middleware
-router.get('/ping.xml', renderPingdomXml)
+router.get('/pingdom/ping.xml', renderPingdomXml)
 router.get('/cookies', renderCookies)
 router.get('/', indexController)
 
