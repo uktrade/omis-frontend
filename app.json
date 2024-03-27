@@ -6,15 +6,6 @@
     "SESSION_SECRET": {
       "generator": "secret"
     },
-    "API_CLIENT_ID": {
-      "required": true
-    },
-    "API_CLIENT_SCOPE": {
-      "required": true
-    },
-    "API_CLIENT_SECRET": {
-      "required": true
-    },
     "API_ROOT": {
       "required": true
     }
