@@ -1,5 +1,11 @@
 SHELL = /bin/bash
 
+CURRENT_UID := $(shell id -u)
+CURRENT_GID := $(shell id -g)
+
+export CURRENT_UID
+export CURRENT_GID
+
 docker-e2e = docker-compose -p omis -f docker-compose.frontend.yml -f docker-compose.backend.yml
 docker-dev = COMPOSE_HTTP_TIMEOUT=300 docker-compose -p omis -f docker-compose.frontend.yml
 
@@ -21,7 +27,7 @@ start-e2e:
 	$(docker-e2e) $(log-command) &
 start-dev:
 	@echo "*** To stop this stack, run 'make stop-dev' ***"
-	@echo "*** IMPORTANT This will now use ../data-hub-api/.env for 'api' and 'rq'services ***"
+	@echo "*** IMPORTANT: This will now use ../data-hub-api/.env for 'api' and 'rq'services ***"
 	$(MAKE) -C ../data-hub-api start-dev
 	$(docker-dev) $(start-command)
 
@@ -32,5 +38,6 @@ stop-dev:
 	$(docker-dev) down -v --remove-orphans
 
 e2e-tests:
+	@echo "*** IMPORTANT: Used for running e2e tests in Circle CI, errors when running tests locally ***"
 	@echo "*** Requires the e2e stack, it can be started with 'make start-e2e' ***"
 	$(docker-e2e) exec frontend bash -c '$(wait-for-frontend) && npm run test:e2e $(cypress-args)'
