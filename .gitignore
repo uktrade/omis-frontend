@@ -2,3 +2,22 @@
 .build/
 node_modules
 babel_cache
+
+# Tests
+.nyc_output
+coverage
+cypress-coverage
+test-results.xml
+selenium-debug.log
+selenium-server.log
+test/acceptance/screenshots/
+cucumber
+seleniumLogs
+test/functional/cypress/screenshots
+cypress/**
+visual-screenshots/comparison
+visual-screenshots/diff
+visual-report
+cypress-visual-report
+cypress-visual-screenshots/comparison
+cypress-visual-screenshots/diff

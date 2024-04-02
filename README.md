@@ -132,7 +132,7 @@ Open this project's `.env` file and make the following changes:
 
 #### Bring up the Dev environment
 
-    make start-dev          // bring up the containers
+    make start-dev          // bring up the omis frontend and api in docker
     make stop-dev           // stop and remove the containers
 
 Once the containers are up, go into the django admin: `http://localhost:8000` and go the orders list. Click on an order and click the public facing url. This should take you to the Omis order in the browser.
@@ -172,11 +172,22 @@ npm run test:unit
 
 ```
 
-#### Start the E2E tests - ACTUAL RUNNING OF THESE TESTS YET TO BE IMPLEMENTED
+#### E2E tests
 
-    make start-e2e          // bring up the containers
-    make e2e-tests          // run the tests inside the container
-    make stop-e2e           // stop and remove the containers
+Tests can be run against the service running locally or when the service is running in Docker
+
+To run them locally:
+
+1. Make sure the api is running, in the api project run `docker-compose up`
+2. In the .env file make sure `API_ROOT=http://localhost:8000`
+3. Start the omis frontend locally, `npm run develop`
+4. Run the tests in the command line with `npm run test:e2e`, or run them in the browser with `npm run test:e2e:watch`
+
+To run them in docker:
+
+1. In the .env file make sure `API_ROOT=http://docker.for.mac.localhost:8000`
+2. Start the api and omis frontend in docker, `make start-dev`
+3. Run the tests in the command line with `npm run test:e2e`, or run them in the browser with `npm run test:e2e:watch`
 
 ### Continuous integration
 

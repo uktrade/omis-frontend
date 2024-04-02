@@ -23,6 +23,8 @@ services:
       ACTIVITY_STREAM_INCOMING_ACCESS_KEY_ID: some-id
       ACTIVITY_STREAM_SECRET_ACCESS_KEY: some-secret
       ACTIVITY_STREAM_INCOMING_SECRET_ACCESS_KEY: some-secret
+      OMIS_PUBLIC_ACCESS_KEY_ID: access-key-id
+      OMIS_PUBLIC_SECRET_ACCESS_KEY: secret-access-key
     ports:
       - 8000:8000
     depends_on:
