@@ -45,7 +45,7 @@
     "client-sessions": "^0.8.0",
     "compression": "^1.7.2",
     "cookie-parser": "^1.4.3",
-    "css-loader": "^7.0.0",
+    "css-loader": "^7.1.1",
     "csurf": "^1.9.0",
     "date-fns": "^2.3.0",
     "del-cli": "^5.1.0",
