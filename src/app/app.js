@@ -23,14 +23,14 @@ function startApp () {
     messages.push(`App running in ${env} mode, workers: ${config.server.workers}`)
     messages.push(`Listening at http://${serverConfig.host}:${serverConfig.port}`)
 
-    logger.info(messages.join('   '))
+    logger.info(messages.join('   '), { eventType: logger.eventTypes.expressStartup,})
   })
 }
 
 if (isClustered) {
   // if this is the master then create the workers
   if (cluster.isMaster) {
-    logger.info('Runing in cluster mode.')
+    logger.info('Runing in cluster mode.', { eventType: logger.eventTypes.expressStartup,})
     for (let i = 0; i < numberOfWorkers; i++) {
       cluster.fork()
     }
@@ -39,6 +39,6 @@ if (isClustered) {
     startApp()
   }
 } else {
-  logger.info('Not running in cluster mode.')
+  logger.info('Not running in cluster mode.', { eventType: logger.eventTypes.expressStartup,})
   startApp()
 }
