@@ -58,9 +58,8 @@ describe('Logger transport check', () => {
     describe('In production environment', () => {
         beforeEach(() => {
             process.env.LOG_LEVEL = 'info'
-            // To Fix: Flakey test, the preserve cache doesn't seem to work or the loading of the config fails. 
             proxyquire.noPreserveCache()
-            sinon.stub(config, 'isProd').value('true')
+            sinon.stub(config, 'isProd').value(true)
             this.logger = proxyquire('../../../../app/lib/logger', {})
         })
         
@@ -95,6 +94,7 @@ describe('Logger transport check', () => {
     describe('In non production environments', () => {
         beforeEach(() => {
             proxyquire.noPreserveCache()
+            sinon.stub(config, 'isProd').value(false)
             this.logger = proxyquire('../../../../app/lib/logger', {})
             this.logger.silent = false
         })
