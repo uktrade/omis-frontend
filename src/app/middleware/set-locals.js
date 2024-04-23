@@ -5,7 +5,9 @@ let webpackManifest = {}
 try {
   webpackManifest = require(`${config.buildDir}/manifest.json`)
 } catch (err) {
-  logger.error('Manifest file is not found. Ensure assets are built.')
+  logger.error('Manifest file is not found. Ensure assets are built.', {
+    eventType: logger.eventTypes.expressStartup,
+  })
 }
 
 module.exports = function setLocals (req, res, next) {
