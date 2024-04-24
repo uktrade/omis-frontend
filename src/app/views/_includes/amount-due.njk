@@ -16,7 +16,7 @@
 
 {% call Message({ type: 'muted', element: 'div' }) %}
   Amount to pay:
-  <span class="u-block font-large">
+  <span data-test="payment-amount" class="u-block font-large">
     {{ costText | safe }}
   </span>
 {% endcall %}

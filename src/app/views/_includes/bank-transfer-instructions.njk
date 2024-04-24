@@ -1,17 +1,17 @@
-<p>Please make your payment in sterling for <strong>{{ order.total_cost | formatCurrency }}</strong> to Department for Business & Trade’s bank account at National Westminster Bank.</p>
+<p data-test="transfer-heading">Please make your payment in sterling for <strong>{{ order.total_cost | formatCurrency }}</strong> to Department for Business & Trade’s bank account at National Westminster Bank.</p>
 
 <p>
-  <strong>Account Name:</strong> DBT OMIS Service<br>
-  <strong>Account Number:</strong> 10014187<br>
-  <strong>Sort Code:</strong> 60-70-80<br>
-  <strong>Reference:</strong> {{ order.reference }}
+  <span data-test="account-name"><strong>Account Name:</strong> DBT OMIS Service<br></span>
+  <span data-test="account-number"><strong>Account Number:</strong> 10014187<br></span>
+  <span data-test="sort-code"><strong>Sort Code:</strong> 60-70-80<br></span>
+  <span data-test="reference"><strong>Reference:</strong> {{ order.reference }}</span>
 </p>
 
 <p>For international payments you may also need SWIFT and IBAN.</p>
 
 <p>
-  <strong>SWIFT:</strong> NWBKGB2L<br>
-  <strong>IBAN:</strong> GB57NWBK60708010014187
+  <span data-test="swift"><strong>SWIFT:</strong> NWBKGB2L<br></span>
+  <span data-test="iban"><strong>IBAN:</strong> GB57NWBK60708010014187</span>
 </p>
 
 <p>You agree to pay any bank charges incurred with this transaction.</p>
