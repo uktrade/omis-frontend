@@ -63,9 +63,8 @@ describe("payment spec", () => {
     );
 
     // Assert invoice link takes you to the invoice page.
-    cy.get('[data-test="invoice-link"]')
-      .click()
+    cy.get('[data-test="invoice-link"]').click();
 
-    cy.url().should('include', '/invoice')
+    cy.url().should("include", "/invoice");
   });
 });
