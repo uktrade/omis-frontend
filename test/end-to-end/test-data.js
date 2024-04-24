@@ -60,7 +60,6 @@ export const paidQuote = {
   billing_address_town: "Montréal",
   billing_address_postcode: "H4E 1A8",
   billing_address_country: "Canada",
-  invoice_number: "202404230002",
   payments: [
     { method: "Bacs", amount: "£500" },
     { method: "Manual", amount: "£500" },

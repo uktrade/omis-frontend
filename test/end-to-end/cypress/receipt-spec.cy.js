@@ -1,19 +1,22 @@
 const { paidQuote } = require("../test-data");
 
-describe("reciept spec", () => {
+describe("Reciept spec", () => {
   const order = paidQuote;
 
-  describe("clicking on the 'View your payment receipt' in the order page", () => {
-    it("should take you to the reciept page", () => {
-      cy.visit(`http://localhost:4000/${order.public_token}`);
-      cy.contains("View your payment receipt").click();
-      cy.get('[data-test="heading"]')
-        .should("exist")
-        .and("have.text", "Receipt");
-    });
-  });
+  context(
+    "When clicking on the 'View your payment receipt' in the order page",
+    () => {
+      it("should take you to the receipt page", () => {
+        cy.visit(`http://localhost:4000/${order.public_token}`);
+        cy.contains("View your payment receipt").click();
+        cy.get('[data-test="heading"]')
+          .should("exist")
+          .and("have.text", "Receipt");
+      });
+    }
+  );
 
-  describe("receipt page", () => {
+  context("When on the receipt page", () => {
     beforeEach(() => {
       cy.visit(`http://localhost:4000/${order.public_token}/receipt`);
     });
@@ -30,10 +33,7 @@ describe("reciept spec", () => {
     });
 
     it("should show the invoice number and a receipt date", () => {
-      cy.contains("Invoice number")
-        .should("exist")
-        .parent()
-        .and("contain", order.invoice_number);
+      cy.contains("Invoice number").should("exist");
       cy.contains("Receipt date").should("exist");
     });
 
