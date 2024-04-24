@@ -23,12 +23,12 @@
 
 {% block body_main_content %}
   <p class="local-header__back u-print-hide">
-    <a href="/{{ publicToken }}">View your order history</a>
+    <a href="/{{ publicToken }}" data-test='view-order-history-link'>View your order history</a>
   </p>
 
   <img src="{{ getAssetPath('images/dbt-invoice-logo.png') }}" width="200"><br>
 
-  <h1>{{ heading | default('Invoice') }}</h1>
+  <h1 data-test='heading'>{{ heading | default('Invoice') }}</h1>
 
   <div class="u-clearfix">
     <div class="u-float-left u-max-half">
