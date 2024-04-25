@@ -1,11 +1,11 @@
 {% extends '_layouts/omis-base.njk' %}
 
 {% block body_main_content %}
-  <h1>Cookies</h1>
+  <h1 data-test="header-cookies">Cookies</h1>
 
-  <p>GOV.UK puts small files (known as ‘cookies’) onto your computer to collect information about how you browse the site.</p>
+  <p data-test="paragraph-cookie-info">GOV.UK puts small files (known as ‘cookies’) onto your computer to collect information about how you browse the site.</p>
 
-  <p>Cookies are used to:</p>
+  <p data-test="paragraph-cookie-useage">Cookies are used to:</p>
 
   <ul>
     <li>measure how you use the website so it can be updated and improved based on your needs</li>
@@ -16,15 +16,15 @@
     <p>GOV.UK cookies aren’t used to identify you personally.</p>
   {% endcall %}
 
-  <p>You’ll normally see a message on the site before we store a cookie on your computer.</p>
+  <p data-test="paragraph-description">You’ll normally see a message on the site before we store a cookie on your computer.</p>
 
-  <p>Find out more about <a rel="external" href="https://ico.org.uk/for-the-public/online/cookies/">how to manage cookies</a>.</p>
+  <p>Find out more about <a data-test="cookies-link" rel="external" href="https://ico.org.uk/for-the-public/online/cookies/">how to manage cookies</a>.</p>
 
-  <h2>How cookies are used on GOV.UK</h2>
+  <h2 data-test="header-title-cookies">How cookies are used on GOV.UK</h2>
 
   <h3>Measuring website usage (Google Analytics)</h3>
 
-  <p>We use Google Analytics software to collect information about how you use GOV.UK. We do this to help make sure the site is meeting the needs of its users and to help us make improvements, for example <a rel="external" href="https://insidegovuk.blog.gov.uk/2015/03/26/new-tool-to-see-trending-searches/">improving site search</a>.</p>
+  <p>We use Google Analytics software to collect information about how you use GOV.UK. We do this to help make sure the site is meeting the needs of its users and to help us make improvements, for example <a rel="external" href="https://insidegovuk.blog.gov.uk/2015/03/26/new-tool-to-see-trending-searches/" data-test="google-analytics-link">improving site search</a>.</p>
 
   <p>Google Analytics stores information about:</p>
 
@@ -43,9 +43,9 @@
 
   <p>Google Analytics sets the following cookies:</p>
 
-  <h3>Universal Analytics</h3>
+  <h3 data-test="header-universal-analytics">Universal Analytics</h3>
 
-  <table>
+  <table data-test="table-universal-analytics">
     <thead>
       <tr>
         <th>Name</th>
@@ -74,7 +74,7 @@
 
   <h3>Google Analytics</h3>
 
-  <table>
+  <table data-test="table-google-analytics">
     <thead>
       <tr>
         <th>Name</th>
@@ -110,7 +110,7 @@
 
   <p>You may see a pop-up welcome message when you first visit GOV.UK. We’ll store a cookie so that your computer knows you’ve seen it and knows not to show it again.</p>
 
-  <table>
+  <table data-test="table-introductory-message">
     <thead>
       <tr>
         <th>Name</th>
@@ -131,7 +131,7 @@
 
   <p>If you choose to pay by credit or debit card we need to store a cookie for your payment session. The content of this is encrypted and never shared.</p>
 
-  <table>
+  <table data-test="table-pay-by-card">
     <thead>
       <tr>
         <th>Name</th>
