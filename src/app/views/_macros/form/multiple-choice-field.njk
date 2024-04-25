@@ -88,7 +88,7 @@
           {% if isSelected %}checked="checked"{% endif %}
           {% if props.hint %}aria-describedby="hint-{{ props.fieldId }}"{% endif %}
         >
-        <label class="c-multiple-choice__label" for="{{ props.fieldId }}-{{ loop.index }}">
+        <label data-test="{{ props.fieldId }}-{{ loop.index }}" class="c-multiple-choice__label" for="{{ props.fieldId }}-{{ loop.index }}">
           <span class="c-multiple-choice__label-text">{{ option.label }}</span>
           {% if option.hint %}
             <span class="c-multiple-choice__hint">{{ option.hint }}</span>
