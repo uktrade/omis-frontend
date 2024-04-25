@@ -5,27 +5,29 @@
 {% set creationDateValue = order.paid_on %}
 
 {% block invoice_payment_information %}
-  <h2 class="heading-medium">
+  <h2 class="heading-medium" data-test="payments-heading">
     Payment details
     {% if payments.length > 1 %}
-      ({{ payments.length }} {{ ' payment' | pluralise(payments.length) }})
+      <span>({{ payments.length }} payments)<span>
     {% endif %}
   </h2>
 
   {% for payment in payments %}
-    {% if payments.length > 1 %}
-      <h3 class="heading-small">Payment {{ loop.index }}</h3>
-    {% endif %}
+    <div data-test="payment-{{ loop.index }}">
+      {% if payments.length > 1 %}
+        <h3 class="heading-small">Payment {{ loop.index }}</h3>
+      {% endif %}
 
-    {{ MetaList({
-      items: [
-        { label: 'Method', value: payment.method | sentenceCase },
-        { label: 'Amount received', value: payment.amount | formatCurrency },
-        { label: 'Received on', value: payment.received_on, type: 'date' },
-        { label: 'Transaction reference', value: payment.transaction_reference }
-      ],
-      modifier: 'stacked',
-      itemModifier: 'stacked'
-    }) }}
+      {{ MetaList({
+        items: [
+          { label: 'Method', value: payment.method | sentenceCase },
+          { label: 'Amount received', value: payment.amount | formatCurrency },
+          { label: 'Received on', value: payment.received_on, type: 'date' },
+          { label: 'Transaction reference', value: payment.transaction_reference }
+        ],
+        modifier: 'stacked',
+        itemModifier: 'stacked'
+      }) }}
+    </div>
   {% endfor %}
 {% endblock %}
