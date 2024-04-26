@@ -39,7 +39,7 @@
     <ul class="list-unstyled">
       {% if invoice.invoice_company_name %}
         <li>
-          <a href="/{{ publicToken }}/invoice">View your invoice</a>
+          <a href="/{{ publicToken }}/invoice" data-test='view-invoice-link'>View your invoice</a>
         </li>
       {% endif %}
       {% if order.status in ['paid', 'complete'] %}
