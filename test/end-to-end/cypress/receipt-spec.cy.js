@@ -37,7 +37,7 @@ describe("Reciept spec", () => {
       cy.contains("Receipt date").should("exist");
     });
 
-    it("should show the invoice adderss and VAT number", () => {
+    it("should show the address that the receipt has been sent from and VAT number", () => {
       cy.contains("From").should("exist");
       cy.contains("VAT number").should("exist");
     });
@@ -46,7 +46,7 @@ describe("Reciept spec", () => {
       cy.get('[data-test="cost-table"]')
         .should("exist")
         .and("contain", order.reference)
-        .and("contain", `UK Government support in ${order.primaryMarket.name}`)
+        .and("contain", `UK Government support in ${order.primary_market.name}`)
         .and("contain", order.subtotal_cost);
     });
 
