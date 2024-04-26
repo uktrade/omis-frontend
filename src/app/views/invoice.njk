@@ -1,23 +1,23 @@
 {% extends '_layouts/invoice.njk' %}
 
 {% block invoice_payment_information %}
-  <h3>Payment terms</h3>
+  <h3 data-test="payment-terms">Payment terms</h3>
 
-  <p>Payable by {{ invoice.payment_due_date | formatDate }} ({{ invoice.payment_due_date | fromNow }}).</p>
+  <p data-test="due-date">Payable by {{ invoice.payment_due_date | formatDate }} ({{ invoice.payment_due_date | fromNow }}).</p>
 
-  <h3>How to pay by credit or debit card</h3>
+  <h3 data-test="pay-by-card">How to pay by credit or debit card</h3>
 
   <p>You can pay online using the government’s secure payment service.</p>
 
   <p>
-    <a href="/{{ publicToken }}/payment/card">Pay by credit or debit card</a>
+    <a href="/{{ publicToken }}/payment/card" data-test="pay-by-card-link">Pay by credit or debit card</a>
   </p>
 
-  <h3>How to pay by bank transfer</h3>
+  <h3 data-test="pay-by-bank-transfer">How to pay by bank transfer</h3>
 
   {% include '_includes/bank-transfer-instructions.njk' %}
 
-  <h3>In case of problems</h3>
+  <h3 data-test="if-problem">In case of problems</h3>
 
-  <p>Get in touch with your DBT contact or email <a href="mailto:omis.orders@digital.trade.gov.uk">omis.orders@digital.trade.gov.uk</a>.</p>
+  <p>Get in touch with your DBT contact or email <a href="mailto:omis.orders@digital.trade.gov.uk" data-test="email-link">omis.orders@digital.trade.gov.uk</a>.</p>
 {% endblock %}
