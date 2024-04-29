@@ -1,0 +1,61 @@
+# A base image with all operating system dependencies, but no Cypress or browsers.
+# See https://github.com/cypress-io/cypress-docker-images for more info.
+
+FROM cypress/base:20.11.1
+
+# Setting environment variables
+ENV CHROME_VERSION=121.0.6167.85-1
+ENV CHROME_DOWNLOAD_URL=https://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-stable/google-chrome-stable_${CHROME_VERSION}_amd64.deb
+ENV DOCKERIZE_VERSION v0.7.0
+ENV TZ Europe/London
+ENV TERM xterm
+ENV LANG C.UTF-8
+ENV NODE_ENV development
+ENV HOME=/home/node
+ENV PATH="$HOME/.local/bin:$PATH"
+ENV NODE_PATH="$HOME/.local/lib/node_modules:$NODE_PATH"
+ENV npm_config_prefix="$HOME/.local"
+ENV CYPRESS_CACHE_FOLDER="$HOME/.cache/Cypress"
+
+# Overwrite CI env variable which is set in the parent cypress/base image to avoid nodemon crashing
+ENV CI=false
+
+# Install dockerize
+RUN wget --quiet --https-only "https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz" \
+  && tar -C /usr/local/bin -xzvf "dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz" \
+  && rm "dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz"
+
+# Configure tzdata package in case it's not already
+RUN ln -snf "/usr/share/zoneinfo/$TZ" /etc/localtime \
+  && echo "$TZ" > /etc/timezone \
+  && echo "Timezone: $(date +%z)"
+
+# Install Google Chrome
+RUN wget --no-verbose -O /tmp/chrome.deb $CHROME_DOWNLOAD_URL \
+  && apt-get update \
+  && apt-get install -y /tmp/chrome.deb \
+  && rm /tmp/chrome.deb \
+  && apt-get clean \
+  && rm -rf /var/lib/apt/lists/*
+
+# Prepare node user environment
+RUN mkdir -p "$HOME" /usr/src/app \
+  && chown -R node: "$HOME" /usr/src/app \
+  && chmod -R 775 /usr/src/app
+
+# Switch to non-root user for subsequent commands
+USER node
+
+# Copying package files with correct ownership
+COPY --chown=node:node package*.json "$HOME/"
+
+# Set the working directory to the app directory, as this is where most subsequent commands will execute
+WORKDIR $HOME
+
+# Install specific version of cypress
+RUN npm install -g cypress@13.8.1 \
+  && npx cypress verify \
+  && npx cypress cache path \
+  && npx cypress cache list \
+  && npx cypress info \
+  && npx cypress version
