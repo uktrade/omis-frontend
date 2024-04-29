@@ -1,11 +1,11 @@
-<p>
+<p data-test="pay-invoice-text">
   You will need to pay
-  <a href="/{{ publicToken }}/invoice" data-test='invoice-link'>the invoice</a>
+  <a href="/{{ publicToken }}/invoice" data-test="invoice-link">the invoice</a>
   by {{ invoice.payment_due_date | formatDate }} ({{ invoice.payment_due_date | fromNow(invoice.overdue) }}{{ ' overdue' if invoice.overdue }}).
 </p>
 
 <p>
-  <a href="/{{ publicToken }}/payment" class="button">
+  <a href="/{{ publicToken }}/payment" class="button" data-test="payment-options-button">
     View payment options
   </a>
 </p>

@@ -40,7 +40,7 @@
       <header class="local-header">
         {% if not hideReturnLink %}
           <p class="local-header__back u-print-hide">
-            <a href="/{{ publicToken }}">View your order history</a>
+            <a href="/{{ publicToken }}" data-test="order-history-link">View your order history</a>
           </p>
         {% endif %}
 
@@ -49,7 +49,7 @@
         {% endif %}
 
         {% if subHeading %}
-          <p class="local-header__subheading">{{ subHeading }}</p>
+          <p class="local-header__subheading" data-test="subheading">{{ subHeading }}</p>
         {% endif %}
       </header>
     {% endif %}

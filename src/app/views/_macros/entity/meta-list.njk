@@ -10,7 +10,7 @@
   {% set modifier = props.modifier | concat('') | reverse | join(' c-meta-list--') if props.modifier %}
 
   {% if props.items | length %}
-    <div class="c-meta-list {{ modifier }}">
+    <div class="c-meta-list {{ modifier }}" data-test="metalist-{{props.dataTest}}">
       {% for metaItem in props.items %}
         {{ MetaItem(metaItem | assign({ highlightTerm: props.highlightTerm, modifier: metaItem.modifier or props.itemModifier })) }}
       {% endfor %}
