@@ -13,38 +13,38 @@
     {% include '_includes/messages/order-paid.njk' %}
   {% endif %}
 
-  <h2>Your actions</h2>
+  <h2 data-test="actions-heading">Your actions</h2>
 
   {% if not quote.accepted_on and not (quote.expired or quote.cancelled_on) %}
-    <p>Please review and accept your quote so that we can start delivering the work.</p>
+    <p data-test="accept-quote-text">Please review and accept your quote so that we can start delivering the work.</p>
 
     <p>
-      <a href="/{{ publicToken }}/quote" class="button">
+      <a href="/{{ publicToken }}/quote" class="button" data-test="review-your-quote-button">
         Review your quote
       </a>
     </p>
   {% elif order.status === 'quote_accepted' %}
-    <p>You must pay for your order to receive the work.</p>
+    <p data-test="must-pay-text">You must pay for your order to receive the work.</p>
 
     {% include '_includes/payment-instructions.njk' %}
   {% else %}
-    <p>You have no actions for this order.</p>
+    <p data-test="no-actions-text">You have no actions for this order.</p>
   {% endif %}
 
   {% if invoice %}
-    <h3>Your invoice</h3>
+    <h3 data-test="invoice-heading">Your invoice</h3>
 
     {% include '_includes/meta-lists/invoice.njk' %}
 
     <ul class="list-unstyled">
       {% if invoice.invoice_company_name %}
         <li>
-          <a href="/{{ publicToken }}/invoice" data-test='view-invoice-link'>View your invoice</a>
+          <a href="/{{ publicToken }}/invoice" data-test="view-invoice-link">View your invoice</a>
         </li>
       {% endif %}
       {% if order.status in ['paid', 'complete'] %}
         <li>
-          <a href="/{{ publicToken }}/receipt">View your payment receipt</a>
+          <a href="/{{ publicToken }}/receipt" data-test="receipt-link">View your payment receipt</a>
         </li>
       {% endif %}
     </ul>
@@ -54,14 +54,14 @@
     {% endif %}
   {% endif %}
 
-  <h3>Your quote</h3>
+  <h3 data-test="your-quote-heading">Your quote</h3>
 
   {% include '_includes/meta-lists/quote.njk' %}
 
   {% if quote.accepted_on or quote.expired or quote.cancelled_on %}
     <ul class="list-unstyled">
       <li>
-        <a href="/{{ publicToken }}/quote">
+        <a href="/{{ publicToken }}/quote" data-test="quote-link">
           View your {{ 'accepted' if quote.accepted_on }} quote
         </a>
       </li>

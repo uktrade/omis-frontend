@@ -3,7 +3,7 @@
 {% set hideReturnLink = true %}
 
 {% block main_content %}
-  <div class="confirmation-banner">
+  <div class="confirmation-banner" data-test="confirmation-banner">
     <h1 class="confirmation-banner__heading">
       Quote accepted
     </h1>
@@ -16,11 +16,11 @@
 
   <h3>What happens next</h3>
 
-  <p>You will receive a confirmation email that the quote has been accepted.</p>
+  <p data-test="confirmation-text">You will receive a confirmation email that the quote has been accepted.</p>
 
   {% include '_includes/payment-instructions.njk' %}
 
   <p>
-    <a href="/{{ publicToken }}">View your order history</a>
+    <a href="/{{ publicToken }}" data-test="order-history-link">View your order history</a>
   </p>
 {% endblock  %}

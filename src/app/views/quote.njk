@@ -20,7 +20,7 @@
 
   {% if quote.content %}
     <article class="example">
-      <div class="example__preview l-markdown">
+      <div class="example__preview l-markdown" data-test="quote">
 {# Ugly indentation is so that markdown spacing is handled correctly #}
 {% markdown %}{{ quote.content | safe }}{% endmarkdown %}
         {% call Reveal({ summary: 'View full terms and conditions' }) %}
@@ -50,10 +50,10 @@
         error: 'Confirm that you accept the Charges and the Terms and Conditions' if invalid
       }) }}
 
-      <button type="submit" class="button">Accept quote</button>
+      <button type="submit" class="button" data-test="accept-quote-button">Accept quote</button>
     </form>
 
-    {% call Reveal({ summary: 'There is a problem with my quote' }) %}
+    {% call Reveal({ summary: 'There is a problem with my quote', dataTest: 'quote-problem' }) %}
       {% include '_includes/messages/general-contact.njk' %}
     {% endcall %}
   {% endif %}
