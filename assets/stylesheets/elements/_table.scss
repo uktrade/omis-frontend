@@ -1,6 +1,6 @@
-@import "../settings/colours";
-@import "../settings/layout";
-@import "../tools/mixins/typography";
+@import '../settings/colours';
+@import '../settings/layout';
+@import '../tools/mixins/typography';
 
 table {
   border-collapse: collapse;
@@ -25,7 +25,7 @@ table {
     font-weight: 700;
     text-align: left;
 
-    &[align="right"] {
+    &[align='right'] {
       text-align: right;
     }
   }

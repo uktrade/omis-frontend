@@ -1,4 +1,4 @@
-function renderOrderSummary (req, res) {
+function renderOrderSummary(req, res) {
   res.render('order-summary')
 }
 

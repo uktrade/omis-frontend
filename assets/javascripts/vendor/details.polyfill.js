@@ -9,15 +9,20 @@
 ;(function () {
   'use strict'
 
-  var NATIVE_DETAILS = typeof document.createElement('details').open === 'boolean'
+  var NATIVE_DETAILS =
+    typeof document.createElement('details').open === 'boolean'
 
   // Add event construct for modern browsers or IE
   // which fires the callback with a pre-converted target reference
-  function addEvent (node, type, callback) {
+  function addEvent(node, type, callback) {
     if (node.addEventListener) {
-      node.addEventListener(type, function (e) {
-        callback(e, e.target)
-      }, false)
+      node.addEventListener(
+        type,
+        function (e) {
+          callback(e, e.target)
+        },
+        false
+      )
     } else if (node.attachEvent) {
       node.attachEvent('on' + type, function (e) {
         callback(e, e.srcElement)
@@ -26,7 +31,7 @@
   }
 
   // Handle cross-modal click events
-  function addClickEvent (node, callback) {
+  function addClickEvent(node, callback) {
     // Prevent space(32) from scrolling the page
     addEvent(node, 'keypress', function (e, target) {
       if (target.nodeName === 'SUMMARY') {
@@ -41,7 +46,9 @@
     })
     // When the key comes up - check if it is enter(13) or space(32)
     addEvent(node, 'keyup', function (e, target) {
-      if (e.keyCode === 13 || e.keyCode === 32) { callback(e, target) }
+      if (e.keyCode === 13 || e.keyCode === 32) {
+        callback(e, target)
+      }
     })
     addEvent(node, 'mouseup', function (e, target) {
       callback(e, target)
@@ -49,7 +56,7 @@
   }
 
   // Get the nearest ancestor element of a node that matches a given tag name
-  function getAncestor (node, match) {
+  function getAncestor(node, match) {
     do {
       if (!node || node.nodeName.toLowerCase() === match) {
         break
@@ -65,7 +72,7 @@
   var started = false
 
   // Initialisation function
-  function addDetailsPolyfill (list) {
+  function addDetailsPolyfill(list) {
     // If this has already happened, just return
     // else set the flag so it doesn't happen again
     if (started) {
@@ -140,22 +147,33 @@
           twisty.appendChild(document.createTextNode('\u25ba'))
         }
 
-        details.__summary.__twisty = details.__summary.insertBefore(twisty, details.__summary.firstChild)
+        details.__summary.__twisty = details.__summary.insertBefore(
+          twisty,
+          details.__summary.firstChild
+        )
         details.__summary.__twisty.setAttribute('aria-hidden', 'true')
       }
     }
 
     // Define a statechange function that updates aria-expanded and style.display
     // Also update the arrow position
-    function statechange (summary) {
-      var expanded = summary.__details.__summary.getAttribute('aria-expanded') === 'true'
-      var hidden = summary.__details.__content.getAttribute('aria-hidden') === 'true'
+    function statechange(summary) {
+      var expanded =
+        summary.__details.__summary.getAttribute('aria-expanded') === 'true'
+      var hidden =
+        summary.__details.__content.getAttribute('aria-hidden') === 'true'
 
-      summary.__details.__summary.setAttribute('aria-expanded', (expanded ? 'false' : 'true'))
-      summary.__details.__content.setAttribute('aria-hidden', (hidden ? 'false' : 'true'))
+      summary.__details.__summary.setAttribute(
+        'aria-expanded',
+        expanded ? 'false' : 'true'
+      )
+      summary.__details.__content.setAttribute(
+        'aria-hidden',
+        hidden ? 'false' : 'true'
+      )
 
       if (!NATIVE_DETAILS) {
-        summary.__details.__content.style.display = (expanded ? 'none' : '')
+        summary.__details.__content.style.display = expanded ? 'none' : ''
 
         var hasOpenAttr = summary.__details.getAttribute('open') !== null
         if (!hasOpenAttr) {
@@ -166,8 +184,11 @@
       }
 
       if (summary.__twisty) {
-        summary.__twisty.firstChild.nodeValue = (expanded ? '\u25ba' : '\u25bc')
-        summary.__twisty.setAttribute('class', (expanded ? 'details__arrow is-closed' : 'details__arrow is-open'))
+        summary.__twisty.firstChild.nodeValue = expanded ? '\u25ba' : '\u25bc'
+        summary.__twisty.setAttribute(
+          'class',
+          expanded ? 'details__arrow is-closed' : 'details__arrow is-open'
+        )
       }
 
       return true

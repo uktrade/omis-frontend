@@ -8,8 +8,8 @@ try {
   logger.error('Manifest file is not found. Ensure assets are built.')
 }
 
-module.exports = function setLocals (req, res, next) {
-  const baseUrl = `${(req.encrypted ? 'https' : req.protocol)}://${req.get('host')}`
+module.exports = function setLocals(req, res, next) {
+  const baseUrl = `${req.encrypted ? 'https' : req.protocol}://${req.get('host')}`
 
   res.locals = Object.assign({}, res.locals, {
     BASE_URL: baseUrl,
@@ -18,15 +18,15 @@ module.exports = function setLocals (req, res, next) {
     GOOGLE_TAG_MANAGER_KEY: config.googleTagManagerKey,
     GOOGLE_TAG_MANAGER_SUFFIX: config.googleTagManagerSuffix,
 
-    getMessages () {
+    getMessages() {
       return req.flash()
     },
 
-    getPageTitle () {
+    getPageTitle() {
       return ''
     },
 
-    getAssetPath (asset) {
+    getAssetPath(asset) {
       const assetsUrl = config.assetsHost || baseUrl
       const webpackAssetPath = webpackManifest[asset]
 

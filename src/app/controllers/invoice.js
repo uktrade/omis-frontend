@@ -1,6 +1,6 @@
 const { get } = require('lodash')
 
-function renderInvoice (req, res, next) {
+function renderInvoice(req, res, next) {
   const companyName = get(res.locals, 'invoice.invoice_company_name')
 
   if (!companyName) {

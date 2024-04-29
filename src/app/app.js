@@ -7,9 +7,9 @@ const createApp = require('./create-app')
 
 const serverConfig = config.server
 const numberOfWorkers = serverConfig.workers
-const isClustered = (numberOfWorkers > 1)
+const isClustered = numberOfWorkers > 1
 
-function startApp () {
+function startApp() {
   const app = createApp()
   const env = app.get('env')
 
@@ -20,8 +20,12 @@ function startApp () {
       messages.push(`Worker ${cluster.worker.id} created`)
     }
 
-    messages.push(`App running in ${env} mode, workers: ${config.server.workers}`)
-    messages.push(`Listening at http://${serverConfig.host}:${serverConfig.port}`)
+    messages.push(
+      `App running in ${env} mode, workers: ${config.server.workers}`
+    )
+    messages.push(
+      `Listening at http://${serverConfig.host}:${serverConfig.port}`
+    )
 
     logger.info(messages.join('   '))
   })

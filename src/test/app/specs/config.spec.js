@@ -2,9 +2,9 @@ const proxyquire = require('proxyquire')
 
 let originalEnv
 
-function createConfig (stubs = {}) {
+function createConfig(stubs = {}) {
   const defaults = {
-    'os': {
+    os: {
       cpus: jasmine.createSpy('os.cpus').and.callFake(() => []),
     },
   }
@@ -80,10 +80,12 @@ describe('Config', function () {
     describe('When no env var is set', function () {
       describe('When the system has 1 CPU', function () {
         it('Should set the workers to 1', function () {
-          const cpus = jasmine.createSpy('os.cpus').and.callFake(() => new Array(1))
+          const cpus = jasmine
+            .createSpy('os.cpus')
+            .and.callFake(() => new Array(1))
 
           const config = createConfig({
-            'os': { cpus },
+            os: { cpus },
           })
 
           expect(config.server.workers).toEqual(1)
@@ -93,10 +95,12 @@ describe('Config', function () {
 
       describe('When the system has more than 1 CPU', function () {
         it('Should set the workers to 1 less than the number of CPUs', function () {
-          const cpus = jasmine.createSpy('os.cpus').and.callFake(() => new Array(4))
+          const cpus = jasmine
+            .createSpy('os.cpus')
+            .and.callFake(() => new Array(4))
 
           const config = createConfig({
-            'os': { cpus },
+            os: { cpus },
           })
 
           expect(config.server.workers).toEqual(3)

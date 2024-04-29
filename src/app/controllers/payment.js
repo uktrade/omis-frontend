@@ -1,8 +1,8 @@
-function renderPaymentOptions (req, res) {
+function renderPaymentOptions(req, res) {
   res.render('payment/options')
 }
 
-function handlePaymentOptions (req, res) {
+function handlePaymentOptions(req, res) {
   const paymentMethod = req.body['payment-method']
   const publicToken = res.locals.publicToken
 
@@ -19,23 +19,23 @@ function handlePaymentOptions (req, res) {
   })
 }
 
-function renderBankTransferMethod (req, res) {
+function renderBankTransferMethod(req, res) {
   res.render('payment/bank-transfer')
 }
 
-function renderCardMethod (req, res) {
+function renderCardMethod(req, res) {
   res.render('payment/card')
 }
 
-function renderCardFailure (req, res) {
+function renderCardFailure(req, res) {
   res.render('payment/failure')
 }
 
-function renderCardSuccess (req, res) {
+function renderCardSuccess(req, res) {
   res.render('payment/success')
 }
 
-function redirectReturnUrl (req, res) {
+function redirectReturnUrl(req, res) {
   res.redirect(`/${res.locals.publicToken}/payment/card`)
 }
 

@@ -23,7 +23,8 @@ router.use(checkOrderStatus)
 
 router.get('/card/failure', renderCardFailure)
 router.get('/card/success', setPayments, renderCardSuccess)
-router.get('/card/:paymentSessionId',
+router.get(
+  '/card/:paymentSessionId',
   validatePaymentGatewaySession,
   setPaymentGatewaySession,
   checkPaymentGatewaySessionStatus(true),
@@ -34,14 +35,12 @@ router.get('/card/:paymentSessionId',
 // being access if order has been paid
 router.use(checkPaidStatus)
 
-router
-  .route('/')
-  .get(renderPaymentOptions)
-  .post(handlePaymentOptions)
+router.route('/').get(renderPaymentOptions).post(handlePaymentOptions)
 
 router.get('/bank-transfer', renderBankTransferMethod)
 
-router.get('/card',
+router.get(
+  '/card',
   createPaymentGatewaySession,
   setPaymentGatewaySession,
   checkPaymentGatewaySessionStatus(),

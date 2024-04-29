@@ -9,10 +9,12 @@ module.exports = {
   },
 
   catchAll: function (error, req, res, next) {
-    const statusCode = error.statusCode = (error.response ? error.response.status : error.statusCode) || 500
-    let statusMessage = statusCode === 404
-      ? 'We couldn\'t find that page'
-      : 'Something has gone wrong'
+    const statusCode = (error.statusCode =
+      (error.response ? error.response.status : error.statusCode) || 500)
+    let statusMessage =
+      statusCode === 404
+        ? "We couldn't find that page"
+        : 'Something has gone wrong'
 
     if (res.headersSent) {
       return next(error)

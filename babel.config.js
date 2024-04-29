@@ -1,8 +1,6 @@
 module.exports = {
   sourceType: 'unambiguous',
-  plugins: [
-    '@babel/plugin-transform-class-properties',
-  ],
+  plugins: ['@babel/plugin-transform-class-properties'],
   presets: [
     [
       '@babel/preset-env',

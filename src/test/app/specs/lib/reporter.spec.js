@@ -7,10 +7,12 @@ let logger
 let raven
 
 describe('Error reporter', function () {
-  function createReporter (opts = {}) {
+  function createReporter(opts = {}) {
     raven = {
       captureMessage: jasmine.createSpy('raven.captureMessage'),
-      config: jasmine.createSpy('raven.config').and.callFake(function () { return { install: raven.install } }),
+      config: jasmine.createSpy('raven.config').and.callFake(function () {
+        return { install: raven.install }
+      }),
       install: jasmine.createSpy('raven.install'),
       requestHandler: jasmine.createSpy('raven.requestHandler'),
       errorHandler: jasmine.createSpy('raven.errorHandler'),
@@ -24,7 +26,7 @@ describe('Error reporter', function () {
     }
 
     reporter = proxyquire('../../../../app/lib/reporter', {
-      'raven': opts.raven || raven,
+      raven: opts.raven || raven,
       './logger': opts.logger || logger,
       '../../../config': opts.config || { version },
     })

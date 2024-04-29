@@ -9,7 +9,6 @@ module.exports = function (isDev) {
     `img-src 'self' www.google-analytics.com`,
     `frame-src www.googletagmanager.com`,
     `form-action 'self'`,
-
   ].join(';')
 
   return function (req, res, next) {
@@ -21,7 +20,10 @@ module.exports = function (isDev) {
     res.setHeader('Cache-Control', 'no-cache, no-store')
 
     if (!isDev) {
-      res.setHeader('Strict-Transport-Security', 'max-age=31536000; includeSubDomains')
+      res.setHeader(
+        'Strict-Transport-Security',
+        'max-age=31536000; includeSubDomains'
+      )
     }
 
     next()

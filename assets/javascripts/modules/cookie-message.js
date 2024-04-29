@@ -1,9 +1,9 @@
-function setCookie (name, value, options = {}) {
+function setCookie(name, value, options = {}) {
   let cookieString = `${name}=${value}; path=/`
 
   if (options.days) {
     const date = new Date()
-    date.setTime(date.getTime() + (options.days * 24 * 60 * 60 * 1000))
+    date.setTime(date.getTime() + options.days * 24 * 60 * 60 * 1000)
     cookieString = `${cookieString}; expires=${date.toGMTString()}`
   }
 
@@ -14,7 +14,7 @@ function setCookie (name, value, options = {}) {
   document.cookie = cookieString
 }
 
-function getCookie (name) {
+function getCookie(name) {
   const nameEQ = `${name}=`
   const cookies = document.cookie.split(';')
 

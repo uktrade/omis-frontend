@@ -1,6 +1,6 @@
-@import "../settings/colours";
-@import "../settings/typography";
-@import "../tools/mixins/addons";
+@import '../settings/colours';
+@import '../settings/typography';
+@import '../tools/mixins/addons';
 
 html {
   font-family: $dit-font-stack;
@@ -39,7 +39,9 @@ button {
 
   &:focus,
   &:focus + label::before {
-    transition: box-shadow .1s, outline-color .1s .1s;
+    transition:
+      box-shadow 0.1s,
+      outline-color 0.1s 0.1s;
     box-shadow: 0 0 0 3px $focus-colour;
     outline-color: $focus-colour;
     text-decoration: none;

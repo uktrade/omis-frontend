@@ -1,5 +1,7 @@
+/* eslint-disable no-unused-vars */
 const nock = require('nock')
 const hawk = require('hawk')
+
 const config = require('../../../../../config')
 const { fetch } = require('../../../../app/lib/api')
 
@@ -24,7 +26,7 @@ const mockServerResponse = [
   },
 ]
 
-async function authenticateHawkRequest (request) {
+async function authenticateHawkRequest(request) {
   const hawkRequest = {
     ...request,
     url: request.path,
@@ -32,36 +34,32 @@ async function authenticateHawkRequest (request) {
   }
   const { credentials, artifacts } = await hawk.server.authenticate(
     hawkRequest,
-    () => config.api.hawkCredentials,
+    () => config.api.hawkCredentials
   )
-  const serverHeader = hawk.server.header(
-    credentials,
-    artifacts,
-    {
-      payload: JSON.stringify(mockServerResponse),
-      contentType: request.headers['content-type'],
-    }
-  )
+  const serverHeader = hawk.server.header(credentials, artifacts, {
+    payload: JSON.stringify(mockServerResponse),
+    contentType: request.headers['content-type'],
+  })
   return serverHeader
 }
 
 describe('api fetch', () => {
   describe('GET request', () => {
     beforeEach(() => {
-      nock(config.api.root).get(
-        testGetApiURL
-      ).reply(async function (uri, requestBody) {
-        try {
-          const serverHeader = await authenticateHawkRequest(this.req)
-          return [
-            200,
-            mockServerResponse,
-            { 'Server-Authorization': serverHeader },
-          ]
-        } catch (e) {
-          return [401, { error: 'Unauthorized' }]
-        }
-      })
+      nock(config.api.root)
+        .get(testGetApiURL)
+        .reply(async function (uri, requestBody) {
+          try {
+            const serverHeader = await authenticateHawkRequest(this.req)
+            return [
+              200,
+              mockServerResponse,
+              { 'Server-Authorization': serverHeader },
+            ]
+          } catch (e) {
+            return [401, { error: 'Unauthorized' }]
+          }
+        })
     })
 
     it('successfuly requests Hawk authenticated endpoint', async function () {
@@ -69,27 +67,22 @@ describe('api fetch', () => {
       expect(response).toEqual(mockServerResponse)
     })
 
-    it(
-      'fails to request Hawk authenticated endpoint using wrong credentials',
-      async function () {
-        let err
-        try {
-          await fetch(testGetApiURL, testWrongCredentials)
-        } catch (e) {
-          err = e
-        }
-        expect(err).toEqual(new Error('Request failed with status code 401'))
+    it('fails to request Hawk authenticated endpoint using wrong credentials', async function () {
+      let err
+      try {
+        await fetch(testGetApiURL, testWrongCredentials)
+      } catch (e) {
+        err = e
       }
-    )
+      expect(err).toEqual(new Error('Request failed with status code 401'))
+    })
   })
 
   describe('POST request', () => {
-    it(
-      'successfuly requests Hawk authenticated endpoint using POST method',
-      async function () {
-        nock(config.api.root).post(
-          testPostApiURL
-        ).reply(async function (uri, requestBody) {
+    it('successfuly requests Hawk authenticated endpoint using POST method', async function () {
+      nock(config.api.root)
+        .post(testPostApiURL)
+        .reply(async function (uri, requestBody) {
           const serverHeader = await authenticateHawkRequest(this.req)
           return [
             200,
@@ -98,33 +91,29 @@ describe('api fetch', () => {
           ]
         })
 
-        const response = await fetch({ url: testPostApiURL, method: 'post' })
-        expect(response).toEqual(mockServerResponse)
-      }
-    )
+      const response = await fetch({ url: testPostApiURL, method: 'post' })
+      expect(response).toEqual(mockServerResponse)
+    })
   })
 
   describe('Forged response', () => {
-    it(
-      'fails when server response is forged',
-      async function () {
-        nock(config.api.root).get(
-          testForgedApiURL
-        ).reply(async function (uri, requestBody) {
+    it('fails when server response is forged', async function () {
+      nock(config.api.root)
+        .get(testForgedApiURL)
+        .reply(async function (uri, requestBody) {
           return [
             200,
             mockServerResponse,
             { 'Server-Authorization': forgedServerResponse },
           ]
         })
-        let err
-        try {
-          await fetch(testForgedApiURL)
-        } catch (e) {
-          err = e
-        }
-        expect(err).toEqual(new Error('Bad response mac'))
+      let err
+      try {
+        await fetch(testForgedApiURL)
+      } catch (e) {
+        err = e
       }
-    )
+      expect(err).toEqual(new Error('Bad response mac'))
+    })
   })
 })

@@ -1,4 +1,6 @@
+/* eslint-disable no-undef */
 const axios = require('axios')
+
 const { api } = require('../../../config')
 const logger = require('../lib/logger')
 
@@ -9,7 +11,7 @@ const serviceDependencies = [
   },
 ]
 
-function pingdomTemplate (statusMessage, responseTime) {
+function pingdomTemplate(statusMessage, responseTime) {
   return `
     <?xml version="1.0" encoding="UTF-8"?>
     <pingdom_http_custom_check>
@@ -19,9 +21,10 @@ function pingdomTemplate (statusMessage, responseTime) {
   `.trim()
 }
 
-function healthCheck (dependencies) {
+function healthCheck(dependencies) {
   const promiseArray = dependencies.map((dependency) => {
-    return dependency.healthCheck()
+    return dependency
+      .healthCheck()
       .then((result) => result)
       .catch((error) => {
         return { name: dependency.name, error }
@@ -31,12 +34,12 @@ function healthCheck (dependencies) {
   return Promise.all(promiseArray)
 }
 
-function timer () {
+function timer() {
   const start = Date.now()
   return () => Date.now() - start
 }
 
-function renderPingdomXml (req, res, next) {
+function renderPingdomXml(req, res, next) {
   const tickingTimer = timer()
   let responseTime
 
@@ -53,7 +56,10 @@ function renderPingdomXml (req, res, next) {
 
       if (errors.length) {
         errors.forEach((dependency) => {
-          logger.error(`${dependency.name} health check failed`, dependency.error)
+          logger.error(
+            `${dependency.name} health check failed`,
+            dependency.error
+          )
         })
 
         return res
@@ -61,9 +67,7 @@ function renderPingdomXml (req, res, next) {
           .send(pingdomTemplate('Service Unavailable', responseTime))
       }
 
-      return res
-        .status(200)
-        .send(pingdomTemplate('OK', responseTime))
+      return res.status(200).send(pingdomTemplate('OK', responseTime))
     })
     .catch(next)
 }

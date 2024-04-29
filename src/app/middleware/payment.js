@@ -2,7 +2,7 @@ const { get } = require('lodash')
 
 const { fetch } = require('../lib/api')
 
-function checkOrderStatus (req, res, next) {
+function checkOrderStatus(req, res, next) {
   const orderStatus = get(res.locals, 'order.status')
 
   if (!['quote_accepted', 'paid', 'complete'].includes(orderStatus)) {
@@ -12,7 +12,7 @@ function checkOrderStatus (req, res, next) {
   next()
 }
 
-function checkPaidStatus (req, res, next) {
+function checkPaidStatus(req, res, next) {
   const orderStatus = get(res.locals, 'order.status')
 
   if (['paid', 'complete'].includes(orderStatus)) {
@@ -22,7 +22,7 @@ function checkPaidStatus (req, res, next) {
   next()
 }
 
-async function createPaymentGatewaySession (req, res, next) {
+async function createPaymentGatewaySession(req, res, next) {
   const publicToken = res.locals.publicToken
 
   if (get(req, `paymentGatewaySession.${publicToken}`)) {
@@ -46,16 +46,20 @@ async function createPaymentGatewaySession (req, res, next) {
   }
 }
 
-async function setPaymentGatewaySession (req, res, next) {
+async function setPaymentGatewaySession(req, res, next) {
   const publicToken = res.locals.publicToken
-  const sessionId = req.params.paymentSessionId || get(req, `paymentGatewaySession.${publicToken}`)
+  const sessionId =
+    req.params.paymentSessionId ||
+    get(req, `paymentGatewaySession.${publicToken}`)
 
   if (!sessionId) {
     return next()
   }
 
   try {
-    res.locals.paymentGatewaySession = await fetch(`/v3/public/omis/order/${publicToken}/payment-gateway-session/${sessionId}`)
+    res.locals.paymentGatewaySession = await fetch(
+      `/v3/public/omis/order/${publicToken}/payment-gateway-session/${sessionId}`
+    )
 
     next()
   } catch (error) {
@@ -63,7 +67,7 @@ async function setPaymentGatewaySession (req, res, next) {
   }
 }
 
-function checkPaymentGatewaySessionStatus (skipFailure = false) {
+function checkPaymentGatewaySessionStatus(skipFailure = false) {
   return function (req, res, next) {
     const publicToken = res.locals.publicToken
     const status = get(res.locals, 'paymentGatewaySession.status')
@@ -86,7 +90,7 @@ function checkPaymentGatewaySessionStatus (skipFailure = false) {
   }
 }
 
-function validatePaymentGatewaySession (req, res, next) {
+function validatePaymentGatewaySession(req, res, next) {
   const publicToken = res.locals.publicToken
   const requestSessionId = req.params.paymentSessionId
   const sessionCookieId = get(req, `paymentGatewaySession.${publicToken}`)
