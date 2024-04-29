@@ -11,7 +11,7 @@
   {%- if props.summary -%}
     <details>
       <summary>
-        <span class="details__summary">{{ props.summary }}</span>
+        <span class="details__summary" data-test="reveal-{{ props.dataTest }}">{{ props.summary }}</span>
       </summary>
 
       <div class="details__content">
