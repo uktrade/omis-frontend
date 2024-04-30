@@ -11,9 +11,7 @@ const templateGlobals = require('./globals')
 const filters = require('./filters')
 
 module.exports = (app, config) => {
-  const env = nunjucks.configure([
-    `${config.root}/src/app/views`,
-  ], {
+  const env = nunjucks.configure([`${config.root}/src/app/views`], {
     autoescape: true,
     express: app,
     watch: config.isDev,

@@ -1,6 +1,6 @@
-@import "../../settings/typography";
-@import "../functions/typography";
-@import "./conditionals";
+@import '../../settings/typography';
+@import '../functions/typography';
+@import './conditionals';
 
 /// Type setting
 /// -------------
@@ -13,19 +13,19 @@
 @mixin _type-setting($level: 0, $font-weight: 400) {
   @if $is-print {
     font-family: $print-font-stack;
-    font-size: type-scale($level, "print");
+    font-size: type-scale($level, 'print');
   } @else {
     font-family: $dit-font-stack;
-    font-size: type-scale($level, "small");
+    font-size: type-scale($level, 'small');
   }
 
   font-weight: $font-weight;
-  line-height: line-height($level, "small");
+  line-height: line-height($level, 'small');
   text-transform: none;
 
   @include media-query(tablet, $is-print: false) {
-    font-size: type-scale($level, "medium");
-    line-height: line-height($level, "medium");
+    font-size: type-scale($level, 'medium');
+    line-height: line-height($level, 'medium');
   }
 
   @include media-query(desktop, $is-print: false) {
@@ -71,7 +71,10 @@
 ///   }
 @mixin bold-font($font-size) {
   @if map-has-key($type-settings-map, $font-size) {
-    @include _type-setting(map-get($type-settings-map, $font-size), $font-weight: 600);
+    @include _type-setting(
+      map-get($type-settings-map, $font-size),
+      $font-weight: 600
+    );
   } @else {
     @warn "`#{$font-size}` is not a core font size. See `settings/_typography.scss` for a list of valid sizes.";
   }

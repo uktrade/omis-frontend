@@ -5,7 +5,7 @@ const hawk = require('hawk')
 
 const config = require('../../../config')
 
-function getHawkHeader (credentials, uri, method) {
+function getHawkHeader(credentials, uri, method) {
   // Generate Authorization request header
   // Ensure backend is using same protocol for hash generation
   return hawk.client.header(uri, method, {
@@ -15,7 +15,7 @@ function getHawkHeader (credentials, uri, method) {
   })
 }
 
-function parseOptions (options) {
+function parseOptions(options) {
   if (isString(options)) {
     return {
       url: options,
@@ -29,18 +29,18 @@ function parseOptions (options) {
   }
 }
 
-function buildRequestOptions (method, url, hawkHeader) {
+function buildRequestOptions(method, url, hawkHeader) {
   return {
     method,
     url,
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': hawkHeader.header,
+      Authorization: hawkHeader.header,
     },
   }
 }
 
-async function fetch (options, hawkCredentials = config.api.hawkCredentials) {
+async function fetch(options, hawkCredentials = config.api.hawkCredentials) {
   const { url, method } = parseOptions(options)
 
   const completeURL = `${config.api.root}${url}`
@@ -62,7 +62,7 @@ async function fetch (options, hawkCredentials = config.api.hawkCredentials) {
     hawkHeader.artifacts,
     // Axios returns a JSON object and to authenticate the request
     // we need a string.
-    { payload: JSON.stringify(response.data) },
+    { payload: JSON.stringify(response.data) }
   )
 
   return response.data

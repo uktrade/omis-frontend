@@ -12,7 +12,7 @@ const appFile = '/app.js'
 const childExits = []
 let child
 
-function createChildProcess () {
+function createChildProcess() {
   child = childProcess.fork(path.join(__dirname, appFile))
 
   console.info('Child process created, pid: ' + child.pid)
@@ -20,7 +20,7 @@ function createChildProcess () {
   child.on('exit', handleChildExit)
 }
 
-function handleChildExit (e) {
+function handleChildExit(e) {
   const now = Date.now()
   let exitsInLastMinute = 0
 
@@ -28,7 +28,7 @@ function handleChildExit (e) {
 
   if (childExits.length >= CHILD_EXIT_LIMIT) {
     childExits.slice(-CHILD_EXIT_LIMIT).forEach(function (item) {
-      const delta = (now - item)
+      const delta = now - item
 
       if (delta < CHILD_EXIT_THRESHOLD) {
         exitsInLastMinute++
@@ -49,7 +49,7 @@ function handleChildExit (e) {
   }
 }
 
-function createErrorHandler (type) {
+function createErrorHandler(type) {
   return function () {
     console.log('Parent event: %s', type)
 

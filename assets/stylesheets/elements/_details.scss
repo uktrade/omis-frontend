@@ -1,4 +1,4 @@
-@import "../settings/colours";
+@import '../settings/colours';
 
 details {
   clear: both;
@@ -51,7 +51,7 @@ details {
 // Match fallback arrow spacing with -webkit default
 .details__arrow {
   font-style: normal;
-  margin-right: .35em;
+  margin-right: 0.35em;
 
   .details--inline & {
     display: none;

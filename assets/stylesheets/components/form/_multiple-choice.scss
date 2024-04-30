@@ -1,10 +1,12 @@
-@import "../../settings";
-@import "../../tools";
+@import '../../settings';
+@import '../../tools';
 
 .c-multiple-choice {
   position: relative;
   clear: left;
-  transform: translateZ(0); // Enforcing GPU acceleration fixes overflow cropping caused by CSS columns
+  transform: translateZ(
+    0
+  ); // Enforcing GPU acceleration fixes overflow cropping caused by CSS columns
 
   & + & {
     margin-top: $default-spacing-unit / 2;
@@ -16,7 +18,7 @@
   width: $input-size;
   height: $input-size;
 
-  &[type="checkbox"] + .c-multiple-choice__label::after {
+  &[type='checkbox'] + .c-multiple-choice__label::after {
     border-width: 0 0 5px 5px;
     width: round($input-size / 1.7);
     height: round($input-size / 3);
@@ -44,12 +46,12 @@
   margin: auto;
   opacity: 0;
 
-  &[type="checkbox"] + .c-multiple-choice__label::after {
+  &[type='checkbox'] + .c-multiple-choice__label::after {
     transform: rotate(-45deg);
     -ms-transform: rotate(-45deg);
   }
 
-  &[type="radio"] + .c-multiple-choice__label {
+  &[type='radio'] + .c-multiple-choice__label {
     &::before,
     &::after {
       border-radius: 100%;
@@ -59,7 +61,7 @@
   & + .c-multiple-choice__label {
     &::before,
     &::after {
-      content: "";
+      content: '';
       position: absolute;
       margin: auto;
     }
@@ -91,7 +93,8 @@
   cursor: pointer;
   vertical-align: middle;
   display: inline-block;
-  padding: ($default-spacing-unit / 2) ($default-spacing-unit / 2) ($default-spacing-unit / 2) ($default-spacing-unit * 3);
+  padding: ($default-spacing-unit / 2) ($default-spacing-unit / 2)
+    ($default-spacing-unit / 2) ($default-spacing-unit * 3);
   line-height: 1.2;
 }
 
@@ -141,4 +144,3 @@
   margin-top: 0;
   margin-right: $default-spacing-unit;
 }
-

@@ -1,5 +1,5 @@
-@import "../../settings/typography";
-@import "../mixins/conditionals";
+@import '../../settings/typography';
+@import '../mixins/conditionals';
 
 // Typographic scale helpers
 
@@ -22,8 +22,8 @@
 ///   h1 {
 ///     font-size: type-scale(0, "mobile");
 ///   }
-@function type-scale($level, $size: "large") {
-  @return map-get(map-get(map-get($type-settings, $level), $size), "font-size");
+@function type-scale($level, $size: 'large') {
+  @return map-get(map-get(map-get($type-settings, $level), $size), 'font-size');
 }
 
 /// Line height
@@ -45,8 +45,11 @@
 ///   h1 {
 ///     font-size: line-height(0, "mobile");
 ///   }
-@function line-height($level, $size: "large") {
-  @return map-get(map-get(map-get($type-settings, $level), $size), "line-height");
+@function line-height($level, $size: 'large') {
+  @return map-get(
+    map-get(map-get($type-settings, $level), $size),
+    'line-height'
+  );
 }
 
 /// Type setting
@@ -60,19 +63,19 @@
 @mixin _type-setting($level: 0, $font-weight: 400) {
   @if $is-print {
     font-family: $print-font-stack;
-    font-size: type-scale($level, "print");
+    font-size: type-scale($level, 'print');
   } @else {
     font-family: $dit-font-stack;
-    font-size: type-scale($level, "small");
+    font-size: type-scale($level, 'small');
   }
 
   font-weight: $font-weight;
-  line-height: line-height($level, "small");
+  line-height: line-height($level, 'small');
   text-transform: none;
 
   @include media-query(tablet) {
-    font-size: type-scale($level, "medium");
-    line-height: line-height($level, "medium");
+    font-size: type-scale($level, 'medium');
+    line-height: line-height($level, 'medium');
   }
 
   @include media-query(desktop) {
@@ -118,7 +121,10 @@
 ///   }
 @mixin bold-font($font-size) {
   @if map-has-key($type-settings-map, $font-size) {
-    @include _type-setting(map-get($type-settings-map, $font-size), $font-weight: 600);
+    @include _type-setting(
+      map-get($type-settings-map, $font-size),
+      $font-weight: 600
+    );
   } @else {
     @warn "`#{$font-size}` is not a core font size. See `settings/_typography.scss` for a list of valid sizes.";
   }

@@ -1,18 +1,69 @@
 {
-  "extends": "standard",
-  "parser": "babel-eslint",
-  "plugins": [],
+  "parser": "@babel/eslint-parser",
+  "extends": ["plugin:prettier/recommended", "prettier"],
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "plugins": ["import"],
   "rules": {
-    "comma-dangle": [
+    "no-async-promise-executor": "off",
+    "no-case-declarations": "off",
+    "no-prototype-builtins": "off",
+    "no-unused-vars": [
       "error",
       {
-        "arrays": "always-multiline",
-        "objects": "always-multiline",
-        "imports": "never",
-        "exports": "never",
-        "functions": "ignore"
+        "ignoreRestSiblings": true
       }
     ],
-    "object-curly-spacing": ["error", "always"]
-  }
+    "node/no-deprecated-api": "off",
+    "object-curly-newline": "off",
+    "no-else-return": "off",
+    "arrow-body-style": "off",
+    "dot-notation": "error",
+    "import/newline-after-import": [
+      "error",
+      {
+        "count": 1
+      }
+    ],
+    "eol-last": "error",
+    "no-multiple-empty-lines": [
+      "error",
+      {
+        "max": 1
+      }
+    ],
+    "no-undef": "error",
+    "no-console": ["error", { "allow": ["assert"] }],
+    "import/order": [
+      "error",
+      {
+        "groups": [["builtin", "external"]],
+        "newlines-between": "always-and-inside-groups"
+      }
+    ],
+    "no-duplicate-imports": "error"
+  },
+  "overrides": [
+    {
+      "globals": {
+        "expect": true,
+        "proxyquire": true,
+        "sinon": true,
+        "nock": true,
+        "rootPath": true,
+        "globalReq": true,
+        "globalRes": true
+      },
+      "rules": {
+        "no-unused-expressions": 0
+      },
+      "files": ["**.test.{js}"],
+      "env": {
+        "mocha": true,
+        "browser": true
+      }
+    }
+  ]
 }

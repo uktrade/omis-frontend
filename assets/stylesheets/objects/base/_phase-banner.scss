@@ -1,10 +1,10 @@
-@import "../../settings/colours";
-@import "../../tools/mixins/layout";
+@import '../../settings/colours';
+@import '../../tools/mixins/layout';
 
 .phase-banner {
   width: 100%;
   display: table;
-  font-size: .85em;
+  font-size: 0.85em;
   padding-top: $baseline-grid-unit * 2;
   padding-bottom: $baseline-grid-unit * 2;
   border-bottom: 1px solid $grey-2;

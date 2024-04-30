@@ -1,8 +1,8 @@
 const os = require('os')
 const path = require('path')
 
-const cpus = (os.cpus().length || 1)
-const defaultWorkers = (cpus > 1 ? cpus - 1 : cpus)
+const cpus = os.cpus().length || 1
+const defaultWorkers = cpus > 1 ? cpus - 1 : cpus
 
 const isProd = process.env.NODE_ENV === 'production'
 const root = path.normalize(`${__dirname}/..`)
@@ -15,16 +15,19 @@ const config = {
   buildDir: path.join(root, '.build'),
   server: {
     host: process.env.SERVER_HOST || 'localhost',
-    port: process.env.SERVER_PORT || (process.env.PORT || 3000),
-    workers: process.env.SERVER_WORKERS || (process.env.WEB_CONCURRENCY || defaultWorkers),
+    port: process.env.SERVER_PORT || process.env.PORT || 3000,
+    workers:
+      process.env.SERVER_WORKERS ||
+      process.env.WEB_CONCURRENCY ||
+      defaultWorkers,
   },
   views: {
-    cache: (process.env.CACHE_VIEWS + '') === 'true',
+    cache: process.env.CACHE_VIEWS + '' === 'true',
   },
   session: {
     secret: process.env.SESSION_SECRET || 'howdoesyourgardengrow',
     // 2 hour timeout
-    ttl: process.env.SESSION_TTL || (2 * 60 * 60 * 1000),
+    ttl: process.env.SESSION_TTL || 2 * 60 * 60 * 1000,
   },
   logLevel: process.env.LOG_LEVEL || 'warn',
   api: {

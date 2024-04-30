@@ -59,7 +59,7 @@ describe('errors middleware', function () {
             expect(res.render).toHaveBeenCalledWith('errors', {
               error: err,
               statusCode: 404,
-              statusMessage: 'We couldn\'t find that page',
+              statusMessage: "We couldn't find that page",
               showErrors: config.showErrors,
             })
             expect(logger.error).not.toHaveBeenCalled()
@@ -78,7 +78,7 @@ describe('errors middleware', function () {
             expect(res.render).toHaveBeenCalledWith('errors', {
               error: err,
               statusCode: 404,
-              statusMessage: 'We couldn\'t find that page',
+              statusMessage: "We couldn't find that page",
               showErrors: config.showErrors,
             })
             expect(logger.error).not.toHaveBeenCalled()

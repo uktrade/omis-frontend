@@ -1,20 +1,21 @@
+/* eslint-disable no-unused-vars */
 const { get } = require('lodash')
 
 const { fetch } = require('../lib/api')
 
-function renderQuote (req, res, next) {
+function renderQuote(req, res, next) {
   res.render('quote')
-};
+}
 
-function renderAcceptedQuote (req, res, next) {
+function renderAcceptedQuote(req, res, next) {
   if (!res.locals.quote.accepted_on) {
     return res.redirect(`/${res.locals.publicToken}/quote`)
   }
 
   res.render('quote-accepted')
-};
+}
 
-async function acceptQuote (req, res, next) {
+async function acceptQuote(req, res, next) {
   const publicToken = res.locals.publicToken
 
   if (!get(req.body, 'confirm')) {

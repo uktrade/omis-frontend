@@ -3,7 +3,7 @@ const { assign, map } = require('lodash')
 
 const { fetch } = require('../lib/api')
 
-async function fetchOrderDetails (req, res, next, publicToken) {
+async function fetchOrderDetails(req, res, next, publicToken) {
   let order
   let quote
   let invoice
@@ -43,9 +43,11 @@ async function fetchOrderDetails (req, res, next, publicToken) {
   next()
 }
 
-async function setPayments (req, res, next) {
+async function setPayments(req, res, next) {
   try {
-    const paymentsResponse = await fetch(`/v3/public/omis/order/${res.locals.publicToken}/payment`)
+    const paymentsResponse = await fetch(
+      `/v3/public/omis/order/${res.locals.publicToken}/payment`
+    )
 
     res.locals.payments = map(paymentsResponse, (payment) => {
       payment.amount = parseInt(payment.amount) / 100

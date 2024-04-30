@@ -19,7 +19,7 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: cimg/node:18.15
+      - image: cimg/node:20.11.1
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
@@ -49,6 +49,38 @@ jobs:
       - run:
           name: Run unit tests
           command: npm test
+          environment:
+            API_CLIENT_HAWK_ACCESS_KEY_ID: access-key-id
+            API_CLIENT_HAWK_SECRET_ACCESS_KEY: secret-access-key
+          when: always
+
+  lint:
+    docker:
+      - image: cimg/node:20.11.1
+
+    working_directory: ~/omis-frontend
+
+    steps:
+      - checkout
+
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package-lock.json" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
+
+      - run: npm install
+
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package-lock.json" }}
+
+      # run tests!
+      - run:
+          name: Run linter
+          command: npm run lint
           environment:
             API_CLIENT_HAWK_ACCESS_KEY_ID: access-key-id
             API_CLIENT_HAWK_SECRET_ACCESS_KEY: secret-access-key
@@ -91,3 +123,4 @@ workflows:
     jobs:
       - e2e_tests
       - build
+      - lint

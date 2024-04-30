@@ -18,11 +18,15 @@ numeral.locale('en-gb')
 
 const { formats } = require('../../config')
 
-function isNotEmpty (value) {
-  return !isNil(value) && !/^\s*$/.test(value) && !(isPlainObject(value) && isEmpty(value))
+function isNotEmpty(value) {
+  return (
+    !isNil(value) &&
+    !/^\s*$/.test(value) &&
+    !(isPlainObject(value) && isEmpty(value))
+  )
 }
 
-function pluralise (string, count, pluralisedWord) {
+function pluralise(string, count, pluralisedWord) {
   if (parseInt(count, 10) !== 1) {
     if (pluralisedWord) {
       string = pluralisedWord
@@ -74,10 +78,14 @@ const filters = {
     return collection
   },
 
-  applyClassModifiers (className, modifier) {
-    if (!isString(className) || !(isString(modifier) || isArray(modifier))) { return className }
+  applyClassModifiers(className, modifier) {
+    if (!isString(className) || !(isString(modifier) || isArray(modifier))) {
+      return className
+    }
 
-    const classModifier = flatten([modifier]).map(mod => `${className}--${mod}`).join(' ')
+    const classModifier = flatten([modifier])
+      .map((mod) => `${className}--${mod}`)
+      .join(' ')
 
     return `${className} ${classModifier}`.trim()
   },

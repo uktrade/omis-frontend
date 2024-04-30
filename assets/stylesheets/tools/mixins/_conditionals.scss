@@ -19,7 +19,12 @@
 ///       float: left;
 ///     }
 ///   }
-@mixin media-query($size: false, $max-width: false, $min-width: false, $is-print: $is-print) {
+@mixin media-query(
+  $size: false,
+  $max-width: false,
+  $min-width: false,
+  $is-print: $is-print
+) {
   @if $size == desktop {
     @media (min-width: 925px) {
       @content;

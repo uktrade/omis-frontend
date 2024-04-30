@@ -9,10 +9,12 @@ module.exports = {
 
   // Renders macro with object passed as props
   // { macroName: 'TextField', type: 'textarea', modifier: 'small' }
-  renderAsMacro (config, additionalProps) {
-    function renderMacro (props = {}) {
+  renderAsMacro(config, additionalProps) {
+    function renderMacro(props = {}) {
       const macroName = props.macroName
-      if (!macroName) { return }
+      if (!macroName) {
+        return
+      }
       const macro = this.env.globals.callAsMacro.call(this, macroName)
       if (!isFunction(macro)) {
         throw Error(`${macroName} macro not found`)

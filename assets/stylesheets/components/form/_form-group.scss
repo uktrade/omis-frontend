@@ -1,11 +1,11 @@
-@import "../../tools";
-@import "../../settings";
+@import '../../tools';
+@import '../../settings';
 
 .c-form-group {
   border: 0;
   max-width: 40em;
 
-  [type="hidden"] + &,
+  [type='hidden'] + &,
   .c-form-fieldset__legend + &,
   .c-form-fieldset__hint + & {
     margin-top: 0;
@@ -138,4 +138,3 @@
     border-color: $error-colour;
   }
 }
-

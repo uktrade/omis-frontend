@@ -24,7 +24,7 @@ const setLocals = require('./middleware/set-locals')
 module.exports = function () {
   const app = express()
   const env = app.get('env')
-  const isDev = (env === 'development')
+  const isDev = env === 'development'
 
   let staticMaxAge = isDev ? 0 : '2y'
 
@@ -36,54 +36,80 @@ module.exports = function () {
 
   // Static files
   app.use(favicon(path.join(config.root, 'assets/images', 'favicon.ico')))
-  app.use(express.static(path.join(config.root, 'public'), { maxAge: staticMaxAge }))
-  app.use('/js', express.static(path.join(config.buildDir, 'js'), { maxAge: staticMaxAge }))
-  app.use('/css', express.static(path.join(config.buildDir, 'css'), { maxAge: staticMaxAge }))
-  app.use('/images', express.static(path.join(config.buildDir, 'images'), { maxAge: staticMaxAge }))
-  app.use('/fonts', express.static(path.join(config.buildDir, 'fonts'), { maxAge: staticMaxAge }))
+  app.use(
+    express.static(path.join(config.root, 'public'), { maxAge: staticMaxAge })
+  )
+  app.use(
+    '/js',
+    express.static(path.join(config.buildDir, 'js'), { maxAge: staticMaxAge })
+  )
+  app.use(
+    '/css',
+    express.static(path.join(config.buildDir, 'css'), { maxAge: staticMaxAge })
+  )
+  app.use(
+    '/images',
+    express.static(path.join(config.buildDir, 'images'), {
+      maxAge: staticMaxAge,
+    })
+  )
+  app.use(
+    '/fonts',
+    express.static(path.join(config.buildDir, 'fonts'), {
+      maxAge: staticMaxAge,
+    })
+  )
 
   reporter.setup(app)
 
   if (!isDev) {
     app.use(compression())
     app.enable('trust proxy')
-    app.use(enforce.HTTPS({
-      trustProtoHeader: true,
-    }))
+    app.use(
+      enforce.HTTPS({
+        trustProtoHeader: true,
+      })
+    )
   }
 
   app.use(cookieParser())
-  app.use(session({
-    store: new MemoryStore({
-      checkPeriod: 86400000,
-      ttl: config.session.ttl,
-    }),
-    cookie: {
-      secure: !config.isDev,
-      maxAge: config.session.ttl,
-    },
-    secret: config.session.secret,
-    key: 'datahub_omis.sid',
-    rolling: false,
-    resave: false,
-    saveUninitialized: true,
-  }))
-  app.use(sessions({
-    cookieName: 'paymentGatewaySession',
-    secret: config.session.secret,
-    duration: config.session.ttl,
-  }))
+  app.use(
+    session({
+      store: new MemoryStore({
+        checkPeriod: 86400000,
+        ttl: config.session.ttl,
+      }),
+      cookie: {
+        secure: !config.isDev,
+        maxAge: config.session.ttl,
+      },
+      secret: config.session.secret,
+      key: 'datahub_omis.sid',
+      rolling: false,
+      resave: false,
+      saveUninitialized: true,
+    })
+  )
+  app.use(
+    sessions({
+      cookieName: 'paymentGatewaySession',
+      secret: config.session.secret,
+      duration: config.session.ttl,
+    })
+  )
   app.use(bodyParser.urlencoded({ extended: true, limit: '1mb' }))
 
   app.use(setLocals)
-  app.use(morganLogger((isDev ? 'dev' : 'combined')))
+  app.use(morganLogger(isDev ? 'dev' : 'combined'))
   app.use(headers(isDev))
-  app.use(csrf({
-    cookie: {
-      httpOnly: true,
-      secure: !config.isDev,
-    },
-  }))
+  app.use(
+    csrf({
+      cookie: {
+        httpOnly: true,
+        secure: !config.isDev,
+      },
+    })
+  )
   app.use(setCSRFToken())
 
   app.use(router)

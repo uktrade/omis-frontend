@@ -1,5 +1,5 @@
-@import "../settings";
-@import "../tools/mixins/layout";
+@import '../settings';
+@import '../tools/mixins/layout';
 
 // View assemblies
 // Define how components stack in views
@@ -14,7 +14,7 @@ body {
 summary,
 script,
 noscript,
-input[type="hidden"],
+input[type='hidden'],
 .skip-links,
 .notification-banner,
 .global-header,
@@ -41,7 +41,10 @@ li + li {
   margin-top: $baseline-grid-unit;
 }
 
-h2, h3, h4, h5 {
+h2,
+h3,
+h4,
+h5 {
   & + * {
     margin-top: $default-spacing-unit / 2;
   }

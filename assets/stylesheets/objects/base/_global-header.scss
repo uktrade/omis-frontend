@@ -1,5 +1,5 @@
-@import "../../settings/colours";
-@import "../../tools/mixins";
+@import '../../settings/colours';
+@import '../../tools/mixins';
 
 .global-header {
   background-color: $black;
@@ -27,7 +27,8 @@
 }
 
 .global-header__crest {
-  background: url("../../../images/dit-crest__white.png") 6px 0 no-repeat transparent;
+  background: url('../../../images/dit-crest__white.png') 6px 0 no-repeat
+    transparent;
   background-size: contain;
   border-left: 2px solid $white;
   display: inline-block;
@@ -37,7 +38,7 @@
   vertical-align: text-bottom;
 
   @include device-pixel-ratio(2) {
-    background-image: url("../../../images/dit-crest__white@2x.png");
+    background-image: url('../../../images/dit-crest__white@2x.png');
     background-size: 28px 30px;
   }
 
@@ -81,10 +82,10 @@
 .global-header__service-name {
   @include bold-font(36);
   color: inherit;
-  line-height: .9;
+  line-height: 0.9;
 
   @include media-query(tablet) {
-    line-height: .9;
+    line-height: 0.9;
     font-size: 30px;
   }
 }

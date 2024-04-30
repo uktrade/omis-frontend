@@ -1,4 +1,4 @@
-version: "3"
+version: '3'
 services:
   frontend:
     depends_on:
@@ -8,14 +8,14 @@ services:
     image: gcr.io/sre-docker-registry/data-hub-api:latest
     env_file: .env
     environment:
-      DEBUG: "False"
+      DEBUG: 'False'
       RESOURCE_SERVER_AUTH_TOKEN: sso-token
       STAFF_SSO_BASE_URL: http://mock-sso:8080/
       STAFF_SSO_AUTH_TOKEN: sso-token
-      ES_APM_ENABLED: "False"
+      ES_APM_ENABLED: 'False'
       COLUMNS: 80
       DJANGO_SUPERUSER_SSO_EMAIL_USER_ID: test@gov.uk
-      ALLOW_TEST_FIXTURE_SETUP: "True"
+      ALLOW_TEST_FIXTURE_SETUP: 'True'
       ACTIVITY_STREAM_OUTGOING_URL: http://activity-feed-reverseproxy:8081/v2/activities
       ACTIVITY_STREAM_OUTGOING_ACCESS_KEY_ID: incoming-some-id-1
       ACTIVITY_STREAM_OUTGOING_SECRET_ACCESS_KEY: incoming-some-secret-1
@@ -49,7 +49,7 @@ services:
   postgres:
     image: postgres:12
     ports:
-      - "5432:5432"
+      - '5432:5432'
     environment:
       POSTGRES_DB: datahub
       POSTGRES_USER: user
@@ -58,8 +58,8 @@ services:
   opensearch:
     image: opensearchproject/opensearch:1.2.4
     ports:
-      - "9200:9200"
-      - "9300:9300"
+      - '9200:9200'
+      - '9300:9300'
     environment:
       - cluster.name=cluster-001
       - node.name=node-001
