@@ -1,4 +1,4 @@
-const { addMonths, format } = require('date-fns')
+const { format, addDays } = require('date-fns')
 
 const { formats } = require('../../../config')
 
@@ -36,7 +36,7 @@ describe('order page spec', () => {
       .and('contain', 'It will expire on')
       .and(
         'contain',
-        `${format(addMonths(new Date(), 1), formats.dateLong)} (in a month)`
+        `${format(addDays(new Date(), 30), formats.dateLong)} (in a month)`
       )
   })
   it('when visiting an order where the quote is accepted', () => {
@@ -58,7 +58,7 @@ describe('order page spec', () => {
     )
     cy.get('[data-test="pay-invoice-text"]').should(
       'have.text',
-      `\n  You will need to pay\n  the invoice\n  by ${format(addMonths(new Date(), 1), formats.dateLong)} (in a month).\n`
+      `\n  You will need to pay\n  the invoice\n  by ${format(addDays(new Date(), 30), formats.dateLong)} (in a month).\n`
     )
     cy.get('[data-test="invoice-link"]')
       .should('have.text', 'the invoice')
