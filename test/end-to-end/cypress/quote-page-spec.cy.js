@@ -1,4 +1,4 @@
-const { addMonths, format } = require('date-fns')
+const { format, addDays } = require('date-fns')
 
 const { formats } = require('../../../config')
 
@@ -26,7 +26,7 @@ describe('quote page spec', () => {
       .and('contain', 'It will expire on')
       .and(
         'contain',
-        `${format(addMonths(new Date(), 1), formats.dateLong)} (in a month)`
+        `${format(addDays(new Date(), 30), formats.dateLong)} (in a month)`
       )
 
     cy.log('should render quote')
@@ -50,7 +50,7 @@ describe('quote page spec', () => {
       )
       .and(
         'contain',
-        `This Quote must be accepted by you by ${format(addMonths(new Date(), 1), formats.dateLong)}.`
+        `This Quote must be accepted by you by ${format(addDays(new Date(), 30), formats.dateLong)}.`
       )
 
     cy.log('should render the quote acceptance elements')
@@ -126,7 +126,7 @@ describe('quote page spec', () => {
       )
       .and(
         'contain',
-        `This Quote must be accepted by you by ${format(addMonths(new Date(), 1), formats.dateLong)}.`
+        `This Quote must be accepted by you by ${format(addDays(new Date(), 30), formats.dateLong)}.`
       )
 
     cy.log('should not display the acceptance elements')

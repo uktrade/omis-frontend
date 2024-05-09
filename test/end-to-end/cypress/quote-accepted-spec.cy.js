@@ -1,4 +1,4 @@
-const { addMonths, format } = require('date-fns')
+const { format, addDays } = require('date-fns')
 
 const { formats } = require('../../../config')
 
@@ -20,7 +20,7 @@ describe('quote acceptance page spec', () => {
     )
     cy.get('[data-test="pay-invoice-text"]').should(
       'have.text',
-      `\n  You will need to pay\n  the invoice\n  by ${format(addMonths(new Date(), 1), formats.dateLong)} (in a month).\n`
+      `\n  You will need to pay\n  the invoice\n  by ${format(addDays(new Date(), 30), formats.dateLong)} (in a month).\n`
     )
     cy.get('[data-test="payment-options-button"]')
       .should('contain', 'View payment options')
