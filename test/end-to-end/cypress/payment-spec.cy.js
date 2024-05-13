@@ -1,15 +1,17 @@
 describe('payment spec', () => {
+  const site_url = Cypress.env('TESTING_OMIS_SITE_URL')
+  
   it('visits OMIS payment options page', () => {
     // Visit the payment options page.
     cy.visit(
-      'http://localhost:4000/XXMPH3b2185a7Vpe2f3RiI5HXT0Nshrck_6xGJuRp4UAsA6vkQ/payment'
+      `${site_url}/XXMPH3b2185a7Vpe2f3RiI5HXT0Nshrck_6xGJuRp4UAsA6vkQ/payment`
     )
 
     // Payment options page assertions.
     cy.get('h1').should('exist').and('have.text', 'Choose a payment method')
     cy.get('[data-test="payment-amount"]')
       .should('exist')
-      .contains('£1,000.00 (No VAT applies)')
+      .contains('£144.00 (£120.00 excluding VAT)')
     cy.get('[data-test="field-payment-method-1"]')
       .should('exist')
       .contains('credit or debit card')
@@ -21,7 +23,7 @@ describe('payment spec', () => {
   it('visits OMIS pay by bank transfer page', () => {
     // Visit payment page.
     cy.visit(
-      'http://localhost:4000/XXMPH3b2185a7Vpe2f3RiI5HXT0Nshrck_6xGJuRp4UAsA6vkQ/payment'
+      `${site_url}/XXMPH3b2185a7Vpe2f3RiI5HXT0Nshrck_6xGJuRp4UAsA6vkQ/payment`
     )
 
     // Select bank transfer option and submit to go to bank transfer page.
@@ -33,7 +35,7 @@ describe('payment spec', () => {
     // Assert payment amount is displayed.
     cy.get('[data-test="transfer-heading"]')
       .should('exist')
-      .contains('Please make your payment in sterling for £1,000.00')
+      .contains('Please make your payment in sterling for £144.00')
 
     // Assert DBT bank details are displayed as well as payment reference.
     cy.get('[data-test="account-name"]')
@@ -59,7 +61,7 @@ describe('payment spec', () => {
   it('visits OMIS pay by bank transfer and checks invoice link', () => {
     // Visit bank transfer page
     cy.visit(
-      'http://localhost:4000/XXMPH3b2185a7Vpe2f3RiI5HXT0Nshrck_6xGJuRp4UAsA6vkQ/payment/bank-transfer'
+      `${site_url}/XXMPH3b2185a7Vpe2f3RiI5HXT0Nshrck_6xGJuRp4UAsA6vkQ/payment/bank-transfer`
     )
 
     // Assert invoice link takes you to the invoice page.

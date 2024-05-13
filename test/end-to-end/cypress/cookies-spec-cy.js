@@ -1,8 +1,11 @@
 describe('Omis Cookie Spec', () => {
+  const site_url = Cypress.env('TESTING_OMIS_SITE_URL')
+
   context('cookies spec', () => {
     beforeEach(() => {
-      cy.visit('http://localhost:4000/cookies')
+      cy.visit(`${site_url}/cookies`)
     })
+
     it('visits cookies page', () => {
       cy.get('[data-test="header-cookies"]')
         .should('exist')

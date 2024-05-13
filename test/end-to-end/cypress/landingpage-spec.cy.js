@@ -1,6 +1,8 @@
 describe('landing page spec', () => {
+  const site_url = Cypress.env('TESTING_OMIS_SITE_URL')
+
   it('visits OMIS landing page', () => {
-    cy.visit('http://localhost:4000')
+    cy.visit(site_url)
     cy.get('h1').should('exist').and('have.text', 'About this service')
     cy.get('[class="body"]')
       .should('exist')
@@ -10,7 +12,7 @@ describe('landing page spec', () => {
       )
   })
   it('should click on the help link', () => {
-    cy.visit('http://localhost:4000')
+    cy.visit(site_url)
     cy.get('[class="link"]')
       .should('exist')
       .and('contain', 'getting help from a trade specialist')
