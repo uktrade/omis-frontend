@@ -193,6 +193,9 @@ To run them in docker:
 
 Tests and code linting are all run on [CircleCI](https://circleci.com/).
 
+Note:
+When the e2e tests are running in CircleCI they use a docker image to run the api, that is hosted in Google Container Registry, so that we can get the orders to test against from the database. We don't appear to pulling down the latest api docker image. As it stands this shouldn't be a problem because the image being used will still seed the database with the orders to test against. However, if changes are made to the orders seed data for testing purposes, the api image used by omis will need to be updated to the most recent version.
+
 ## Deployment
 
 Deployments to staging and production are done manually through Jenkins and are
