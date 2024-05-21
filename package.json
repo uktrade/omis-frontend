@@ -86,7 +86,7 @@
   "devDependencies": {
     "@babel/eslint-parser": "^7.24.5",
     "chai": "^4.3.10",
-    "chai-as-promised": "^7.1.1",
+    "chai-as-promised": "^7.1.2",
     "chai-subset": "^1.6.0",
     "cypress": "^13.9.0",
     "eslint": "^8.57.0",
