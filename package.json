@@ -60,7 +60,7 @@
     "imagemin-gifsicle": "^7.0.0",
     "imagemin-jpegtran": "^7.0.0",
     "imagemin-optipng": "^8.0.0",
-    "imagemin-svgo": "^11.0.0",
+    "imagemin-svgo": "^10.0.1",
     "lodash": "^4.17.10",
     "markdown-it": "^14.0.0",
     "memorystore": "^1.6.0",

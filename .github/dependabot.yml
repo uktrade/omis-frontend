@@ -14,3 +14,6 @@ updates:
       - dependency-name: date-fns
         versions:
           - '> 2.3.0'
+      - dependency-name: imagemin-svgo
+        versions:
+          - '> 10.0.1'
