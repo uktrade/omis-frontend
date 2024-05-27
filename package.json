@@ -33,7 +33,7 @@
   "homepage": "https://github.com/uktrade/omis-frontend#readme",
   "dependencies": {
     "@babel/core": "^7.24.5",
-    "@babel/plugin-transform-class-properties": "^7.24.1",
+    "@babel/plugin-transform-class-properties": "^7.24.6",
     "@babel/preset-env": "^7.24.5",
     "autoprefixer": "^10.4.19",
     "axios": "^1.7.0",
