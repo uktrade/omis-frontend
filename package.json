@@ -34,7 +34,7 @@
   "dependencies": {
     "@babel/core": "^7.24.5",
     "@babel/plugin-transform-class-properties": "^7.24.1",
-    "@babel/preset-env": "^7.24.5",
+    "@babel/preset-env": "^7.24.6",
     "autoprefixer": "^10.4.19",
     "axios": "^1.7.0",
     "babel-loader": "^9.1.3",
