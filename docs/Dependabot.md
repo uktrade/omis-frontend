@@ -21,3 +21,49 @@ If you're running against a live environment, replace the environment domain wit
 14. Rebase the dependency branch against `master` to remove all the merge commits, then push the changes and open a PR.
 15. If you are satisfied that everything is in order and all the tests have passed, request reviews as normal.
 16. Ensure that the dev deployment has succeeded. If they haven't, notify the Platform Enhancements team.
+
+## Cypress
+
+When Cypress is updated, the Cypress version used in [`Dockerfile.dependencies`](../Dockerfile.dependencies) needs to be updated as well.
+
+> The process is the same for Data Hub Frontend. To setup Google Cloud CLI, request access to the container registries, or if you are having issues, please read [`Docker.md`](https://github.com/uktrade/data-hub-frontend/blob/main/docs/Docker.md#creating-docker-container-for-circleci) in the Data Hub Frontend repo.
+
+First, in `Dockerfile.dependencies`, bump the Cypress version to match that in `package.json`.
+
+```Dockerfile
+RUN npm install -g cypress@{INSERT_CYPRESS_VERSION_HERE} \
+    ...
+```
+
+From the terminal, build the new dependencies image.
+
+```bash
+docker build -f Dockerfile.dependencies -t omis-dependencies . --platform linux/amd64
+```
+
+Tag the dependencies image with the incremented version.
+
+```bash
+export VERSION=1.0.1 # Increment this version each time when you edit Dockerfile.
+docker tag omis-dependencies:latest gcr.io/sre-docker-registry/omis-dependencies:${VERSION}
+docker tag omis-dependencies:latest gcr.io/sre-docker-registry/omis-dependencies:latest
+```
+
+Push the new images to the Google Cloud container registry.
+
+```bash
+gcloud auth login
+docker push gcr.io/sre-docker-registry/omis-dependencies:${VERSION}
+docker push gcr.io/sre-docker-registry/omis-dependencies:latest
+```
+
+The new image should now be listed in the [OMIS Google Cloud Container Registry](https://console.cloud.google.com/gcr/images/sre-docker-registry/global/omis-dependencies).
+
+Update the version tag in `Dockerfile`.
+
+```Dockerfile
+FROM gcr.io/sre-docker-registry/omis-dependencies:{INSERT_VERSION_HERE}
+...
+```
+
+Commit the new changes to the `chore/dependencies` before raising the main Dependabot PR.
