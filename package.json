@@ -55,7 +55,7 @@
     "express-sslify": "^1.2.0",
     "govuk_frontend_toolkit": "^9.0.1",
     "hawk": "^9.0.2",
-    "image-minimizer-webpack-plugin": "^4.0.1",
+    "image-minimizer-webpack-plugin": "^4.0.2",
     "image-webpack-loader": "^8.1.0",
     "imagemin-gifsicle": "^7.0.0",
     "imagemin-jpegtran": "^7.0.0",
