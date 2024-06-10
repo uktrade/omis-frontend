@@ -84,7 +84,7 @@
     "winston": "^3.13.0"
   },
   "devDependencies": {
-    "@babel/eslint-parser": "^7.24.6",
+    "@babel/eslint-parser": "^7.24.7",
     "chai": "^4.3.10",
     "chai-as-promised": "^8.0.0",
     "chai-subset": "^1.6.0",
