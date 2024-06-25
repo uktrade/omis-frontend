@@ -3,15 +3,17 @@ const { format, addDays } = require('date-fns')
 const { formats } = require('../../../config')
 
 describe('order page spec', () => {
+  const site_url = Cypress.env('TESTING_OMIS_SITE_URL')
+
   it('when visiting an order where the quote is awaiting acceptance', () => {
     cy.visit(
-      'http://localhost:4000/7AGZC7uaAIV-5L34J5lnZXHvFG9J1xnbBQnieAUCn-LRJpr-QA'
+      `${site_url}/yV-PZL8YZfFj0bE2LinEMRyg4Rq5t9c0rlB4jqqzd8ztzHwM_w`
     )
     cy.log('should display correct headings')
     cy.get('h1').should('have.text', 'Your order')
     cy.get('[data-test="subheading"]').should(
       'have.text',
-      'Order reference WHY589/23 in Canada'
+      'Order reference UYM672/24 in Australia'
     )
 
     cy.log('should display Review your quote text and button')
@@ -25,7 +27,7 @@ describe('order page spec', () => {
       .and(
         'have.attr',
         'href',
-        '/7AGZC7uaAIV-5L34J5lnZXHvFG9J1xnbBQnieAUCn-LRJpr-QA/quote'
+        '/yV-PZL8YZfFj0bE2LinEMRyg4Rq5t9c0rlB4jqqzd8ztzHwM_w/quote'
       )
 
     cy.log('should display Your quote text')
@@ -41,13 +43,13 @@ describe('order page spec', () => {
   })
   it('when visiting an order where the quote is accepted', () => {
     cy.visit(
-      'http://localhost:4000/XXMPH3b2185a7Vpe2f3RiI5HXT0Nshrck_6xGJuRp4UAsA6vkQ'
+      `${site_url}/XXMPH3b2185a7Vpe2f3RiI5HXT0Nshrck_6xGJuRp4UAsA6vkQ`
     )
     cy.log('should display correct headings')
     cy.get('h1').should('have.text', 'Your order')
     cy.get('[data-test="subheading"]').should(
       'have.text',
-      'Order reference RYM547/24 in Canada'
+      'Order reference RYM547/24 in Angola'
     )
 
     cy.log('should display invoice text and button')
@@ -58,7 +60,7 @@ describe('order page spec', () => {
     )
     cy.get('[data-test="pay-invoice-text"]').should(
       'have.text',
-      `\n  You will need to pay\n  the invoice\n  by ${format(addDays(new Date(), 30), formats.dateLong)} (in a month).\n`
+      `\n  You will need to pay\n  the invoice\n  by 18 April 2024 (in a month).\n`
     )
     cy.get('[data-test="invoice-link"]')
       .should('have.text', 'the invoice')
@@ -82,7 +84,7 @@ describe('order page spec', () => {
     cy.get('[data-test="metalist-invoice"]')
       .should('contain', 'Invoice number')
       .and('contain', 'Created on')
-      .and('contain', format(new Date(), formats.dateLong))
+      .and('contain', '19 March 2024, 12:12pm')
     cy.get('[data-test="view-invoice-link"]')
       .should('contain', 'View your invoice')
       .and(
@@ -95,7 +97,7 @@ describe('order page spec', () => {
     cy.get('[data-test="your-quote-heading"]').should('have.text', 'Your quote')
     cy.get('[data-test="metalist-quote"]')
       .should('contain', 'We sent it on')
-      .and('contain', format(new Date(), formats.dateLong))
+      .and('contain', '19 March 2024, 12:11pm')
       .and('contain', 'You accepted it on')
     cy.get('[data-test="quote-link"]')
       .should('contain', 'View your accepted quote')
@@ -107,13 +109,13 @@ describe('order page spec', () => {
   })
   it('when visiting an order that has been paid for', () => {
     cy.visit(
-      'http://localhost:4000/h93Dn7DKvMLbUB5Yz2h5z7dL1mXXGUa_UiPNBkVoyKLmBE29YQ'
+      `${site_url}/wroisMNmFaEhESOS2s9fkbLzgKgkrr-PJ9cM8IF25nBCDrbX-A`
     )
     cy.log('should display correct headings')
     cy.get('h1').should('have.text', 'Your order')
     cy.get('[data-test="subheading"]').should(
       'have.text',
-      'Order reference CJC167/23 in Canada'
+      'Order reference RCK178/23 in Bosnia and Herzegovina'
     )
 
     cy.log('should display completion box')
@@ -143,35 +145,35 @@ describe('order page spec', () => {
     cy.get('[data-test="metalist-invoice"]')
       .should('contain', 'Invoice number')
       .and('contain', 'Created on')
-      .and('contain', format(new Date(), formats.dateLong))
+      .and('contain', '28 September 2023, 4:16pm')
       .and('contain', 'Paid on')
     cy.get('[data-test="view-invoice-link"]')
       .should('contain', 'View your invoice')
       .and(
         'have.attr',
         'href',
-        '/h93Dn7DKvMLbUB5Yz2h5z7dL1mXXGUa_UiPNBkVoyKLmBE29YQ/invoice'
+        '/wroisMNmFaEhESOS2s9fkbLzgKgkrr-PJ9cM8IF25nBCDrbX-A/invoice'
       )
     cy.get('[data-test="receipt-link"]')
       .should('contain', 'View your payment receipt')
       .and(
         'have.attr',
         'href',
-        '/h93Dn7DKvMLbUB5Yz2h5z7dL1mXXGUa_UiPNBkVoyKLmBE29YQ/receipt'
+        '/wroisMNmFaEhESOS2s9fkbLzgKgkrr-PJ9cM8IF25nBCDrbX-A/receipt'
       )
 
     cy.log('should display Your quote text')
     cy.get('[data-test="your-quote-heading"]').should('have.text', 'Your quote')
     cy.get('[data-test="metalist-quote"]')
       .should('contain', 'We sent it on')
-      .and('contain', format(new Date(), formats.dateLong))
+      .and('contain', '28 September 2023, 1:40pm')
       .and('contain', 'You accepted it on')
     cy.get('[data-test="quote-link"]')
       .should('contain', 'View your accepted quote')
       .and(
         'have.attr',
         'href',
-        '/h93Dn7DKvMLbUB5Yz2h5z7dL1mXXGUa_UiPNBkVoyKLmBE29YQ/quote'
+        '/wroisMNmFaEhESOS2s9fkbLzgKgkrr-PJ9cM8IF25nBCDrbX-A/quote'
       )
   })
 })

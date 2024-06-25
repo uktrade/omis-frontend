@@ -1,11 +1,12 @@
 import { acceptedQuote } from '../test-data'
 
 describe('Invoice spec', () => {
+  const site_url = Cypress.env('TESTING_OMIS_SITE_URL')
   const order = acceptedQuote
 
   context('Link to invoice page', () => {
     it("should take you to the invoice page when clicking 'the invoice' link", () => {
-      cy.visit(`http://localhost:4000/${order.public_token}`)
+      cy.visit(`${site_url}/${order.public_token}`)
       cy.get('[data-test="invoice-link"]').click()
       cy.get('[data-test="heading"]')
         .should('exist')
@@ -13,7 +14,7 @@ describe('Invoice spec', () => {
     })
 
     it("should take you to the invoice page when clicking 'View your invoice'", () => {
-      cy.visit(`http://localhost:4000/${order.public_token}`)
+      cy.visit(`${site_url}/${order.public_token}`)
       cy.get('[data-test="view-invoice-link"]').click()
       cy.get('[data-test="heading"]')
         .should('exist')
@@ -23,18 +24,18 @@ describe('Invoice spec', () => {
 
   context('When on the invoice page', () => {
     beforeEach(() => {
-      cy.visit(`http://localhost:4000/${order.public_token}/invoice`)
+      cy.visit(`${site_url}/${order.public_token}/invoice`)
     })
 
     it('should show the address of the company the invoice is for', () => {
       cy.contains('To')
         .should('exist')
         .parent()
-        .and('contain', order.billing_company_name)
-        .and('contain', order.billing_address_town)
-        .and('contain', order.billing_address_1)
-        .and('contain', order.billing_address_postcode)
-        .and('contain', order.billing_address_country)
+        .and('contain', 'Saputo Inc')
+        .and('contain', '6869 boul Métropolitain E')
+        .and('contain', 'Saint-Léonard')
+        .and('contain', 'H1P 1X8')
+        .and('contain', 'Canada')
     })
 
     it('should show the invoice number and an invoice date', () => {
@@ -51,8 +52,8 @@ describe('Invoice spec', () => {
       cy.get('[data-test="cost-table"]')
         .should('exist')
         .and('contain', order.reference)
-        .and('contain', `UK Government support in ${order.primary_market.name}`)
-        .and('contain', order.subtotal_cost)
+        .and('contain', `UK Government support in Angola`)
+        .and('contain', '120.00')
     })
 
     it('should show payment terms with date invoice is due by', () => {
@@ -77,7 +78,7 @@ describe('Invoice spec', () => {
       )
       cy.get('[data-test="order-total-cost"]')
         .should('exist')
-        .and('contain', order.total_cost)
+        .and('contain', '144.00')
       cy.get('[data-test="reference"]')
         .should('exist')
         .and('contain', order.reference)
