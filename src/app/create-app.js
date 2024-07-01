@@ -21,6 +21,8 @@ const errors = require('./middleware/errors')
 const setCSRFToken = require('./middleware/set-csrf-token')
 const setLocals = require('./middleware/set-locals')
 
+const Sentry = require('@sentry/node')
+
 module.exports = function () {
   const app = express()
   const env = app.get('env')
@@ -60,7 +62,7 @@ module.exports = function () {
     })
   )
 
-  reporter.setup(app)
+  reporter.handleErrors(app)
 
   if (!isDev) {
     app.use(compression())
