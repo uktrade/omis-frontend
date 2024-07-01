@@ -1,3 +1,4 @@
+const reporter = require('./lib/reporter')
 const express = require('express')
 const path = require('path')
 const cookieParser = require('cookie-parser')
@@ -14,7 +15,6 @@ const sessions = require('client-sessions')
 const config = require('../../config')
 const nunjucks = require('../../config/nunjucks')
 const router = require('./routers')
-const reporter = require('./lib/reporter')
 
 const headers = require('./middleware/headers')
 const errors = require('./middleware/errors')
@@ -59,8 +59,6 @@ module.exports = function () {
       maxAge: staticMaxAge,
     })
   )
-
-  reporter.setup(app)
 
   if (!isDev) {
     app.use(compression())
@@ -114,9 +112,9 @@ module.exports = function () {
 
   app.use(router)
 
-  app.use(errors.handle404)
-
   reporter.handleErrors(app)
+
+  app.use(errors.handle404)
 
   app.use(errors.catchAll)
 

@@ -1,30 +1,29 @@
-const raven = require('raven')
-
+const Sentry = require('@sentry/node')
+const { nodeProfilingIntegration } = require('@sentry/profiling-node')
 const config = require('../../../config')
 const logger = require('./logger')
 
 const useSentry = !!config.sentryDsn
 
 if (useSentry) {
-  raven.config(config.sentryDsn, { release: config.version }).install()
+  Sentry.init({
+    dsn: config.sentryDsn,
+    integrations: [nodeProfilingIntegration()],
+    tracesSampleRate: 1.0,
+    profilesSampleRate: 1.0,
+  })
 }
 
 module.exports = {
-  setup: function (app) {
-    if (useSentry) {
-      app.use(raven.requestHandler())
-    }
-  },
-
   handleErrors: function (app) {
     if (useSentry) {
-      app.use(raven.errorHandler())
+      Sentry.setupExpressErrorHandler(app)
     }
   },
 
   message: function (level, msg, extra) {
     if (useSentry) {
-      raven.captureMessage(msg, {
+      Sentry.captureMessage(msg, {
         level,
         extra,
       })
@@ -35,7 +34,7 @@ module.exports = {
 
   captureException: function (err) {
     if (useSentry) {
-      raven.captureException(err)
+      Sentry.captureException(err)
     } else {
       logger.error(err)
     }
