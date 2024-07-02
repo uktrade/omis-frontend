@@ -22,7 +22,7 @@ describe('Error reporter', function () {
     reporter = proxyquire('../../../../app/lib/reporter', {
       sentry: opts.sentry || sentry,
       './logger': opts.logger || logger,
-      '../../../config': opts.init || { version },
+      '../../../init': opts.init || { version },
     })
   }
 
