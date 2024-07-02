@@ -20,7 +20,7 @@ describe('Error reporter', function () {
       debug: jasmine.createSpy('logger.debug'),
     }
     reporter = proxyquire('../../../../app/lib/reporter', {
-      sentry: opts.sentry || sentry,
+      sentry: opts.Sentry || sentry,
       './logger': opts.logger || logger,
       '../../../config': opts.init || { version },
     })
@@ -53,7 +53,7 @@ describe('Error reporter', function () {
     })
 
     describe('A message', function () {
-      it('It should send the message to sentry', function () {
+      it('Should send the message to sentry', function () {
         const msg = 'Test'
         const level = 'test'
         const extra = {
