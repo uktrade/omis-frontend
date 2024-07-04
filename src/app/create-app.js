@@ -11,10 +11,10 @@ const MemoryStore = require('memorystore')(session)
 const enforce = require('express-sslify')
 const sessions = require('client-sessions')
 
+const reporter = require('./lib/reporter')
 const config = require('../../config')
 const nunjucks = require('../../config/nunjucks')
 const router = require('./routers')
-const reporter = require('./lib/reporter')
 
 const headers = require('./middleware/headers')
 const errors = require('./middleware/errors')
@@ -59,8 +59,6 @@ module.exports = function () {
       maxAge: staticMaxAge,
     })
   )
-
-  reporter.setup(app)
 
   if (!isDev) {
     app.use(compression())
@@ -114,9 +112,9 @@ module.exports = function () {
 
   app.use(router)
 
-  app.use(errors.handle404)
-
   reporter.handleErrors(app)
+
+  app.use(errors.handle404)
 
   app.use(errors.catchAll)
 
