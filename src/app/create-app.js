@@ -1,4 +1,3 @@
-const reporter = require('./lib/reporter')
 const express = require('express')
 const path = require('path')
 const cookieParser = require('cookie-parser')
@@ -12,6 +11,7 @@ const MemoryStore = require('memorystore')(session)
 const enforce = require('express-sslify')
 const sessions = require('client-sessions')
 
+const reporter = require('./lib/reporter')
 const config = require('../../config')
 const nunjucks = require('../../config/nunjucks')
 const router = require('./routers')

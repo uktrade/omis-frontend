@@ -1,5 +1,6 @@
 const Sentry = require('@sentry/node')
 const { nodeProfilingIntegration } = require('@sentry/profiling-node')
+
 const config = require('../../../config')
 const logger = require('./logger')
 
