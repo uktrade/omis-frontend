@@ -67,3 +67,8 @@ FROM gcr.io/sre-docker-registry/omis-dependencies:{INSERT_VERSION_HERE}
 ```
 
 Commit the new changes to the `chore/dependencies` before raising the main Dependabot PR.
+
+### Bulk upgrade of dependency groups
+
+As with the Data Hub frontend, this project has some dependencies that need to be updated together:
+- Sentry (`dependabot:update-sentry`)

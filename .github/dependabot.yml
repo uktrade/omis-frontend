@@ -17,3 +17,7 @@ updates:
       - dependency-name: imagemin-svgo
         versions:
           - '> 10.0.1'
+      # These are part of dependency groups and should be updated via the relevant script.
+      - dependency-name: "@sentry/profiling-node"
+        versions:
+          - ">= 0"
