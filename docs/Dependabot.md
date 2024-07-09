@@ -44,7 +44,7 @@ docker build -f Dockerfile.dependencies -t omis-dependencies . --platform linux/
 Tag the dependencies image with the incremented version.
 
 ```bash
-export VERSION=1.0.2 # Increment this version each time when you edit Dockerfile.
+export VERSION=1.0.3 # Increment this version each time when you edit Dockerfile.
 docker tag omis-dependencies:latest gcr.io/sre-docker-registry/omis-dependencies:${VERSION}
 docker tag omis-dependencies:latest gcr.io/sre-docker-registry/omis-dependencies:latest
 ```
@@ -66,4 +66,9 @@ FROM gcr.io/sre-docker-registry/omis-dependencies:{INSERT_VERSION_HERE}
 ...
 ```
 
-Commit the new changes to the `chore/dependencies` before raising the main Dependabot PR.
+Commit the new changes to the `chore/dependencies` branch before raising the main Dependabot PR.
+
+### Bulk upgrade of dependency groups
+
+As with the Data Hub frontend, this project has some dependencies that need to be updated together:
+- Sentry (`dependabot:update-sentry`)
