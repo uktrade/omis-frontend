@@ -10,8 +10,8 @@ if (useSentry) {
   Sentry.init({
     dsn: config.sentryDsn,
     integrations: [nodeProfilingIntegration()],
-    tracesSampleRate: 1.0,
-    profilesSampleRate: 1.0,
+    tracesSampleRate: 0.01,
+    profilesSampleRate: 0.01,
   })
 }
 
