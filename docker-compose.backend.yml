@@ -23,6 +23,7 @@ services:
       ACTIVITY_STREAM_INCOMING_ACCESS_KEY_ID: some-id
       ACTIVITY_STREAM_SECRET_ACCESS_KEY: some-secret
       ACTIVITY_STREAM_INCOMING_SECRET_ACCESS_KEY: some-secret
+      DATABASE_CREDENTIALS: '{"username": "postgres", "password": "datahub", "engine": "postgres", "port": 5432, "dbname": "datahub", "host": "postgres", "dbInstanceIdentifier": "db-instance"}'
       OMIS_PUBLIC_ACCESS_KEY_ID: access-key-id
       OMIS_PUBLIC_SECRET_ACCESS_KEY: secret-access-key
     ports:
@@ -45,18 +46,21 @@ services:
       - redis
     entrypoint: dockerize -wait tcp://postgres:5432 -wait tcp://opensearch:9200 -wait tcp://redis:6379 -timeout 5m
     command: python short-running-worker.py long-running-worker.py
+    environment:
+      DATABASE_CREDENTIALS: '{"username": "postgres", "password": "datahub", "engine": "postgres", "port": 5432, "dbname": "datahub", "host": "postgres", "dbInstanceIdentifier": "db-instance"}'
 
   postgres:
-    image: postgres:12
+    image: postgres:16
     ports:
       - '5432:5432'
     environment:
       POSTGRES_DB: datahub
       POSTGRES_USER: user
       POSTGRES_PASSWORD: password
+      DATABASE_CREDENTIALS: '{"username": "postgres", "password": "datahub", "engine": "postgres", "port": 5432, "dbname": "datahub", "host": "postgres", "dbInstanceIdentifier": "db-instance"}'
 
   opensearch:
-    image: opensearchproject/opensearch:1.2.4
+    image: opensearchproject/opensearch:2.11.0
     ports:
       - '9200:9200'
       - '9300:9300'
@@ -67,6 +71,8 @@ services:
       - bootstrap.memory_lock=true
       - DISABLE_INSTALL_DEMO_CONFIG=true # Prevents execution of bundled demo script which installs demo certificates and security configurations to OpenSearch
       - DISABLE_SECURITY_PLUGIN=true # Disables security plugin
+    logging:
+      driver: none
 
   activity-feed-reverseproxy:
     build: ./test/end-to-end/proxy
@@ -102,7 +108,10 @@ services:
       - INCOMING_IP_WHITELIST__2=2.3.4.5
 
   redis:
-    image: redis:6.2.6
+    image: redis:7.2.4
+    restart: always
+    ports:
+      - "6379:6379"
 
   mock-sso:
     image: gcr.io/sre-docker-registry/github.com/uktrade/mock-sso:latest
