@@ -44,7 +44,7 @@ docker build -f Dockerfile.dependencies -t omis-dependencies . --platform linux/
 Tag the dependencies image with the incremented version.
 
 ```bash
-export VERSION=1.0.4 # Increment this version each time when you edit Dockerfile.
+export VERSION=1.0.5 # Increment this version each time when you edit Dockerfile.
 docker tag omis-dependencies:latest gcr.io/sre-docker-registry/omis-dependencies:${VERSION}
 docker tag omis-dependencies:latest gcr.io/sre-docker-registry/omis-dependencies:latest
 ```
