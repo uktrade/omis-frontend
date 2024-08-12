@@ -36,7 +36,7 @@
     "@babel/core": "^7.25.2",
     "@babel/plugin-transform-class-properties": "^7.24.7",
     "@babel/preset-env": "^7.25.3",
-    "@sentry/node": "^8.23.0",
+    "@sentry/node": "^8.25.0",
     "@sentry/profiling-node": "^8.23.0",
     "autoprefixer": "^10.4.20",
     "axios": "^1.7.3",
