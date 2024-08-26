@@ -76,7 +76,7 @@
     "postcss-loader": "^8.1.1",
     "resolve-url-loader": "^5.0.0",
     "sass": "^1.77.8",
-    "sass-loader": "^16.0.0",
+    "sass-loader": "^16.0.1",
     "serve-favicon": "^2.5.0",
     "sinon": "^18.0.0",
     "std-mocks": "^2.0.0",
