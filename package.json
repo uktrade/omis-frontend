@@ -102,7 +102,7 @@
     "eslint-plugin-promise": "^6.6.0",
     "jasmine": "^5.2.0",
     "jasmine-core": "^5.2.0",
-    "nock": "^13.5.4",
+    "nock": "^13.5.5",
     "nodemon": "^3.1.4",
     "prettier": "^3.3.3",
     "proxyquire": "^2.0.1"
