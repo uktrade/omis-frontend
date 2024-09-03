@@ -35,7 +35,7 @@
   "dependencies": {
     "@babel/core": "^7.25.2",
     "@babel/plugin-transform-class-properties": "^7.25.4",
-    "@babel/preset-env": "^7.25.3",
+    "@babel/preset-env": "^7.25.4",
     "@sentry/node": "^8.26.0",
     "@sentry/profiling-node": "^8.25.0",
     "autoprefixer": "^10.4.20",
