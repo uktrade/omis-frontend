@@ -1,8 +1,0 @@
-applications:
-  - buildpacks:
-      - https://github.com/cloudfoundry/nodejs-buildpack.git#v1.8.23
-    health-check-type: http
-    health-check-http-endpoint: /healthcheck
-    memory: 2G
-    disk_quota: 2G
-    stack: cflinuxfs4
