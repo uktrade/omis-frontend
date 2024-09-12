@@ -78,7 +78,6 @@
     "sass": "^1.78.0",
     "sass-loader": "^16.0.1",
     "serve-favicon": "^2.5.0",
-    "sinon": "^18.0.0",
     "std-mocks": "^2.0.0",
     "style-loader": "^4.0.0",
     "webpack": "^5.94.0",
@@ -105,7 +104,8 @@
     "nock": "^13.5.5",
     "nodemon": "^3.1.4",
     "prettier": "^3.3.3",
-    "proxyquire": "^2.0.1"
+    "proxyquire": "^2.0.1",
+    "sinon": "^18.0.1"
   },
   "overrides": {
     "semver-regex": "3.1.4",
