@@ -112,6 +112,10 @@
     "qs": "6.2.4",
     "http-cache-semantics": "4.1.1",
     "semver": "^7.5.2",
-    "trim-newlines": "^3.0.1"
+    "trim-newlines": "^3.0.1",
+    "path-to-regexp": "8.0.0",
+    "express": {
+      "path-to-regexp": "0.1.10"
+    }
   }
 }
