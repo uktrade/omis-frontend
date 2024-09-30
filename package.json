@@ -59,7 +59,7 @@
     "image-minimizer-webpack-plugin": "^4.1.0",
     "image-webpack-loader": "^8.1.0",
     "imagemin-gifsicle": "^7.0.0",
-    "imagemin-jpegtran": "^7.0.0",
+    "imagemin-jpegtran": "^8.0.0",
     "imagemin-optipng": "^8.0.0",
     "imagemin-svgo": "^10.0.1",
     "lodash": "^4.17.10",
