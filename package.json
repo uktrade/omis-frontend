@@ -85,7 +85,7 @@
     "winston": "^3.14.2"
   },
   "devDependencies": {
-    "@babel/eslint-parser": "^7.25.1",
+    "@babel/eslint-parser": "^7.25.8",
     "browser-sync": "^3.0.3",
     "browser-sync-v3-webpack-plugin": "^0.1.0",
     "chai": "^5.1.1",
