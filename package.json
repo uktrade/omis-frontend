@@ -52,7 +52,7 @@
     "del-cli": "^6.0.0",
     "dotenv": "^16.4.5",
     "express": "^4.21.0",
-    "express-session": "^1.18.0",
+    "express-session": "^1.18.1",
     "express-sslify": "^1.2.0",
     "govuk_frontend_toolkit": "^9.0.1",
     "hawk": "^9.0.2",
