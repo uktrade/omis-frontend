@@ -73,7 +73,7 @@
     "nunjucks-markdown": "^2.0.1",
     "postcss-loader": "^8.1.1",
     "resolve-url-loader": "^5.0.0",
-    "sass": "^1.80.4",
+    "sass": "^1.80.6",
     "sass-loader": "^16.0.1",
     "serve-favicon": "^2.5.0",
     "std-mocks": "^2.0.0",
