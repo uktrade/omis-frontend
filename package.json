@@ -82,7 +82,7 @@
     "webpack-assets-manifest": "^5.2.1",
     "webpack-cli": "^5.1.4",
     "webpack-merge": "^6.0.1",
-    "winston": "^3.16.0"
+    "winston": "^3.17.0"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.25.9",
@@ -91,7 +91,7 @@
     "chai": "^5.1.2",
     "chai-as-promised": "^8.0.0",
     "chai-subset": "^1.6.0",
-    "cypress": "^13.15.1",
+    "cypress": "^13.15.2",
     "eslint": "^8.57.1",
     "eslint-config-prettier": "^9.1.0",
     "eslint-config-standard": "^17.1.0",
@@ -101,7 +101,7 @@
     "eslint-plugin-promise": "^6.6.0",
     "jasmine": "^5.4.0",
     "jasmine-core": "^5.4.0",
-    "nock": "^13.5.5",
+    "nock": "^13.5.6",
     "nodemon": "^3.1.7",
     "prettier": "^3.3.3",
     "proxyquire": "^2.0.1",
