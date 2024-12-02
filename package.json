@@ -103,7 +103,7 @@
     "jasmine-core": "^5.4.0",
     "nock": "^13.5.6",
     "nodemon": "^3.1.7",
-    "prettier": "^3.3.3",
+    "prettier": "^3.4.1",
     "proxyquire": "^2.0.1",
     "sinon": "^19.0.2"
   },
