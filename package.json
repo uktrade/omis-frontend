@@ -91,7 +91,7 @@
     "chai": "^5.1.2",
     "chai-as-promised": "^8.0.1",
     "chai-subset": "^1.6.0",
-    "cypress": "^13.16.0",
+    "cypress": "^13.16.1",
     "eslint": "^8.57.1",
     "eslint-config-prettier": "^9.1.0",
     "eslint-config-standard": "^17.1.0",
