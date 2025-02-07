@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 const axios = require('axios')
 
 const { api } = require('../../../config')

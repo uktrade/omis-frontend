@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 const { get } = require('lodash')
 
 const { fetch } = require('../lib/api')
