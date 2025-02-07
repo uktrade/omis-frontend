@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 const nock = require('nock')
 const hawk = require('hawk')
 
