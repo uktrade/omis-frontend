@@ -1,4 +1,4 @@
-FROM gcr.io/sre-docker-registry/omis-dependencies:1.0.14
+FROM gcr.io/sre-docker-registry/omis-dependencies:1.0.15
 
 ARG CURRENT_UID
 ARG CURRENT_GID
