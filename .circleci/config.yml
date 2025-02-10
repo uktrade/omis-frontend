@@ -9,7 +9,7 @@ jobs:
       image: ubuntu-2004:2024.01.1
       docker_layer_caching: true
     parallelism: 1
-    resource_class: xlarge
+    resource_class: 2xlarge
     steps:
       - checkout
       - run_make:
