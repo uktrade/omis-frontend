@@ -40,7 +40,7 @@
     "@sentry/profiling-node": "^9.2.0",
     "autoprefixer": "^10.4.20",
     "axios": "^1.8.1",
-    "babel-loader": "^9.2.1",
+    "babel-loader": "^10.0.0",
     "body-parser": "^1.20.3",
     "case": "^1.5.5",
     "client-sessions": "^0.8.0",
