@@ -4,7 +4,6 @@
 FROM cypress/base:20.11.1
 
 # Setting environment variables
-ENV CHROME_DOWNLOAD_URL=https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 ENV DOCKERIZE_VERSION=v0.9.2
 ENV TZ=Europe/London
 ENV TERM=xterm
@@ -29,13 +28,15 @@ RUN ln -snf "/usr/share/zoneinfo/$TZ" /etc/localtime \
   && echo "$TZ" > /etc/timezone \
   && echo "Timezone: $(date +%z)"
 
+# Install additional dependencies
+RUN apt-get update && apt-get install -y gnupg
+
+# Add Google's official repository
+RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \ 
+  && echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list
+
 # Install Google Chrome
-RUN wget --no-verbose -O /tmp/chrome.deb $CHROME_DOWNLOAD_URL \
-  && apt-get update \
-  && apt-get install -y /tmp/chrome.deb \
-  && rm /tmp/chrome.deb \
-  && apt-get clean \
-  && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get -y install google-chrome-stable
 
 # Prepare node user environment
 RUN mkdir -p "$HOME" /usr/src/app \
