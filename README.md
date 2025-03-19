@@ -10,7 +10,7 @@ number of settings, and be provided with an API service.
 
 ## Dependencies
 
-- [Node.js v20.11.1](https://nodejs.org/en/)
+- [Node.js v22.12.0](https://nodejs.org/en/)
 
 ## Installation
 
@@ -23,7 +23,7 @@ git clone https://github.com/uktrade/omis-frontend
 2. Install node dependencies:
 
 ```
-nvm use 20.11.1
+nvm use 22.12.0
 ```
 
 ```
