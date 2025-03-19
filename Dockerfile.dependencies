@@ -1,7 +1,7 @@
 # A base image with all operating system dependencies, but no Cypress or browsers.
 # See https://github.com/cypress-io/cypress-docker-images for more info.
 
-FROM cypress/base:20.11.1
+FROM cypress/base:22.12.0
 
 # Setting environment variables
 ENV DOCKERIZE_VERSION=v0.9.2
