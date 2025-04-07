@@ -51,7 +51,7 @@
     "date-fns": "^2.30.0",
     "del-cli": "^6.0.0",
     "dotenv": "^16.4.7",
-    "express": "^4.21.2",
+    "express": "^5.1.0",
     "express-session": "^1.18.1",
     "express-sslify": "^1.2.0",
     "govuk_frontend_toolkit": "^9.0.1",
