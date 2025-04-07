@@ -89,7 +89,7 @@
     "@eslint/compat": "^1.2.7",
     "@eslint/eslintrc": "^3.3.1",
     "@eslint/js": "^9.23.0",
-    "browser-sync": "^3.0.3",
+    "browser-sync": "^3.0.4",
     "browser-sync-v3-webpack-plugin": "^0.1.0",
     "chai": "^5.2.0",
     "chai-as-promised": "^8.0.1",
