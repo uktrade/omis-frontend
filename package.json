@@ -50,7 +50,7 @@
     "csurf": "^1.10.0",
     "date-fns": "^2.30.0",
     "del-cli": "^6.0.0",
-    "dotenv": "^16.4.7",
+    "dotenv": "^16.5.0",
     "express": "^5.1.0",
     "express-session": "^1.18.1",
     "express-sslify": "^1.2.0",
