@@ -10,6 +10,7 @@ docker-e2e = docker-compose -p omis -f docker-compose.frontend.yml -f docker-com
 docker-dev = COMPOSE_HTTP_TIMEOUT=300 docker-compose -p omis -f docker-compose.frontend.yml
 
 wait-for-frontend = dockerize -wait tcp://localhost:4000/healthcheck -timeout 10m -wait-retry-interval 3m
+wait-for-backend = dockerize -wait tcp://localhost:8000/pingdom/ping.xml -timeout 10m -wait-retry-interval 3m
 
 ifdef CI
 	start-command = up --build --force-recreate -d
@@ -40,4 +41,4 @@ stop-dev:
 e2e-tests:
 	@echo "*** IMPORTANT: Used for running e2e tests in Circle CI, errors when running tests locally ***"
 	@echo "*** Requires the e2e stack, it can be started with 'make start-e2e' ***"
-	$(docker-e2e) exec frontend bash -c '$(wait-for-frontend) && npm run test:e2e $(cypress-args)'
+	$(docker-e2e) exec frontend bash -c '$(wait-for-frontend) && $(wait-for-backend) && npm run test:e2e $(cypress-args)'
