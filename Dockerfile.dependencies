@@ -32,7 +32,7 @@ RUN ln -snf "/usr/share/zoneinfo/$TZ" /etc/localtime \
 RUN apt-get update && apt-get install -y gnupg
 
 # Add Google's official repository
-RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \ 
+RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
   && echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list
 
 # Install Google Chrome
@@ -53,7 +53,7 @@ COPY --chown=node:node package*.json "$HOME/"
 WORKDIR $HOME
 
 # Install specific version of cypress
-RUN npm install -g cypress@14.2.1 \
+RUN npm install -g cypress@14.3.3 \
   && npx cypress verify \
   && npx cypress cache path \
   && npx cypress cache list \
