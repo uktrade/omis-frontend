@@ -10,7 +10,7 @@ docker-e2e = docker-compose -p omis -f docker-compose.frontend.yml -f docker-com
 docker-dev = COMPOSE_HTTP_TIMEOUT=300 docker-compose -p omis -f docker-compose.frontend.yml
 
 wait-for-frontend = dockerize -wait tcp://localhost:4000/healthcheck -timeout 10m -wait-retry-interval 3m
-wait-for-backend = dockerize -wait tcp://host.docker.internal:8000/pingdom/ping.xml -timeout 10m -wait-retry-interval 3m
+wait-for-backend = dockerize -wait tcp://api:8000 -timeout 10m -wait-retry-interval 3m
 
 ifdef CI
 	start-command = up --build --force-recreate -d
