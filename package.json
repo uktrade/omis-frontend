@@ -102,7 +102,7 @@
     "eslint-plugin-prettier": "^5.4.0",
     "eslint-plugin-promise": "^6.6.0",
     "globals": "^16.1.0",
-    "jasmine": "^5.6.0",
+    "jasmine": "^5.7.1",
     "jasmine-core": "^5.6.0",
     "nock": "^14.0.4",
     "nodemon": "^3.1.9",
